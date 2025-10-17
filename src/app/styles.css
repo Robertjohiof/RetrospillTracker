@@ -1,2 +1,10 @@
 /* src/app/styles.css */
 @import "tailwindcss";
+
+@theme{
+    --color-primary: #0D0036;
+    --color-primary-light: #1A006B;
+    --color-secondary: #FF6A00;
+    --color-tertiary: #FF00D9;
+    --color-tertiary-light: #FF33FF;
+}
