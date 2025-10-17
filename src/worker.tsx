@@ -8,9 +8,6 @@ import { setCommonHeaders } from "./app/headers";
 import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";
 
-import GameCard from "@features/gameCard/components/GameCard"
-import tekken1 from "@/assets/testImages/tekken1.webp"
-
 export interface Env {
   DB: D1Database;
 }
@@ -29,7 +26,6 @@ export default defineApp([
         <div style={{ padding: "2rem", maxWidth: "600px", margin: "0 auto" }}>
           <h1>Start</h1>
           <p>Velkommen til eksempel</p>
-            <GameCard title={"Hell yeah 2"} altText={"wow its amazing"} imgUrl={tekken1}/>
           <p>Databasen har {userResult.length} brukere</p>
           <div style={{ margin: "1.5rem 0" }}>
             <a
