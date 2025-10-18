@@ -1,15 +1,32 @@
 export default function Header() {
+  // Placeholder
+  const isAuthenticated = false;
+
   return (
     <header className="the-header">
-      <div className="header-container">
-        <h1 className="logo">RetroSpillTracker</h1>
+      <section className="header-container">
+        <div className="logo">
+          <img src="/logo.svg" alt="RetroSpillTracker logo" />
+        </div>
+
         <nav className="nav">
-          <a href="/">Hjem</a>
-          <a href="/browse">Utforsk</a>
-          <a href="/profile">Profil</a>
-          <a href="/signUp">Logg inn</a>
+          <a href="/">Home</a>
+          <a href="/search">Search</a>
+          <a href="/browse">Browse</a>
+          <a href="/forum">Forum</a>
+
+          {isAuthenticated && <a href="/profile">Profil</a>}
         </nav>
-      </div>
+
+        <div className="login-signup-buttons">
+          <a href="/login" className="login-link">
+            Logg inn
+          </a>
+          <a href="/signup" className="signup-button">
+            Sign up
+          </a>
+        </div>
+      </section>
     </header>
   );
 }
