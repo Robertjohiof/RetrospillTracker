@@ -1,5 +1,6 @@
 import type { RequestInfo } from "rwsdk/worker";
 import Layout from "../shared/components/layout/Layout";
+import Hero from "../shared/components/Hero";
 
 export default function HomePage({ ctx }: RequestInfo) {
   const isLoggedIn = Boolean(ctx.user?.id);
@@ -44,26 +45,14 @@ export default function HomePage({ ctx }: RequestInfo) {
     <Layout>
       <main className="mx-auto max-w-7xl px-4 py-8">
         {/*Hero med CTA*/}
-        <section className="relative isolate overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8">
-          <h1 className="text-glow-pink text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Join the retro family
-          </h1>
-          <p className="mt-3 text-glow-cyan max-w-xl">
-            Discover classic games, log your favorites, and get personalized
-            recommendations.
-          </p>
-          <div className="mt-6 flex gap-3">
-            <a href="/signup" className="btn-glow">
-              Join now
-            </a>
-            <a
-              href="/browse"
-              className="rounded-xl border border-white/20 px-4 py-2 text-sm font-semibold text-white transition-colors hover:text-[#33D4FF]"
-            >
-              Explore
-            </a>
-          </div>
-        </section>
+        <Hero
+          title="Join the retro family"
+          subtitle="Discover classic games, log your favorites, and get personalized recommendations."
+          primary={{ label: "Join now", href: "/signup" }}
+          secondary={{ label: "Explore", href: "/browse" }}
+          imageUrl="/images/herohome.png"
+          imageAlt="Retro controller"
+        />
 
         <Section
           title="Popular games"
