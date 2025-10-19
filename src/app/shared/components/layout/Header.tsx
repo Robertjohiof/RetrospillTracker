@@ -3,7 +3,7 @@ export default function Header() {
   const isAuthenticated = false;
 
   return (
-    <header className="bg-[#0a0015]/90 text-orange-400 px-8 py-4 flex items-center justify-between shadow-lg">
+    <header className="sticky top-0 w-full bg-[#0a0015] px-8 py-4 flex items-center justify-between border-b border-white/10 shadow-md z-20">
       <a
         href="/"
         className="flex items-center gap-2 hover:opacity-90 transition"
@@ -13,43 +13,37 @@ export default function Header() {
           alt="RetroSpillTracker logo"
           className="h-10 w-auto"
         />
-        <h1 className="text-pink-500 text-lg font-bold hidden sm:block">
+        <h1 className="text-glow-pink text-lg font-bold hidden sm:block">
           RetroSpillTracker
         </h1>
       </a>
 
       <nav className="hidden md:flex gap-8 text-sm font-semibold">
-        <a href="/" className="hover:text-pink-500 transition-colors">
+        <a href="/" className="nav-link">
           Home
         </a>
-        <a href="/search" className="hover:text-pink-500 transition-colors">
+        <a href="/search" className="nav-link">
           Search
         </a>
-        <a href="/browse" className="hover:text-pink-500 transition-colors">
+        <a href="/browse" className="nav-link">
           Browse
         </a>
-        <a href="/forum" className="hover:text-pink-500 transition-colors">
+        <a href="/forum" className="nav-link">
           Forum
         </a>
 
         {isAuthenticated && (
-          <a href="/profile" className="hover:text-pink-500 transition-colors">
+          <a href="/profile" className="nav-link">
             Profile
           </a>
         )}
       </nav>
 
       <div className="flex gap-4">
-        <a
-          href="/login"
-          className="text-pink-400 hover:text-pink-300 font-medium transition-colors"
-        >
+        <a href="/login" className="nav-link font-medium">
           Log in
         </a>
-        <a
-          href="/signup"
-          className="bg-pink-600 hover:bg-pink-500 text-white px-4 py-2 rounded-md font-semibold shadow-md transition-all"
-        >
+        <a href="/signup" className="btn-glow">
           Sign up
         </a>
       </div>
