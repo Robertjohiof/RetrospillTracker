@@ -2,7 +2,7 @@ import { defineApp } from "rwsdk/worker";
 import { render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { Home } from "@/app/pages/Home";
-
+import HomePage from "./app/pages/HomePage";
 import { User, users } from "./db/schema/user-schema";
 import { setCommonHeaders } from "./app/headers";
 import { env } from "cloudflare:workers";
@@ -50,6 +50,9 @@ export default defineApp([
         </div>
       );
     }),
+
+    route("/frontpage", HomePage),
+
     route("/home", [
       ({ ctx }) => {
         if (!ctx.user) {
