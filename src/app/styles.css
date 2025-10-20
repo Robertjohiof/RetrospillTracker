@@ -1,4 +1,3 @@
-/* src/app/styles.css */
 @import "tailwindcss";
 
 @theme{
@@ -7,4 +6,6 @@
     --color-secondary: #FF6A00;
     --color-tertiary: #FF00D9;
     --color-tertiary-light: #FF33FF;
+
+    --font-main: "Press Start 2P", system-ui;
 }

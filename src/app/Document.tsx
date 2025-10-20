@@ -7,11 +7,12 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
 }) => (
   <html lang="en">
     <head>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>@redwoodjs/starter-standard</title>
-      <link rel="modulepreload" href="/src/client.tsx" />
-      <link rel="stylesheet" href={styles} />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>@redwoodjs/starter-standard</title>
+        <link rel="modulepreload" href="/src/client.tsx" />
+        <link rel="stylesheet" href={styles} />
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
     </head>
     <body>
       <div id="root">{children}</div>
