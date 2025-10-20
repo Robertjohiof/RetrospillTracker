@@ -1,4 +1,5 @@
 // src/app/Document.tsx
+import styles from "./styles.css?url";
 
 export const Document: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -10,7 +11,6 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
         <title>@redwoodjs/starter-standard</title>
         <link rel="modulepreload" href="/src/client.tsx" />
         <link rel="stylesheet" href={styles} />
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
     </head>
     <body>
       <div id="root">{children}</div>

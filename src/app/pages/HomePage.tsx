@@ -1,6 +1,7 @@
 import type { RequestInfo } from "rwsdk/worker";
-import Layout from "../shared/components/layout/Layout";
 import Hero from "../shared/components/Hero";
+import GameList from "@features/gameList/GameList";
+import {listGames} from "@/app/shared/services/gameService";
 
 export default function HomePage({ ctx }: RequestInfo) {
   const isLoggedIn = Boolean(ctx.user?.id);
@@ -42,39 +43,34 @@ export default function HomePage({ ctx }: RequestInfo) {
   ];
 
   return (
-    <Layout>
-      <main className="mx-auto max-w-7xl px-4 py-8">
-        {/*Hero med CTA*/}
-        <Hero
-          title="Join the retro family"
-          subtitle="Discover classic games, log your favorites, and get personalized recommendations."
-          primary={{ label: "Join now", href: "/signup" }}
-          secondary={{ label: "Explore", href: "/browse" }}
-          imageUrl="/images/herohome.png"
-          imageAlt="Retro controller"
-        />
-
-        <Section
-          title="Popular games"
-          link="/browse?sort=popular"
-          items={popular}
-        />
-
-        <Section
-          title="Top rated"
-          link="/browse?sort=rating"
-          items={topRated}
-        />
-
-        {isLoggedIn && (
-          <Section
-            title="Personal recommendation"
-            link="/browse?tab=recommended"
-            items={personal}
+      <>
+          {/*Hero med CTA*/}
+          <Hero
+              title="Join the retro family"
+              subtitle="Discover classic games, log your favorites, and get personalized recommendations."
+              primary={{ label: "Join now", href: "/signup" }}
+              secondary={{ label: "Explore", href: "/browse" }}
+              imageUrl="/images/herohome.png"
+              imageAlt="Retro controller"
           />
-        )}
-      </main>
-    </Layout>
+
+          <GameList games={listGames()} categoryTitle={"Popular games"}/>
+
+          <Section
+              title="Top rated"
+              link="/browse?sort=rating"
+              items={topRated}
+          />
+
+          {isLoggedIn && (
+              <Section
+                  title="Personal recommendation"
+                  link="/browse?tab=recommended"
+                  items={personal}
+              />
+          )}
+      </>
+
   );
 }
 
