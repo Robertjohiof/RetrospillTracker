@@ -3,15 +3,18 @@ import Footer from "./Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-dvh bg-[#0a0015] relative overflow-hidden">
+    // isolate for at z-index fungerer litt mer smooth
+    <div className="min-h-dvh bg-[#0a0015] relative overflow-x-hidden isolate">
+      {/* Låst bakgrunn, for parallax effekt*/}
       <div
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-60 brightness-110 contrast-110"
+        className="pointer-events-none fixed inset-0 z-0 bg-no-repeat bg-cover bg-center bg-fixed opacity-60 brightness-110 contrast-110"
         style={{ backgroundImage: "url('/images/RetroZoneBackground.png')" }}
         aria-hidden="true"
       />
 
+      {/* Gradient over bakgrunn for kontrast */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"
+        className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"
         aria-hidden="true"
       />
 
