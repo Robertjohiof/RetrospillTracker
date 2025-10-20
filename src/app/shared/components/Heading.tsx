@@ -13,7 +13,7 @@ const headingBaseStyle = {
     1: "text-3xl font-extrabold text-tertiary ",
     2: "text-lg font-extrabold text-iceblue ",
     3: "text-md font-bold text-iceblue ",
-    4: "text-sm font-medium text-iceblue ",
+    4: "text-sm font-semibold text-iceblue ",
     5: "text-sm font-medium text-iceblue ",
 }
 /**

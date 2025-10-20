@@ -6,7 +6,7 @@ import {listGames} from "@/app/shared/services/gameService";
 export default function HomePage({ ctx }: RequestInfo) {
   const isLoggedIn = Boolean(ctx.user?.id);
 
-  // Erstattes når Drizzle schema er klart
+  //TODO: Erstattes når Drizzle schema er klart
   const popular = [
     {
       id: "smb3",
@@ -56,6 +56,7 @@ export default function HomePage({ ctx }: RequestInfo) {
 
           <GameList games={listGames()} categoryTitle={"Popular games"}/>
 
+          {/*TODO: bytt ut med gamelist basert på api fetches*/}
           <Section
               title="Top rated"
               link="/browse?sort=rating"
