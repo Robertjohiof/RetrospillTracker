@@ -1,5 +1,5 @@
 import { defineApp } from "rwsdk/worker";
-import { render, route } from "rwsdk/router";
+import {layout, render, route} from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { Home } from "@/app/pages/Home";
 import HomePage from "./app/pages/HomePage";
@@ -11,8 +11,9 @@ import Search from "./app/pages/Search";
 import Browse from "./app/pages/Browse";
 import Forum from "./app/pages/Forum";
 import Login from "./app/pages/Login";
-import SignUp from "./app/pages/SignUp";
+import Layout from "@/app/shared/components/layout/Layout";
 import ProfilePage from "./app/pages/ProfilePage";
+import SignUp from "./app/pages/SignUp";
 
 export interface Env {
   DB: D1Database;
@@ -26,11 +27,14 @@ export type AppContext = {
 export default defineApp([
   setCommonHeaders(),
   render(Document, [
+      layout(Layout, [
+          route("/frontpage", HomePage),
+      ]),
     route("/", async () => {
       const userResult = await drizzle(env.DB).select().from(users);
       return (
         <div style={{ padding: "2rem", maxWidth: "600px", margin: "0 auto" }}>
-          <h1>Start</h1>
+          <h1 className="text-primary">Start</h1>
           <p>Velkommen til eksempel</p>
           <p>Databasen har {userResult.length} brukere</p>
           <div style={{ margin: "1.5rem 0" }}>
@@ -64,6 +68,7 @@ export default defineApp([
     route("/login", Login),
     route("/signup", SignUp),
     route("/profilepage", ProfilePage),
+
 
     route("/home", [
       ({ ctx }) => {
