@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react"
 
 export default function ProfilePage(){
@@ -19,7 +20,11 @@ export default function ProfilePage(){
         });
         if (!response.ok) throw new Error("Error")
         const result = await response.json()
-        setData(result)
+          console.log(result)
+        //setData(result)
+      }
+      catch (err){
+          console.log(err)
       }
     }
   }, [])
