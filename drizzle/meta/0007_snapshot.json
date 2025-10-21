@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "0afb6e98-a6cd-4737-a5e9-3d851cfabb2e",
+  "id": "c194cc74-0a2a-4a65-8318-57f6e04d20cc",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "collection_entries": {
@@ -497,7 +497,7 @@
           "columnsTo": [
             "game_id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         },
         "games_to_platforms_platform_id_platforms_platform_id_fk": {
@@ -510,7 +510,7 @@
           "columnsTo": [
             "platform_id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },

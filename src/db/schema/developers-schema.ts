@@ -20,3 +20,5 @@ export const developersRelations = relations(developers, ({ many }) => ({
     gamesToDeveloper: many(gamesToDevelopers)
 }));
 
+export type Developer = typeof developers.$inferSelect;
+

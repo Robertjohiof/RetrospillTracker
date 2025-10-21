@@ -69,8 +69,8 @@ CREATE TABLE `games_to_platforms` (
 	`game_id` integer NOT NULL,
 	`platform_id` integer NOT NULL,
 	PRIMARY KEY(`game_id`, `platform_id`),
-	FOREIGN KEY (`game_id`) REFERENCES `games`(`game_id`) ON UPDATE no action ON DELETE cascade,
-	FOREIGN KEY (`platform_id`) REFERENCES `platforms`(`platform_id`) ON UPDATE no action ON DELETE cascade
+	FOREIGN KEY (`game_id`) REFERENCES `games`(`game_id`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`platform_id`) REFERENCES `platforms`(`platform_id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `genres` (
