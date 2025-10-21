@@ -1,10 +1,10 @@
-import { sql, relations } from "drizzle-orm";
-import { sqliteTable, text, int } from "drizzle-orm/sqlite-core";
+import { relations } from "drizzle-orm";
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
-import { users } from "./user-schema";
+import { users } from "./users-schema";
 
 export const roles = sqliteTable("roles", {
-  id: int("id").primaryKey({ autoIncrement: true}),
+  id: integer("id").primaryKey(),
   roleName: text("role_name").notNull().unique()
 });
 

@@ -3,7 +3,7 @@ import { render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
 import { Home } from "@/app/pages/Home";
 
-import { User, users } from "./db/schema/user-schema";
+import { User, users } from "./db/schema/users-schema";
 import { setCommonHeaders } from "./app/headers";
 import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";

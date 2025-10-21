@@ -1,8 +1,25 @@
-import { sqliteTable, text, int } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
 import { games } from "./games-schema";
-import { developer } from "./developer-schema";
+import { developers } from "./developers-schema";
+import { relations } from "drizzle-orm";
 
-export const gamesToDeveloper = sqliteTable("gamesToDeveloper", {
-    gamesId: int().primaryKey({ autoIncrement: true }).notNull().references(() => games.id),
-    developerId: int().primaryKey({ autoIncrement: true }).notNull().references(() => developer.id),
-});
+export const gamesToDevelopers = sqliteTable("games_to_developers", {
+    gameId: integer().primaryKey().references(() => games.gameId),
+    developerId: integer().primaryKey().notNull().references(() => developers.developerId),
+},
+(table) => [
+    primaryKey({ columns: [table.gameId, table.developerId] })
+]);
+
+export const gamesToDevelopersRelations = relations(gamesToDevelopers, ({ one }) => ({
+    game: one(games, {
+        fields: [gamesToDevelopers.gameId],
+        references: [games.gameId]
+    }),
+    developer: one(developers, {
+        fields: [gamesToDevelopers.developerId],
+        references: [developers.developerId]
+    })
+}));
+
+export type GamesToDeveloper = typeof gamesToDevelopers.$inferSelect;
