@@ -1,10 +1,50 @@
+"use client"
+
 import type { RequestInfo } from "rwsdk/worker";
 import Hero from "../shared/components/Hero";
 import GameList from "@features/gameList/GameList";
 import {listGames} from "@/app/shared/services/gameService";
+import {useEffect, useState} from "react";
+import { Game } from "@/app/shared/types/game"
 
 export default function HomePage({ ctx }: RequestInfo) {
-  const isLoggedIn = Boolean(ctx.user?.id);
+    interface IGDBGame {
+        id: number;
+        name: string;
+        cover?: {
+            url: string;
+        };
+        summary?: string;
+        developers?: {
+            name: string;
+        }[];
+        platforms?: {
+            abbreviation: string;
+        }[];
+    }
+
+  const [popularGames, setPopularGames] = useState<Game[]>([]);
+
+  const fetchPopularGames = async () => {
+      try{
+          const response = await fetch("http://localhost:5173/api/v1/getPopularGames");
+          const data = await response.json();
+          // @ts-ignore
+          setPopularGames(data.data.map((game:IGDBGame) => {return {
+              id: game.id.toString(),
+              title: game.name,
+              imgUrl: game.cover,
+              description: game.summary,
+          }}));
+      }
+      catch (error) {
+          console.error(error);
+      }
+  }
+
+    useEffect(() => {
+        fetchPopularGames();
+    }, []);
 
   return (
       <>
@@ -19,7 +59,7 @@ export default function HomePage({ ctx }: RequestInfo) {
           />
 
           {/*TODO: bytt ut listGames med servicen som fetcher game basert på categori*/}
-          <GameList games={listGames()} categoryTitle={"Popular games"}/>
+          <GameList games={popularGames} categoryTitle={"Popular games"}/>
           <GameList games={listGames()} categoryTitle={"Top Rated"}/>
           <GameList games={listGames()} categoryTitle={"Recommendations"}/>
       </>

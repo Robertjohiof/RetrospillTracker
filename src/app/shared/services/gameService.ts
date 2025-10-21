@@ -55,6 +55,9 @@ export async function getPopularGames() {
             },
             body: query,
         })
+        if (!response.ok) {
+            console.error(response);
+        }
         const data = await response.json();
         return createSuccessResponse(data)
     }
