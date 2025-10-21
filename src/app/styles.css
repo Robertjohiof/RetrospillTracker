@@ -1,12 +1,15 @@
-/* src/app/styles.css */
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-:root {
+@theme {
     --color-primary: #0D0036;
     --color-primary-light: #1A006B;
+    --color-iceblue: #00BFFF;
     --color-secondary: #FF6A00;
     --color-tertiary: #FF00D9;
     --color-tertiary-light: #FF33FF;
+
+    --font-main: "Press Start 2P", system-ui;
 }
 
 
