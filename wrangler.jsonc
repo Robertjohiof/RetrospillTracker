@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "simple-start",
+  "name": "retrospill-tracker",
   "main": "src/worker.tsx",
   "compatibility_date": "2025-08-29",
   "compatibility_flags": [
@@ -17,15 +17,15 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "simple-start",
-      "database_id": "__change_me__",
+      "database_name": "retrospill-tracker",
+      "database_id": "REMOVED_CLOUDFLARE_DATABASE_ID",
       "migrations_dir": "drizzle"
     }
   ],
-  "r2_buckets": [
-    {
-      "binding": "R2",
-      "bucket_name": "simple-start"
-    },
-  ]
+  // "r2_buckets": [
+  //   {
+  //     "binding": "R2",
+  //     "bucket_name": "simple-start"
+  //   },
+  // ]
 }
