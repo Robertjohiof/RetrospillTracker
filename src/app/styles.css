@@ -1,2 +1,66 @@
-/* src/app/styles.css */
 @import "tailwindcss";
+
+@theme {
+    --color-primary: #0D0036;
+    --color-primary-light: #1A006B;
+    --color-iceblue: #00BFFF;
+    --color-secondary: #FF6A00;
+    --color-tertiary: #FF00D9;
+    --color-tertiary-light: #FF33FF;
+
+}
+
+
+.text-glow-cyan {
+  color: #33D4FF;
+  text-shadow:
+    0 0 6px #33D4FF,
+    0 0 12px #0088FF,
+    0 0 24px rgba(0,136,255,0.4);
+}
+
+.text-glow-pink {
+  color: var(--color-tertiary); 
+  text-shadow:
+    0 0 1.5px var(--color-tertiary),
+    0 0 3px var(--color-tertiary-light),
+    0 0 6px rgba(255, 0, 217, 0.1);
+  filter: brightness(1.05) contrast(1.1);
+}
+
+.text-glow-orange {
+  color: var(--color-secondary); 
+  text-shadow:
+    0 0 6px var(--color-secondary),
+    0 0 12px rgba(255, 106, 0, 0.6),
+    0 0 24px rgba(255, 106, 0, 0.3);
+}
+
+.btn-glow {
+  background-color: var(--color-secondary);
+  color: black;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+  background-color: var(--color-tertiary);
+  color: white;
+  box-shadow:
+    0 0 6px var(--color-tertiary),
+    0 0 12px var(--color-tertiary-light),
+    0 0 24px rgba(255, 0, 217, 0.4);
+}
+
+.nav-link {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  color: var(--color-secondary);
+}
+.nav-link:hover {
+  color: var(--color-tertiary-light);
+  text-shadow:
+    0 0 6px var(--color-tertiary-light),
+    0 0 12px rgba(255, 51, 255, 0.4);
+}
