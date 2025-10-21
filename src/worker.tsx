@@ -7,7 +7,13 @@ import { User, users } from "./db/schema/user-schema";
 import { setCommonHeaders } from "./app/headers";
 import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";
+import Search from "./app/pages/Search";
+import Browse from "./app/pages/Browse";
+import Forum from "./app/pages/Forum";
+import Login from "./app/pages/Login";
 import Layout from "@/app/shared/components/layout/Layout";
+import ProfilePage from "./app/pages/ProfilePage";
+import SignUp from "./app/pages/SignUp";
 
 export interface Env {
   DB: D1Database;
@@ -55,6 +61,13 @@ export default defineApp([
       );
     }),
 
+    route("/frontpage", HomePage),
+    route("/search", Search),
+    route("/browse", Browse),
+    route("/forum", Forum),
+    route("/login", Login),
+    route("/signup", SignUp),
+    route("/profilepage", ProfilePage),
 
 
     route("/home", [
