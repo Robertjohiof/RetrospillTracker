@@ -1,6 +1,6 @@
 // src/db/schema/user-schema.ts
 import { relations, sql } from "drizzle-orm";
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, uniqueIndex } from "drizzle-orm/sqlite-core";
 import { roles } from "./roles-schema";
 import { collections } from "./collections-schema";
 import { sessions } from "./sessions-schema";
@@ -18,12 +18,17 @@ export const users = sqliteTable("users", {
   profileBanner: text("profile_banner"),
   biography: text("biography"),
   isActive: integer({ mode: 'boolean' }).notNull(),
-  createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
+  createdAt: text("created_at"),
   updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
   roleId: integer("role_id")
     .notNull()
     .references(() => roles.id)
-});
+},
+
+(table) => [
+  uniqueIndex("user_idx").on(table.userId),
+  uniqueIndex("user_slugx").on(table.slug)
+]);
 
 export const userRelations = relations(users, ({ one, many }) => ({
   role: one(roles, {

@@ -4,8 +4,8 @@ import { developers } from "./developers-schema";
 import { relations } from "drizzle-orm";
 
 export const gamesToDevelopers = sqliteTable("games_to_developers", {
-    gameId: integer().primaryKey().references(() => games.gameId),
-    developerId: integer().primaryKey().notNull().references(() => developers.developerId),
+    gameId: integer("game_id").references(() => games.gameId, {onDelete: "cascade" }),
+    developerId: integer("developer_id").notNull().references(() => developers.developerId, { onDelete: "cascade" }),
 },
 (table) => [
     primaryKey({ columns: [table.gameId, table.developerId] })

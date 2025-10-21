@@ -15,7 +15,6 @@ export const collectionEntries = sqliteTable("collection_entries", {
     finishedAt: text("finished_at")
 });
 
-
 export const collectionEntriesRelations = relations(collectionEntries, ({ one }) => ({
     collection: one(collections, {
        fields: [collectionEntries.collectionId],

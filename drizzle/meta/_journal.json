@@ -8,6 +8,41 @@
       "when": 1748955325827,
       "tag": "0000_common_shaman",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1761048928231,
+      "tag": "0001_polite_ultimatum",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1761049449775,
+      "tag": "0002_awesome_franklin_storm",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1761049711729,
+      "tag": "0003_melted_mordo",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1761053768728,
+      "tag": "0004_perfect_master_chief",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1761053971707,
+      "tag": "0005_blue_mephisto",
+      "breakpoints": true
     }
   ]
 }
