@@ -1,4 +1,6 @@
-import image from "@/assets/testImages/tekken1.webp"
+import { createSuccessResponse, createErrorResponse } from "@/app/shared/lib/response";
+
+const GET_URL = "https://api.igdb.com/v4/games";
 
 //TODO: add logic for doing opperations for getting games from the repository
 export function listGames() {
@@ -39,4 +41,30 @@ export function listGames() {
             apiKey: "0379758",
         },
     ]
+}
+
+export async function getPopularGames() {
+    const query = "fields name, cover.url, rating, rating_count, first_release_date; sort rating desc; limit 10;"
+    try{
+        const response = await fetch(GET_URL, {
+            method: "POST",
+            headers: {
+                "Client-ID": process.env.TWITCH_API_ID as string,
+                Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
+                contentType: "text/plain;"
+            },
+            body: query,
+        })
+        if (!response.ok) {
+            console.error(response);
+        }
+        const data = await response.json();
+        return createSuccessResponse(data)
+    }
+    catch (err) {
+        if (err instanceof Error){
+            return createErrorResponse(err.message, 500)
+        }
+        return createErrorResponse("An unknown error occurred", 500)
+    }
 }
