@@ -18,7 +18,7 @@ const headingBaseStyle = {
 }
 /**
  * General purpose heading component for keeping the styling of headings consistent and maintainable
- * @typedef {HeadingProps} props The level, content and extra classes of the heading
+ * @param {HeadingProps} props The level, content and extra classes of the heading
  */
 export default function Heading( props: HeadingProps ){
     const { level, children, styling } = props;
