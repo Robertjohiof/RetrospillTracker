@@ -43,7 +43,7 @@ export function listGames() {
     ]
 }
 
-export async function getPopularGames() {
+export async function getTopratedGames() {
     const query = "fields name, cover.url, rating, rating_count, first_release_date; sort rating desc; limit 10;"
     try{
         const response = await fetch(GET_URL, {
@@ -51,7 +51,7 @@ export async function getPopularGames() {
             headers: {
                 "Client-ID": process.env.TWITCH_API_ID as string,
                 Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
-                contentType: "text/plain;"
+                'Accept': 'application/json',
             },
             body: query,
         })

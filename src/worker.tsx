@@ -16,7 +16,7 @@ import Login from "./app/pages/Login";
 import Layout from "@/app/shared/components/layout/Layout";
 import ProfilePage from "./app/pages/ProfilePage";
 import SignUp from "./app/pages/SignUp";
-import {getPopularGames} from "@/app/shared/services/gameService";
+import {getTopratedGames} from "@/app/shared/services/gameService";
 
 export interface Env {
   DB: D1Database;
@@ -29,7 +29,7 @@ export type AppContext = {
 
 export default defineApp([
   setCommonHeaders(),
-  route("/api/v1/getPopularGames", getPopularGames),
+  route("/api/v1/getPopularGames", getTopratedGames),
   render(Document, [
     route("/seed", async () => {
       try {

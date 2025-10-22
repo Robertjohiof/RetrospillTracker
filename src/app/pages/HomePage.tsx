@@ -6,6 +6,7 @@ import GameList from "@features/gameList/GameList";
 import {listGames} from "@/app/shared/services/gameService";
 import {useEffect, useState} from "react";
 import { Game } from "@/app/shared/types/game"
+import GameWrapper from "@features/gameList/components/GameWrapper";
 
 export default function HomePage({ ctx }: RequestInfo) {
     interface IGDBGame {
@@ -59,9 +60,7 @@ export default function HomePage({ ctx }: RequestInfo) {
           />
 
           {/*TODO: bytt ut listGames med servicen som fetcher game basert på categori*/}
-          <GameList games={popularGames} categoryTitle={"Popular games"}/>
-          <GameList games={listGames()} categoryTitle={"Top Rated"}/>
-          <GameList games={listGames()} categoryTitle={"Recommendations"}/>
+          <GameWrapper/>
       </>
 
   );
