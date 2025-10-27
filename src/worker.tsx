@@ -5,7 +5,7 @@ import { Home } from "@/app/pages/Home";
 
 import { runCustomSeed } from "./db/runCustomSeed";
 import HomePage from "./app/pages/HomePage";
-import { User, users } from "./db/schema/user-schema";
+import { User, users } from "@/db/schema";
 import { setCommonHeaders } from "./app/headers";
 import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";

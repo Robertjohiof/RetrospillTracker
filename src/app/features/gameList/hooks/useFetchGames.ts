@@ -2,14 +2,19 @@
 
 import {Game} from "@/app/shared/types/game"
 import {useEffect, useState} from "react";
+import {API_BASE_URL} from "@/app/config/api";
 
 export function useFetchGames() {
     const [games, setGames] = useState<Game[]>([])
 
     const fetchPopularGames = async () => {
         try{
-            const response = await fetch("http://localhost:5173/api/v1/getPopularGames");
+            const response = await fetch(`${API_BASE_URL}getPopularGames`);
+            if (!response.ok){
+                return
+            }
             const data:IGDBGame = await response.json();
+
             console.log(data);
             setGames(data.data.map((game:IGDBData) => {return {
                 id: game.id.toString(),

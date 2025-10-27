@@ -55,13 +55,18 @@ export async function getTopratedGames() {
             },
             body: query,
         })
+        console.log(response);
         if (!response.ok) {
             console.error(response);
+            return createErrorResponse(response.statusText, response.status)
         }
         const data = await response.json();
         return createSuccessResponse(data)
     }
     catch (err) {
+        if (err instanceof ResponseError) {
+            return createErrorResponse(err.message, err.status)
+        }
         if (err instanceof Error){
             return createErrorResponse(err.message, 500)
         }
