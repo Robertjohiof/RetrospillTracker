@@ -111,7 +111,7 @@ export async function getSearchGames() {
             method: "POST",
             headers: {
                 "Client-ID": process.env.TWITCH_API_ID as string,
-                Authorization: `Bearer ${process.env.OAuth_TOKEN}`,
+                Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
                 contentType: "application/json",
             },
             body: query,
