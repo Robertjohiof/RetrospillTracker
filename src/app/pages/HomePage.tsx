@@ -1,13 +1,12 @@
 "use client"
 
-import type { RequestInfo } from "rwsdk/worker";
 import Hero from "../shared/components/Hero";
 import GameList from "@features/gameList/GameList";
 import {listGames} from "@/app/shared/services/gameService";
 import {useEffect, useState} from "react";
 import { Game } from "@/app/shared/types/game"
 
-export default function HomePage({ ctx }: RequestInfo) {
+export default function HomePage() {
     interface IGDBGame {
         id: number;
         name: string;
@@ -33,7 +32,7 @@ export default function HomePage({ ctx }: RequestInfo) {
           setPopularGames(data.data.map((game:IGDBGame) => {return {
               id: game.id.toString(),
               title: game.name,
-              imgUrl: game.cover,
+              imgUrl: game.cover?.url.replace("t_thumb","t_cover_big"),
               description: game.summary,
           }}));
       }
@@ -60,8 +59,6 @@ export default function HomePage({ ctx }: RequestInfo) {
 
           {/*TODO: bytt ut listGames med servicen som fetcher game basert på categori*/}
           <GameList games={popularGames} categoryTitle={"Popular games"}/>
-          <GameList games={listGames()} categoryTitle={"Top Rated"}/>
-          <GameList games={listGames()} categoryTitle={"Recommendations"}/>
       </>
 
   );
