@@ -32,7 +32,7 @@ export default function HomePage() {
           setPopularGames(data.data.map((game:IGDBGame) => {return {
               id: game.id.toString(),
               title: game.name,
-              imgUrl: game.cover,
+              imgUrl: game.cover?.url.replace("t_thumb","t_cover_big"),
               description: game.summary,
           }}));
       }
