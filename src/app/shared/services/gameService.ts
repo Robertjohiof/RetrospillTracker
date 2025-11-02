@@ -1,3 +1,5 @@
+'use server'
+
 import { createSuccessResponse, createErrorResponse } from "@/app/shared/lib/response";
 import {requestInfo} from "rwsdk/worker"
 
