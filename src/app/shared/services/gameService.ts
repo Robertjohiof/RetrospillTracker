@@ -51,10 +51,37 @@ export async function getPopularGames() {
             headers: {
                 "Client-ID": process.env.TWITCH_API_ID as string,
                 Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
-                contentType: "text/plain;"
+                contentType: "application/json",
             },
             body: query,
         })
+        if (!response.ok) {
+            console.error(response);
+        }
+        const data = await response.json();
+        return createSuccessResponse(data)
+    }
+    catch (err) {
+        if (err instanceof Error){
+            return createErrorResponse(err.message, 500)
+        }
+        return createErrorResponse("An unknown error occurred", 500)
+    }
+}
+
+export async function getAllGames() {
+    const query = "fields name, cover.url, rating, rating_count, first_release_date; limit 24;"
+    try{
+        const response = await fetch(GET_URL, {
+            method: "POST",
+            headers: {
+                "Client-ID": process.env.TWITCH_API_ID as string,
+                Authorization: `Bearer ${process.env.TWITCH_API_TOKEN}`,
+                contentType: "application/json",
+            },
+            body: query,
+        })
+        //TODO: better error handling
         if (!response.ok) {
             console.error(response);
         }
