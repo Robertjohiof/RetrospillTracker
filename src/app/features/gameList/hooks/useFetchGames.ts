@@ -38,6 +38,5 @@ export function useFetchGames(apiEndpoint:string) {
         fetchPopularGames();
     }, []);
 
-    setLoading(false);
     return {games, loading, error}
 }

@@ -1,51 +1,7 @@
-"use client"
-
-import type { RequestInfo } from "rwsdk/worker";
 import Hero from "../shared/components/Hero";
-import GameList from "@features/gameList/GameList";
-import {listGames} from "@/app/shared/services/gameService";
-import {useEffect, useState} from "react";
-import { Game } from "@/app/shared/types/game"
 import GameWrapper from "@features/gameList/components/GameWrapper";
 
-export default function HomePage({ ctx }: RequestInfo) {
-    interface IGDBGame {
-        id: number;
-        name: string;
-        cover?: {
-            url: string;
-        };
-        summary?: string;
-        developers?: {
-            name: string;
-        }[];
-        platforms?: {
-            abbreviation: string;
-        }[];
-    }
-
-  const [popularGames, setPopularGames] = useState<Game[]>([]);
-
-  const fetchPopularGames = async () => {
-      try{
-          const response = await fetch("http://localhost:5173/api/v1/getPopularGames");
-          const data = await response.json();
-          // @ts-ignore
-          setPopularGames(data.data.map((game:IGDBGame) => {return {
-              id: game.id.toString(),
-              title: game.name,
-              imgUrl: game.cover,
-              description: game.summary,
-          }}));
-      }
-      catch (error) {
-          console.error(error);
-      }
-  }
-
-    useEffect(() => {
-        fetchPopularGames();
-    }, []);
+export default function HomePage() {
 
   return (
       <>

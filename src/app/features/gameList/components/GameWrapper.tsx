@@ -1,3 +1,5 @@
+'use client'
+
 import GameList from "@features/gameList/GameList"
 import {useFetchGames} from "@features/gameList/hooks/useFetchGames";
 import {Suspense} from "react";
