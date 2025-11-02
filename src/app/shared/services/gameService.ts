@@ -1,4 +1,5 @@
 import { createSuccessResponse, createErrorResponse } from "@/app/shared/lib/response";
+import {requestInfo} from "rwsdk/worker"
 
 const GET_URL = "https://api.igdb.com/v4/games";
 
@@ -57,6 +58,7 @@ export async function getPopularGames() {
         })
         if (!response.ok) {
             console.error(response);
+            createErrorResponse(response.statusText, response.status)
         }
         const data = await response.json();
         return createSuccessResponse(data)
@@ -84,6 +86,37 @@ export async function getAllGames() {
         //TODO: better error handling
         if (!response.ok) {
             console.error(response);
+            createErrorResponse(response.statusText, response.status)
+        }
+        const data = await response.json();
+        return createSuccessResponse(data)
+    }
+    catch (err) {
+        if (err instanceof Error){
+            return createErrorResponse(err.message, 500)
+        }
+        return createErrorResponse("An unknown error occurred", 500)
+    }
+}
+
+export async function getSearchGames() {
+    const {request} = requestInfo;
+    const url = new URL(request.url);
+    const search = url.searchParams.get("search");
+    const query = `fields name, cover.url, rating, rating_count; first_release_date; search "${search}"`
+    try{
+        const response = await fetch(GET_URL, {
+            method: "POST",
+            headers: {
+                "Client-ID": process.env.TWITCH_API_ID as string,
+                Authorization: `Bearer ${process.env.TWITCH_API_TOKEN}`,
+                contentType: "application/json",
+            },
+            body: query,
+        })
+        if (!response.ok) {
+            console.error(response);
+            createErrorResponse(response.statusText, response.status)
         }
         const data = await response.json();
         return createSuccessResponse(data)

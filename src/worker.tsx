@@ -5,7 +5,7 @@ import { Home } from "@/app/pages/Home";
 
 import { runCustomSeed } from "./db/runCustomSeed";
 import HomePage from "./app/pages/HomePage";
-import { User, users } from "./db/schema/user-schema";
+import { User, users } from "@/db/schema";
 import { setCommonHeaders } from "./app/headers";
 import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";
@@ -16,7 +16,7 @@ import Login from "./app/pages/Login";
 import Layout from "@/app/shared/components/layout/Layout";
 import ProfilePage from "./app/pages/ProfilePage";
 import SignUp from "./app/pages/SignUp";
-import {getAllGames, getPopularGames} from "@/app/shared/services/gameService";
+import {getAllGames, getPopularGames, getSearchGames} from "@/app/shared/services/gameService";
 
 export interface Env {
   DB: D1Database;
@@ -31,6 +31,7 @@ export default defineApp([
   setCommonHeaders(),
   route("/api/v1/getPopularGames", getPopularGames),
   route("/api/v1/getAllGames", getAllGames),
+  route("/api/v1/getSearchGames", getSearchGames),
   render(Document, [
     route("/seed", async () => {
       try {
