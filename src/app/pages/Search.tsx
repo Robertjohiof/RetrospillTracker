@@ -18,17 +18,23 @@ export default function Search() {
 
   // init: hent en første liste (mock eller ekte)
   useEffect(() => {
-    (async () => {
-      try {
+    const params = new URLSearchParams(window.location.search);
+    const initial = params.get("search") || params.get("query") || "";
+    if (initial) {
+      setQuery(initial);
+      (async () => {
         setLoading(true);
-        const first = await listAllGames(24, 0);
-        setGames(first);
-      } catch {
-        setError("Not able to load games.");
-      } finally {
-        setLoading(false);
-      }
-    })();
+        setError(null);
+        try {
+          const results = await searchGames(initial, 24, 0);
+          setGames(results);
+        } catch {
+          setError("Not able to find games");
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }
   }, []);
 
   // søk-knapp / enter
