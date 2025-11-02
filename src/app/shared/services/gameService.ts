@@ -80,7 +80,7 @@ export async function getAllGames() {
             method: "POST",
             headers: {
                 "Client-ID": process.env.TWITCH_API_ID as string,
-                Authorization: `Bearer ${process.env.TWITCH_API_TOKEN}`,
+                Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
                 contentType: "application/json",
             },
             body: query,
@@ -105,13 +105,13 @@ export async function getSearchGames() {
     const {request} = requestInfo;
     const url = new URL(request.url);
     const search = url.searchParams.get("search");
-    const query = `fields name, cover.url, rating, rating_count; first_release_date; search "${search}"`
+    const query = `fields name, cover.url, rating, rating_count; first_release_date; search "${search}";`
     try{
         const response = await fetch(GET_URL, {
             method: "POST",
             headers: {
                 "Client-ID": process.env.TWITCH_API_ID as string,
-                Authorization: `Bearer ${process.env.TWITCH_API_TOKEN}`,
+                Authorization: `Bearer ${process.env.OAuth_TOKEN}`,
                 contentType: "application/json",
             },
             body: query,
