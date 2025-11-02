@@ -6,7 +6,7 @@ type ButtonLink = {
 };
 
 export interface HeroProps {
-  title: string;
+  title?: string;
   subtitle?: string;
   imageUrl?: string;
   imageAlt?: string;
