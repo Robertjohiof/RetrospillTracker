@@ -36,7 +36,7 @@ export default function ProfilePage(){
       <section className="relative">
         <span className="h-7">
           <Hero
-            imageUrl="/images/gameover.png"
+            imageUrl="/images/gameOver.png"
             imageAlt="Hero banner that says Game Over"
           />
         </span>
@@ -49,16 +49,65 @@ export default function ProfilePage(){
       </section>
       <section className="bg-primary-light grid grid-cols-5 grid-rows-3 gap-2 p-3">
       <article className="row-span-full col-span-1 bg-primary">
-        <h2 className="text-glow-orange text-2xl pl-5 pt-5">Search</h2>
+        <h2 className="font-press text-glow-orange text-2xl pl-5 pt-5">Search</h2>
       </article>
-      <article className="bg-primary col-span-4">
-        <h2 className="font-press text-2xl">Playing</h2>
+      <article className="col-span-4">
+        <h2 className="text-glow-cyan font-press text-2xl">Playing</h2>
+        <section className="bg-primary py-5">
+          <table className="w-full text-right">
+            <thead>
+              <tr className="">
+                <th scope="col" className="text-glow-orange">Title</th>
+                <th scope="col" className="text-glow-orange">Start Date</th>
+                <th scope="col" className="text-glow-orange">Platform</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="odd:bg-white-50">
+                {/* Her må det mates på */}
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
       </article>
-      <article className="bg-primary col-span-4">
-        <h2 className="font-vt323 text-2xl">Planning</h2>
+      <article className="col-span-4">
+        <h2 className="text-glow-cyan font-press text-2xl">Planning</h2>
+        <section className="bg-primary flex flex-col p-5">
+          <tr className="flex justify-between">
+            <th className="text-glow-orange">Title</th>
+            <th className="text-glow-orange">Priority</th>
+            <th className="text-glow-orange">Platform</th>
+          </tr>
+          <tr className="flex justify-between">
+            {/* Her må det mates på */}
+            <td className="text-white">Temp</td>
+            <td className="text-white">Temp</td>
+            <td className="text-white">Temp</td>
+          </tr>
+        </section>
       </article>
-      <article className="bg-primary col-span-4">
-        <h2 className="font-roboto text-4xl">Played</h2>
+      <article className="col-span-4">
+        <h2 className="text-glow-cyan font-roboto text-2xl">Played</h2>
+        <section className="bg-primary flex flex-col p-5">
+          <tr className="flex justify-between">
+            <th className="text-glow-orange">Title</th>
+            <th className="text-glow-orange">Rating</th>
+            <th className="text-glow-orange">Start Date</th>
+            <th className="text-glow-orange">Finish date</th>
+            <th className="text-glow-orange">Platform</th>
+          </tr>
+          <tr className="flex justify-between">
+            {/* Her må det mates på */}
+            <td className="text-white">Temp</td>
+            <td className="text-white">Temp</td>
+            <td className="text-white">Temp</td>
+            <td className="text-white">Temp</td>
+            <td className="text-white">Temp</td>
+          </tr>
+        </section>
       </article>
       </section>
     </div>
