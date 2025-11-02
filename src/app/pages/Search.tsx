@@ -9,12 +9,14 @@ import type { Game } from "@/app/shared/types/game";
 import GameCard from "@/app/features/gameCard/components/GameCard";
 import { React } from "rwsdk/client";
 
-export default function SearchPage() {
+export default function Search() {
+  // lokal state
   const [query, setQuery] = useState("");
   const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // init: hent en første liste (mock eller ekte)
   useEffect(() => {
     (async () => {
       try {
@@ -29,14 +31,18 @@ export default function SearchPage() {
     })();
   }, []);
 
+  // søk-knapp / enter
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
       setLoading(true);
       setError(null);
-      const results = query.trim()
-        ? await searchGames(query, 24, 0)
+
+      const text = query.trim();
+      const results = text
+        ? await searchGames(text, 24, 0) // POST via client-service
         : await listAllGames(24, 0);
+
       setGames(results);
     } catch {
       setError("Not able to find games");
@@ -47,7 +53,7 @@ export default function SearchPage() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-10 text-cyan-300">
-      {/* Filter rad */}
+      {/* Filter-rad */}
       <div className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-5">
         {/* Search */}
         <form onSubmit={onSubmit} className="col-span-1 md:col-span-1">
@@ -55,8 +61,8 @@ export default function SearchPage() {
             <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400/70"></span>
             <input
               value={query}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setQuery(event.target.value)
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setQuery(e.target.value)
               }
               placeholder="Search games"
               className="w-full rounded-lg border border-white/10 bg-white/5 pl-10 pr-3 py-3 outline-none"
@@ -69,19 +75,20 @@ export default function SearchPage() {
             Search
           </button>
         </form>
-        {/* Genre */}
+
+        {/* Genres (deaktivert ennå) */}
         <div className="md:col-span-1">
           <label className="mb-1 block text-sm text-cyan-400">Genres</label>
           <select
             className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
             disabled
-            title="kommer senere"
+            title="Kommer senere"
           >
             <option>Any</option>
           </select>
         </div>
 
-        {/* Year */}
+        {/* Year (deaktivert ennå) */}
         <div className="md:col-span-1">
           <label className="mb-1 block text-sm text-cyan-400">Year</label>
           <select
@@ -93,7 +100,7 @@ export default function SearchPage() {
           </select>
         </div>
 
-        {/* Console */}
+        {/* Console (deaktivert ennå) */}
         <div className="md:col-span-1">
           <label className="mb-1 block text-sm text-cyan-400">Console</label>
           <select
@@ -105,7 +112,7 @@ export default function SearchPage() {
           </select>
         </div>
 
-        {/* More filters */}
+        {/* More filters (deaktivert ennå) */}
         <div className="md:col-span-1">
           <label className="mb-1 block text-sm text-transparent select-none">
             .
@@ -124,7 +131,7 @@ export default function SearchPage() {
       {loading && <p>Fetching games...</p>}
       {error && <p className="text-red-400">{error}</p>}
 
-      {/*Sections*/}
+      {/* Sections */}
       {!loading && !error && (
         <div className="space-y-12">
           {/* Popular now */}
