@@ -36,7 +36,7 @@ export default function ProfilePage(){
       <section className="relative">
         <span className="h-7">
           <Hero
-            imageUrl="/images/gameOver.png"
+            imageUrl="/images/gameover.png"
             imageAlt="Hero banner that says Game Over"
           />
         </span>
@@ -53,8 +53,8 @@ export default function ProfilePage(){
       </article>
       <article className="col-span-4">
         <h2 className="text-glow-cyan font-press text-2xl">Playing</h2>
-        <section className="bg-primary py-5">
-          <table className="w-full text-right">
+        
+          <table className="w-full bg-primary font-press">
             <thead>
               <tr className="">
                 <th scope="col" className="text-glow-orange">Title</th>
@@ -71,43 +71,51 @@ export default function ProfilePage(){
               </tr>
             </tbody>
           </table>
-        </section>
+        
       </article>
       <article className="col-span-4">
         <h2 className="text-glow-cyan font-press text-2xl">Planning</h2>
-        <section className="bg-primary flex flex-col p-5">
-          <tr className="flex justify-between">
-            <th className="text-glow-orange">Title</th>
-            <th className="text-glow-orange">Priority</th>
-            <th className="text-glow-orange">Platform</th>
-          </tr>
-          <tr className="flex justify-between">
-            {/* Her må det mates på */}
-            <td className="text-white">Temp</td>
-            <td className="text-white">Temp</td>
-            <td className="text-white">Temp</td>
-          </tr>
-        </section>
+          <table className="bg-primary w-full">
+            <thead>
+              <tr className="flex justify-between">
+                <th className="text-glow-orange">Title</th>
+                <th className="text-glow-orange">Priority</th>
+                <th className="text-glow-orange">Platform</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="flex justify-between">
+                {/* Her må det mates på */}
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+              </tr>
+            </tbody>
+        </table>
       </article>
       <article className="col-span-4">
         <h2 className="text-glow-cyan font-roboto text-2xl">Played</h2>
-        <section className="bg-primary flex flex-col p-5">
-          <tr className="flex justify-between">
-            <th className="text-glow-orange">Title</th>
-            <th className="text-glow-orange">Rating</th>
-            <th className="text-glow-orange">Start Date</th>
-            <th className="text-glow-orange">Finish date</th>
-            <th className="text-glow-orange">Platform</th>
-          </tr>
-          <tr className="flex justify-between">
-            {/* Her må det mates på */}
-            <td className="text-white">Temp</td>
-            <td className="text-white">Temp</td>
-            <td className="text-white">Temp</td>
-            <td className="text-white">Temp</td>
-            <td className="text-white">Temp</td>
-          </tr>
-        </section>
+          <table className="bg-primary w-full">
+            <thead>
+              <tr className="flex justify-between">
+                <th className="text-glow-orange">Title</th>
+                <th className="text-glow-orange">Rating</th>
+                <th className="text-glow-orange">Start Date</th>
+                <th className="text-glow-orange">Finish date</th>
+                <th className="text-glow-orange">Platform</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="flex justify-between">
+                {/* Her må det mates på */}
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+                <td className="text-white">Temp</td>
+              </tr>
+            </tbody>
+          </table>
       </article>
       </section>
     </div>
