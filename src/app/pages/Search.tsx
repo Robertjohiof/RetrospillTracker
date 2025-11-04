@@ -26,7 +26,7 @@ export default function Search() {
         setLoading(true);
         setError(null);
         try {
-          const results = await searchGames(initial, 24, 0);
+          const results = await searchGames(initial, 25, 0);
           setGames(results);
         } catch {
           setError("Not able to find games");
@@ -45,8 +45,8 @@ export default function Search() {
       setError(null);
       const text = query.trim();
       const results = text
-        ? await searchGames(text, 24, 0)
-        : await listAllGames(24, 0);
+        ? await searchGames(text, 25, 0)
+        : await listAllGames(25, 0);
       setGames(results);
     } catch {
       setError("Not able to find games");

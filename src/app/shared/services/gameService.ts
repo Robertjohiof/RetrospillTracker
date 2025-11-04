@@ -78,7 +78,7 @@ export async function getPopularGames() {
 
 export async function getAllGames() {
   const query =
-    "fields name, cover.url, rating, rating_count, first_release_date; limit 24;";
+    "fields name, cover.url, rating, rating_count, first_release_date; limit 25;";
   try {
     const response = await fetch(GET_URL, {
       method: "POST",
@@ -126,7 +126,7 @@ export async function getSearchGames() {
   // IGDB Apicalypse-spørring
   const query = `fields name, cover.url, rating, rating_count, first_release_date;
 search "${safeSearch}";
-limit 24;`;
+limit 25;`;
 
   try {
     const response = await fetch(GET_URL, {

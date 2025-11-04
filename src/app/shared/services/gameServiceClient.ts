@@ -43,7 +43,7 @@ type RawGame = {
 };
 
 /** Hent alle via backend */
-export async function listAllGames(limit = 24, offset = 0): Promise<Game[]> {
+export async function listAllGames(limit = 25, offset = 0): Promise<Game[]> {
   if (typeof realService.listAllGames === "function") {
     return await realService.listAllGames(limit, offset);
   }
@@ -53,7 +53,7 @@ export async function listAllGames(limit = 24, offset = 0): Promise<Game[]> {
 /** Søk (én POST til Worker) */
 export async function searchGames(
   searchText: string,
-  limit = 24,
+  limit = 25,
   offset = 0
 ): Promise<Game[]> {
   const res = await fetch("/api/v1/getSearchGames", {
