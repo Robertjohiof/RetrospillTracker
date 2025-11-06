@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkButton } from "./ui/LinkButton";
 
 type ButtonLink = {
   label: string;
@@ -53,17 +54,25 @@ export default function Hero({
 
         <div className="mt-6 flex gap-3">
           {primary && (
-            <a href={primary.href} className="btn-glow">
+            <LinkButton
+              href={primary.href}
+              variant="glow"
+              size="none"
+              className="h-9 rounded-[0.4rem]"
+            >
               {primary.label}
-            </a>
+            </LinkButton>
           )}
+
           {secondary && (
-            <a
+            <LinkButton
               href={secondary.href}
-              className="rounded-xl border border-white/20 px-4 py-2 text-sm font-semibold text-white transition-colors hover:text-[#33D4FF]"
+              variant="ghost"
+              size="md"
+              className="rounded-xl"
             >
               {secondary.label}
-            </a>
+            </LinkButton>
           )}
         </div>
       </div>

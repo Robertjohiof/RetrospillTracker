@@ -1,4 +1,5 @@
 import HeaderSearch from "./HeaderSearch";
+import { LinkButton } from "../ui/LinkButton";
 
 export default function Header() {
   // Temp placeholder
@@ -59,18 +60,16 @@ export default function Header() {
 
       {/* Auth-knapper */}
       <div className="flex items-center gap-4">
-        <a
-          href="/login"
-          className="nav-link font-medium text-orange-500 hover:text-pink-400 transition"
-        >
+        <a href="/login" className="nav-link font-medium">
           Log in
         </a>
-        <a
+        <LinkButton
           href="/signup"
-          className="btn-glow px-4 py-2 rounded-lg bg-orange-500 hover:bg-pink-500 text-black font-semibold transition"
+          variant="glow"
+          className="h-9 rounded-[0.4rem]"
         >
           Sign up
-        </a>
+        </LinkButton>
       </div>
     </header>
   );
