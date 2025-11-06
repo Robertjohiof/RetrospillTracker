@@ -38,6 +38,18 @@ interface error{
     message: string;
 }
 
+export type Success<T> = {
+    success: true,
+    data: T
+}
+
+export type Failure = {
+    success: false,
+    error: string
+}
+
+export type Result<T> = Success<T> | Failure
+
 export function createSuccessResponse<T>(data:T, pagination?:pagination):Response {
     const response = {
         success: true,
