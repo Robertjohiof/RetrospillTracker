@@ -1,5 +1,5 @@
 "use client"
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, useEffect, useRef, useState} from "react";
 import {Game} from "@/app/shared/types/game"
 import {ChangeEvent} from "react";
 import {Result} from "@/app/shared/lib/response";
@@ -20,8 +20,7 @@ export default function useSearchResults(){
         setError(null)
         event.preventDefault()
         setLoading(true)
-        const searchQuery = query.trim();
-        const result:Result<Game[]> = searchQuery ? await searchFetch(searchQuery) : await fetchAll()
+        const result:Result<Game[]> = await (query.trim() ? searchFetch(query) : fetchAll())
         if (!result.success){
             setError(result.error)
         }
@@ -34,7 +33,9 @@ export default function useSearchResults(){
     async function onRender():Promise<void>{
         setError(null)
         setLoading(true)
-        const result:Result<Game[]> = await fetchAll()
+        const urlParams = new URLSearchParams(window.location.search)
+        const searchParam:string|null = urlParams.get("search")
+        const result:Result<Game[]> = await(searchParam ? searchFetch(searchParam): fetchAll())
         if (!result.success){
             setError(result.error)
         }
@@ -79,6 +80,7 @@ export default function useSearchResults(){
     useEffect(() => {
         onRender()
     }, []);
+
 
     return {error, games, loading, handleSearchChange, onSubmit, query};
 }
