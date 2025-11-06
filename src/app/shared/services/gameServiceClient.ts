@@ -1,14 +1,16 @@
 import * as realServiceModule from "./gameService";
 import { Game } from "@/app/shared/types/game";
 
-// Backend-funksjoner (om/ når de finnes)
+// Backend-funksjoner (om/når de finnes)
 type RealService = {
   listAllGames?: (limit?: number, offset?: number) => Promise<Game[]>;
   getGameBySlug?: (slug: string) => Promise<Game | null>;
 };
+
 const realService = realServiceModule as unknown as RealService;
 
 // ---- Hjelpere ----
+
 const toSlug = (txt: string): string =>
   txt
     .toLowerCase()
@@ -61,6 +63,7 @@ export async function searchGames(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ search: searchText ?? "", limit, offset }),
   });
+
   if (!res.ok) return [];
 
   let payload: unknown;
@@ -76,16 +79,19 @@ export async function searchGames(
     : Array.isArray((payload as any)?.data)
     ? ((payload as any).data as RawGame[])
     : [];
+
   if (!rows.length) return [];
 
   const mapped: Game[] = rows.map((raw) => {
     const https = ensureHttps(raw.cover?.url);
     const sized = replaceIgdbSize(https, "t_cover_big");
     const img = sized ?? "/images/placeholder.png";
+
     const slug =
       raw.slug && raw.slug.trim().length
         ? raw.slug
         : toSlug(raw.name || String(raw.id));
+
     return {
       id: String(raw.id),
       title: raw.name,

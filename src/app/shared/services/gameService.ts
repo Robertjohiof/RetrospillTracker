@@ -8,7 +8,7 @@ import { requestInfo } from "rwsdk/worker";
 
 const GET_URL = "https://api.igdb.com/v4/games";
 
-//TODO: add logic for doing opperations for getting games from the repository
+// TODO: add logic for doing operations for getting games from the repository
 export function listGames() {
   return [
     {
@@ -50,22 +50,28 @@ export function listGames() {
 }
 
 export async function getPopularGames() {
-  const query =
-    "fields name, cover.url, rating, rating_count, first_release_date; sort rating desc; limit 10;";
+  const query = `
+    fields name, cover.url, rating, rating_count, first_release_date;
+    sort rating desc;
+    limit 10;
+  `;
+
   try {
     const response = await fetch(GET_URL, {
       method: "POST",
       headers: {
         "Client-ID": process.env.TWITCH_API_ID as string,
         Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
-        contentType: "application/json",
+        "Content-Type": "application/json",
       },
       body: query,
     });
+
     if (!response.ok) {
       console.error(response);
-      createErrorResponse(response.statusText, response.status);
+      return createErrorResponse(response.statusText, response.status);
     }
+
     const data = await response.json();
     return createSuccessResponse(data);
   } catch (err) {
@@ -77,23 +83,27 @@ export async function getPopularGames() {
 }
 
 export async function getAllGames() {
-  const query =
-    "fields name, cover.url, rating, rating_count, first_release_date; limit 25;";
+  const query = `
+    fields name, cover.url, rating, rating_count, first_release_date;
+    limit 25;
+  `;
+
   try {
     const response = await fetch(GET_URL, {
       method: "POST",
       headers: {
         "Client-ID": process.env.TWITCH_API_ID as string,
         Authorization: `Bearer ${process.env.OAUTH_TOKEN}`,
-        contentType: "application/json",
+        "Content-Type": "application/json",
       },
       body: query,
     });
-    //TODO: better error handling
+
     if (!response.ok) {
       console.error(response);
-      createErrorResponse(response.statusText, response.status);
+      return createErrorResponse(response.statusText, response.status);
     }
+
     const data = await response.json();
     return createSuccessResponse(data);
   } catch (err) {
@@ -124,9 +134,11 @@ export async function getSearchGames() {
   const safeSearch = (search ?? "").replace(/"/g, '\\"');
 
   // IGDB Apicalypse-spørring
-  const query = `fields name, cover.url, rating, rating_count, first_release_date;
-search "${safeSearch}";
-limit 25;`;
+  const query = `
+    fields name, cover.url, rating, rating_count, first_release_date;
+    search "${safeSearch}";
+    limit 25;
+  `;
 
   try {
     const response = await fetch(GET_URL, {
