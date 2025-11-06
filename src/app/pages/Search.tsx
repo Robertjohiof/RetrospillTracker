@@ -1,59 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  listAllGames,
-  searchGames,
-} from "@/app/shared/services/gameServiceClient";
-import type { Game } from "@/app/shared/types/game";
 import GameCard from "@/app/features/gameCard/components/GameCard";
 import { React } from "rwsdk/client";
+import useSearchResults from "@features/gameSearch/hooks/useSearchResults";
 
 export default function Search() {
-  // lokal state
-  const [query, setQuery] = useState("");
-  const [games, setGames] = useState<Game[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  // init: les ?search/ ?query fra URL og søk
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const initial = params.get("search") || params.get("query") || "";
-    if (initial) {
-      setQuery(initial);
-      (async () => {
-        setLoading(true);
-        setError(null);
-        try {
-          const results = await searchGames(initial, 24, 0);
-          setGames(results);
-        } catch {
-          setError("Not able to find games");
-        } finally {
-          setLoading(false);
-        }
-      })();
-    }
-  }, []);
-
-  // submit fra lokalt søkefelt
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    try {
-      setLoading(true);
-      setError(null);
-      const text = query.trim();
-      const results = text
-        ? await searchGames(text, 24, 0)
-        : await listAllGames(24, 0);
-      setGames(results);
-    } catch {
-      setError("Not able to find games");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const {games, handleSearchChange, onSubmit, loading, error, query} = useSearchResults()
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-10 text-cyan-300">
@@ -64,9 +17,7 @@ export default function Search() {
           <div className="relative flex-1 min-w-[220px]">
             <input
               value={query}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setQuery(e.target.value)
-              }
+              onChange={handleSearchChange}
               placeholder="Search games"
               className="w-full rounded-lg border border-white/10 bg-white/5 pl-10 pr-3 py-3 
                    text-white placeholder-white/40 outline-none focus:border-pink-500/40 
