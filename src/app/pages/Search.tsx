@@ -3,6 +3,7 @@
 import GameCard from "@/app/features/gameCard/components/GameCard";
 import { React } from "rwsdk/client";
 import useSearchResults from "@features/gameSearch/hooks/useSearchResults";
+import Button from "../shared/components/ui/Button";
 
 export default function Search() {
 
@@ -19,24 +20,21 @@ export default function Search() {
               value={query}
               onChange={handleSearchChange}
               placeholder="Search games"
-              className="w-full rounded-lg border border-white/10 bg-white/5 pl-10 pr-3 py-3 
-                   text-white placeholder-white/40 outline-none focus:border-pink-500/40 
-                   focus:ring-1 focus:ring-pink-500/60 focus:shadow-[0_0_10px_rgba(255,77,216,0.5)]
-                   transition-all"
+              className="w-full rounded-lg border border-white/10 bg-white/5 pl-10 pr-3 py-3 text-white placeholder-white/40 outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500/60 focus:shadow-[0_0_10px_rgba(255,77,216,0.5)] transition-all"
             />
             <span className="absolute left-3 top-1/2 -translate-y-1/2 opacity-70">
               🔍
             </span>
           </div>
-          <button
+
+          <Button
             type="submit"
-            className="h-[48px] rounded-md bg-orange-500 text-black font-semibold px-5 
-                 hover:bg-pink-500 hover:text-white transition-all duration-200 
-                 shadow-[0_0_6px_rgba(255,77,216,0.5)] focus:shadow-[0_0_10px_rgba(255,77,216,0.8)] 
-                 active:scale-95"
+            variant="glow"
+            size="none"
+            className="h-[48px] rounded-md px-5"
           >
             Search
-          </button>
+          </Button>
         </form>
 
         {/* Genres */}
