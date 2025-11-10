@@ -3,26 +3,42 @@
 import { ProfileLayout } from "@features/profilePage/layout/ProfileLayout";
 import { useProfileData } from "@features/profilePage/hooks/useProfileData";
 import { useEffect, useState } from "react";
+import { db } from "@/db";
+import { users } from "@/db/schema";
+import { eq } from "drizzle-orm";
+
 
 
 export default function ProfilePage() {
   const [user, setUser] = useState<any>(null);
-  const { data, search, setSearch } = useProfileData(user?.userName)
+  const { data, search, setSearch, loading, error } = useProfileData(user?.userName)
 
-  useEffect(() => {
-    (async () => {
-      const u = await getTestUser();
-      setUser(u);
-    })
-  })
+
+  // useEffect(() => {
+  //   async function loadUser() {
+  //     try {
+  //       const [result] = await db
+  //       .select()
+  //       .from(users)
+  //     setUser(result)
+  //   } catch (err) {
+  //     console.log("Failed fetching")
+  //    }
+  //   }
+  //   loadUser()
+  // }, [])
+
+  console.log(user)
   
-  
-  // const { data, error, loading, search, setSearch } = useProfileData("Sell_Mango");
-  // return <ProfileLayout 
-  // search={search} 
-  // setSearch={setSearch}
-  // data={data}
-  // error={error}
-  // loading={loading}  
-  // />;
+  if(!user) return <p>Fetching user...</p>
+
+  return (
+    <ProfileLayout 
+      data={data} 
+      search={search} 
+      setSearch={setSearch}
+      loading={loading}
+      error={error}
+    />
+  )
 }

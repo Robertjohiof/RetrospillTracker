@@ -1,6 +1,16 @@
+"use client";
+
+import Login from "@/app/pages/Login";
+import { useState } from "react";
+
 export default function Header() {
   // Temp placeholder
   const isAuthenticated = false;
+  const [seen, setSeen] = useState<any>(false)
+
+  function togglePop() {
+    setSeen(!seen)
+  }
 
   return (
     <header className="sticky top-0 w-full bg-[#0a0015] px-8 py-4 flex items-center justify-between border-b border-white/10 shadow-md z-20">
@@ -40,12 +50,17 @@ export default function Header() {
       </nav>
 
       <div className="flex gap-4">
-        <a href="/login" className="nav-link font-medium">
+        {/* <a href="/login" onClick={togglePop} className="nav-link font-medium">
           Log in
-        </a>
-        <a href="/signup" className="btn-glow">
+          {seen ? <Login toggle={togglePop} /> : null}
+        </a> */}
+        <button onClick={togglePop} className="nav-link font-medium">
+          Log in
+        </button>
+        {seen && <Login toggle={togglePop} />}
+        {/* <a href="/signup" className="btn-glow">
           Sign up
-        </a>
+        </a> */}
       </div>
     </header>
   );
