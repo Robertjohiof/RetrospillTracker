@@ -49,6 +49,10 @@
   border-radius: 0.4rem;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
+  line-height: 1;          
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-glow:hover {
@@ -63,6 +67,9 @@
 .nav-link {
   transition: color 0.3s ease, text-shadow 0.3s ease;
   color: var(--color-secondary);
+  font-weight: 600;
+  font-size: 1.3rem;
+
 }
 .nav-link:hover {
   color: var(--color-tertiary-light);
@@ -70,3 +77,60 @@
     0 0 6px var(--color-tertiary-light),
     0 0 12px rgba(255, 51, 255, 0.4);
 }
+
+.btn-secondary {
+  background: rgba(15, 23, 42, 1); /* slate-900ish */
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  transition: background .2s ease;
+}
+.btn-secondary:hover { background: rgba(30, 41, 59, 1); }
+
+.btn-ghost {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  transition: border-color .2s ease;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.40); }
+
+
+/* Neon pulse for inputs (header search) */
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0px rgba(255, 77, 216, .0),
+      0 0 12px rgba(255, 77, 216, .35),
+      0 0 28px rgba(0, 234, 255, .25);
+  }
+  50% {
+    box-shadow:
+      0 0 0px rgba(255, 77, 216, .05),
+      0 0 18px rgba(255, 77, 216, .55),
+      0 0 40px rgba(0, 234, 255, .35);
+  }
+}
+
+/* Neon input style */
+.input-neon {
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+
+.input-neon:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #ff4dd8; /* pink neon edge */
+  box-shadow:
+    0 0 0 2px rgba(255, 77, 216, .35) inset,
+    0 0 12px rgba(255, 77, 216, .6),
+    0 0 28px rgba(0, 234, 255, .45);
+  animation: neonPulse 1.6s ease-in-out infinite;
+}
+

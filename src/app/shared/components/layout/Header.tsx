@@ -13,7 +13,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 w-full bg-[#0a0015] px-8 py-4 flex items-center justify-between border-b border-white/10 shadow-md z-20">
+    <header className="sticky top-0 w-full bg-[#0a0015] px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
+      {/* Logo + tittel */}
       <a
         href="/"
         className="flex items-center gap-2 hover:opacity-90 transition"
@@ -23,27 +24,42 @@ export default function Header() {
           alt="RetroSpillTracker logo"
           className="h-10 w-auto"
         />
-        <h1 className="text-glow-pink text-lg font-bold hidden sm:block">
+        <h1 className="text-glow-pink text-xl font-bold hidden sm:block tracking-wide">
           RetroSpillTracker
         </h1>
       </a>
 
-      <nav className="hidden md:flex gap-8 text-sm font-semibold">
-        <a href="/" className="nav-link">
+      {/* Navigasjon + søk */}
+      <nav className="hidden md:flex items-center gap-10 text-base font-semibold flex-1 justify-center">
+        <a
+          href="/"
+          className="nav-link text-orange-500 hover:text-pink-400 transition"
+        >
           Home
         </a>
-        <a href="/search" className="nav-link">
-          Search
-        </a>
-        <a href="/browse" className="nav-link">
+
+        <div className="flex justify-center flex-1 max-w-sm">
+          <HeaderSearch />
+        </div>
+
+        <a
+          href="/browse"
+          className="nav-link text-orange-500 hover:text-pink-400 transition"
+        >
           Browse
         </a>
-        <a href="/forum" className="nav-link">
+        <a
+          href="/forum"
+          className="nav-link text-orange-500 hover:text-pink-400 transition"
+        >
           Forum
         </a>
 
         {isAuthenticated && (
-          <a href="/profile" className="nav-link">
+          <a
+            href="/profile"
+            className="nav-link text-orange-500 hover:text-pink-400 transition"
+          >
             Profile
           </a>
         )}
