@@ -75,9 +75,10 @@ export default function Header() {
           Login
         </button>
         {seen && <Login toggle={togglePop} />}
-        {/* <a href="/signup" className="btn-glow">
+        <span className="text-glow-orange text-2xl -mx-1">/</span>
+        <a href="/signup" className="btn-glow text-lg">
           Sign up
-        </a> */}
+        </a>
       </div>
     </header>
   );
