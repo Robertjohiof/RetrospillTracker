@@ -2,6 +2,7 @@
 
 import Login from "@/app/pages/Login";
 import { useState } from "react";
+import HeaderSearch from "./HeaderSearch";
 
 export default function Header() {
   // Temp placeholder
@@ -71,7 +72,7 @@ export default function Header() {
           {seen ? <Login toggle={togglePop} /> : null}
         </a> */}
         <button onClick={togglePop} className="nav-link font-medium">
-          Log in
+          Login
         </button>
         {seen && <Login toggle={togglePop} />}
         {/* <a href="/signup" className="btn-glow">
