@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c194cc74-0a2a-4a65-8318-57f6e04d20cc",
+  "id": "904e5b36-d6eb-479a-b06a-ed863f7b09b6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "collection_entries": {
@@ -646,8 +646,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "isActive": {
-          "name": "isActive",
+        "is_active": {
+          "name": "is_active",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
