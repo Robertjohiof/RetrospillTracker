@@ -10,9 +10,7 @@ export default function GameWrapper() {
 
     return (
         <>
-            <Suspense fallback={LoadingGame()}>
-                <GameList games={games} categoryTitle={"Popular games"}/>
-            </Suspense>
+            <GameList games={games} categoryTitle={"Popular games"} loading={loading}/>
         </>
     )
 }
