@@ -51,7 +51,7 @@ export default function SignUp(){
                     Password:
                     <input className="bg-white border w-full p-1" type="password" placeholder="**********" value={password} onChange={e => setPassword(e.target.value)} />
                 </label>
-                <button className="border text-glow-orange mx-30 mt-15 py-2 px-1 bg-primary" type="submit">Sign up</button>
+                <button className="border text-glow-orange w-50 self-center text-2xl py-2 px-1 bg-primary" type="submit">Sign up</button>
             </form>
         </div>
       </div>
