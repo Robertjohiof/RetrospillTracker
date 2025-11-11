@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 
 export default function SignUp(){
   const [username, setUsername] = useState<string>("");
@@ -29,7 +29,7 @@ export default function SignUp(){
 
   return (
     <>
-    <h1 className="text-3xl font-bold text-white text-center drop-shadown-sm">Sign up</h1>
+    <h1 className="text-3xl font-bold text-white text-center drop-shadow-sm">Sign up</h1>
     <section className="flex justify-center">
       <div className="w-1/2 bg-iceblue rounded-sm border-secondary p-20">
         <div className="flex flex-col gap-2">

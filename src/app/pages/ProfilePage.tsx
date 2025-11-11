@@ -2,10 +2,7 @@
 
 import { ProfileLayout } from "@features/profilePage/layout/ProfileLayout";
 import { useProfileData } from "@features/profilePage/hooks/useProfileData";
-import { useEffect, useState } from "react";
-import { db } from "@/db";
-import { users } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { useState } from "react";
 
 
 
