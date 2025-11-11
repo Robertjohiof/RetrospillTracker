@@ -32,7 +32,7 @@ export function useFetchGames(apiEndpoint:string) {
             console.error(error);
             setLoading(false);
         }
-        setTimeout(()=>{setLoading(false);},4000)
+        setTimeout(()=>{setLoading(false);},1000)
 
     }
 
