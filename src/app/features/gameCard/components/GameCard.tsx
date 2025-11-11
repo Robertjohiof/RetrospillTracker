@@ -8,7 +8,7 @@ export default function GameCard(props: gameCardProps) {
       {/*TODO: add link with dynamic slugs */}
       <a
         href={"/"}
-        className="group border border-white/10 flex flex-col-reverse items-center rounded-lg w-full bg-white/5 shadow-md h-82"
+        className="group border border-white/10 flex flex-col-reverse items-center rounded-lg w-full bg-white/5 shadow-md h-80"
       >
         <Heading level={3} styling={"mt-4 mb-4 text-center"}>
           {title}

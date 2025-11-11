@@ -1,8 +1,5 @@
 import Hero from "../shared/components/Hero";
 import GameWrapper from "@features/gameList/components/GameWrapper";
-import {Suspense} from "react";
-import LoadingGame from "@features/gameList/components/LoadingGame";
-
 export default function HomePage() {
 
   return (
