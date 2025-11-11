@@ -23,6 +23,7 @@ import {
   getPopularGames,
   getSearchGames,
 } from "@/app/shared/services/gameService";
+import { fetchAllUsers } from "./app/shared/repository/userRepository";
 
 // ----------- Types -----------
 export interface Env {
@@ -42,6 +43,7 @@ export default defineApp([
   route("/api/v1/getPopularGames", getPopularGames),
   route("/api/v1/getAllGames", getAllGames),
   route("/api/v1/getSearchGames", getSearchGames),
+  route("/users", fetchAllUsers),
 
   // --- Rendered Pages ---
   render(Document, [
