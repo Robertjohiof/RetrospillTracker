@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Orbitron:wght@400..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=VT323&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -8,6 +9,11 @@
     --color-tertiary: #FF00D9;
     --color-tertiary-light: #FF33FF;
 
+    --font-press: "Press Start 2P", system-ui;
+    --font-vt323: "VT323", monospace;
+    --font-orbitron: "Orbitron", sans-serif;
+    --font-roboto: "Roboto", sans-serif;
+    --font-openSans: "Open Sans", sans-serif;
 }
 
 

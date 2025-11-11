@@ -1,9 +1,17 @@
+"use client";
+
+import Login from "@/app/pages/Login";
+import { useState } from "react";
 import HeaderSearch from "./HeaderSearch";
-import { LinkButton } from "../ui/LinkButton";
 
 export default function Header() {
   // Temp placeholder
   const isAuthenticated = false;
+  const [seen, setSeen] = useState<any>(false)
+
+  function togglePop() {
+    setSeen(!seen)
+  }
 
   return (
     <header className="sticky top-0 w-full bg-[#0a0015] px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
@@ -58,18 +66,19 @@ export default function Header() {
         )}
       </nav>
 
-      {/* Auth-knapper */}
-      <div className="flex items-center gap-4">
-        <a href="/login" className="nav-link font-medium">
+      <div className="flex gap-4">
+        {/* <a href="/login" onClick={togglePop} className="nav-link font-medium">
           Log in
-        </a>
-        <LinkButton
-          href="/signup"
-          variant="glow"
-          className="h-9 rounded-[0.4rem]"
-        >
+          {seen ? <Login toggle={togglePop} /> : null}
+        </a> */}
+        <button onClick={togglePop} className="nav-link font-medium">
+          Login
+        </button>
+        {seen && <Login toggle={togglePop} />}
+        <span className="text-glow-orange text-2xl -mx-1">/</span>
+        <a href="/signup" className="btn-glow text-lg">
           Sign up
-        </LinkButton>
+        </a>
       </div>
     </header>
   );
