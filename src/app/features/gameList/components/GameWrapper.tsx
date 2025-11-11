@@ -13,7 +13,6 @@ export default function GameWrapper() {
             <Suspense fallback={LoadingGame()}>
                 <GameList games={games} categoryTitle={"Popular games"}/>
             </Suspense>
-            <GameList games={[{id:"1",title: "something",imgUrl: "jnasjdj", apiKey: "dasda", description: "something"}]} categoryTitle={"Top rated"}/>
         </>
     )
 }
