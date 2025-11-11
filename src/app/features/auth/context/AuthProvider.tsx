@@ -3,6 +3,7 @@ import {AuthContexType} from "@features/auth/types/authContexType";
 import {mockUser} from "@features/auth/mockUser";
 import {LoginCredentials, RegisterCredentials} from "@features/auth/types/credentials";
 import {createSuccessResponse} from "@/app/shared/lib/response";
+import {User} from "@/db/schema/users-schema"
 
 const AuthContext = createContext<AuthContexType>({
     user: null,

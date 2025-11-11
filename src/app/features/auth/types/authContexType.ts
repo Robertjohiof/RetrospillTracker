@@ -1,4 +1,5 @@
 import {LoginCredentials, RegisterCredentials} from "@features/auth/types/credentials";
+import {User} from "@/db/schema/users-schema"
 
 export type AuthContexType = {
     user: User|null,
