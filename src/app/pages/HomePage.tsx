@@ -1,6 +1,5 @@
 import Hero from "../shared/components/Hero";
 import GameWrapper from "@features/gameList/components/GameWrapper";
-
 export default function HomePage() {
 
   return (
