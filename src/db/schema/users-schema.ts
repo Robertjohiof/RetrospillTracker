@@ -17,7 +17,7 @@ export const users = sqliteTable("users", {
   profilePicture: text("profile_picture"),
   profileBanner: text("profile_banner"),
   biography: text("biography"),
-  isActive: integer({ mode: 'boolean' }).notNull(),
+  isActive: integer("is_active", { mode: 'boolean' }).notNull(),
   createdAt: text("created_at"),
   updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
   roleId: integer("role_id")

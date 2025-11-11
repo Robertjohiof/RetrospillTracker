@@ -57,6 +57,13 @@
       "when": 1761076744045,
       "tag": "0007_majestic_tomas",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1762898875857,
+      "tag": "0008_green_purple_man",
+      "breakpoints": true
     }
   ]
 }
