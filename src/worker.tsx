@@ -24,6 +24,7 @@ import {
   getSearchGames,
 } from "@/app/shared/services/gameService";
 import { fetchAllUsers, fetchUserById } from "./app/shared/repository/userRepository";
+import {fetchBacklogByUser, fetchCollectionsByUser} from "@/app/shared/repository/userCollectionsRepository";
 
 // ----------- Types -----------
 export interface Env {
@@ -47,6 +48,12 @@ export default defineApp([
   route("/users/:id", ({ params }) => {
     return fetchUserById(params.id)
   }),
+    route("/users/:id/collections", ({ params }) => {
+      return fetchCollectionsByUser(params.id)
+    }),
+    route("/users/:id/collections/backlog/", ({ params }) => {
+        return fetchCollectionsByUser(params.id, true)
+    }),
 
   // --- Rendered Pages ---
   render(Document, [
