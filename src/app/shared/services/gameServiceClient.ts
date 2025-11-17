@@ -1,4 +1,4 @@
-import * as realServiceModule from "./gameService";
+import * as realServiceModule from "@features/api/game/gameService";
 import { Game } from "@/app/shared/types/game";
 
 // Backend-funksjoner (om/når de finnes)
