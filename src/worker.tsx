@@ -22,7 +22,7 @@ import {
   getAllGames,
   getPopularGames,
   getSearchGames,
-} from "@/app/shared/services/gameService";
+} from "@features/api/game/gameService";
 import { fetchAllUsers, fetchUserById } from "./app/shared/repository/userRepository";
 
 // ----------- Types -----------
@@ -40,9 +40,11 @@ export default defineApp([
   setCommonHeaders(),
 
   // --- API Routes ---
-  route("/api/v1/getPopularGames", getPopularGames),
-  route("/api/v1/getAllGames", getAllGames),
-  route("/api/v1/getSearchGames", getSearchGames),
+    prefix("/api/v1/", [
+        route("getPopularGames", getPopularGames),
+        route("getAllGames", getAllGames),
+        route("getSearchGames", getSearchGames),
+    ]),
   route("/users", fetchAllUsers),
   route("/users/:id", ({ params }) => {
     return fetchUserById(params.id)
