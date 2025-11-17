@@ -2,6 +2,7 @@ import { sqliteTable, integer, text, index } from "drizzle-orm/sqlite-core";
 import { users } from "./users-schema";
 import { relations, sql } from "drizzle-orm";
 import { tagsToCollections } from "./tagsToCollections-schema";
+import {collectionEntries} from "@/db/schema/collectionEntries-schema";
 
 export const collections = sqliteTable("collections", {
     collectionId: integer("collection_id").primaryKey(),
@@ -23,7 +24,8 @@ export const collectionsRelations = relations(collections, ({ one, many }) => ({
        fields: [collections.userId],
        references: [users.userId] 
     }),
-    tagsToCollection: many(tagsToCollections)
+    tagsToCollection: many(tagsToCollections),
+    collectionEntries: many(collectionEntries),
 }));
 
 export type Collection = typeof collections.$inferSelect;
