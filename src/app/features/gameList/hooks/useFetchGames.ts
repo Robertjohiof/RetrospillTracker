@@ -32,6 +32,8 @@ export function useFetchGames(apiEndpoint:string) {
             console.error(error);
             setLoading(false);
         }
+        setTimeout(()=>{setLoading(false);},1000)
+
     }
 
     useEffect(() => {

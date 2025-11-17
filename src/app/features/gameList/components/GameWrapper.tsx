@@ -1,5 +1,3 @@
-'use client'
-
 import GameList from "@features/gameList/GameList"
 import {useFetchGames} from "@features/gameList/hooks/useFetchGames";
 import {Suspense} from "react";
@@ -10,9 +8,7 @@ export default function GameWrapper() {
 
     return (
         <>
-            <Suspense fallback={LoadingGame()}>
-                <GameList games={games} categoryTitle={"Popular games"}/>
-            </Suspense>
+            <GameList games={games} categoryTitle={"Popular games"} loading={loading}/>
         </>
     )
 }
