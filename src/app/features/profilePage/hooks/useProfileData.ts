@@ -1,15 +1,33 @@
 import { dbCollections, dbCollectionsEntries, dbGames, dbUsers } from "@/app/data/dbTestData";
+import { API_URL } from "@/app/shared/config/apiPaths";
+import { User } from "@/db/schema";
 import { useEffect, useState } from "react";
 
 export function useProfileData(userName: string) {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<null | string>(null);
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+
+
+  const fetchUser = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const response = await fetch(`${API_URL}/users`);
+      if(!response.ok) {
+        return
+      }
+      const 
+      
+    }
+  }
+
+
 
   useEffect(() => {
     const user = dbUsers.find((u) => u.userName === userName);
-    if (!user) return setError("Could not find user!");
+    
 
     const collections = dbCollections.filter((col) => col.userId === user.userId);
 
@@ -21,11 +39,9 @@ export function useProfileData(userName: string) {
   }, [userName])
 
   useEffect(() => {
-    if(!search) return;
-
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:5173/api/v1/getSearchGames?search=${search}`);
+        const response = await fetch(`http://localhost:5173/users`);
         if (!response.ok) throw new Error("Error");
         const result = await response.json();
         setData(result);
@@ -37,7 +53,7 @@ export function useProfileData(userName: string) {
       }
     }
     fetchData();
-  }, [search]);
+  }, []);
 
   console.log(data)
 
