@@ -69,3 +69,15 @@ export async function getSearchGames() {
 
   return await igdbFetch(query)
 }
+
+export async function getGenres() {
+    return await igdbFetch("fields name;limit 300;","https://api.igdb.com/v4/genres");
+}
+
+export async function getReleaseDates(){
+    return await igdbFetch("fields y;where y != null;sort y asc;limit 300;","https://api.igdb.com/v4/release_dates");
+}
+
+export async function getConsoles(){
+    return await igdbFetch("fields name;where platform_type = 1;sort name asc;limit 300;", "https://api.igdb.com/v4/platforms");
+}

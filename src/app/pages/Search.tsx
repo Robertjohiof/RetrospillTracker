@@ -28,39 +28,6 @@ export default function Search() {
           isLoading={loading}
         />
 
-        {/* Genres */}
-        <div className="flex flex-col w-[150px]">
-          <label className="mb-1 block text-sm text-cyan-400">Genres</label>
-          <select
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
-            disabled
-          >
-            <option>Any</option>
-          </select>
-        </div>
-
-        {/* Year */}
-        <div className="flex flex-col w-[120px]">
-          <label className="mb-1 block text-sm text-cyan-400">Year</label>
-          <select
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
-            disabled
-          >
-            <option>Any</option>
-          </select>
-        </div>
-
-        {/* Console */}
-        <div className="flex flex-col w-[150px]">
-          <label className="mb-1 block text-sm text-cyan-400">Console</label>
-          <select
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
-            disabled
-          >
-            <option>Any</option>
-          </select>
-        </div>
-
         {/* More filters */}
         <div className="flex flex-col w-[160px]">
           <label className="mb-1 block text-sm text-transparent select-none">
