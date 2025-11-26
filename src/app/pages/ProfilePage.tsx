@@ -2,32 +2,15 @@
 
 import { ProfileLayout } from "@features/profilePage/layout/ProfileLayout";
 import { useProfileData } from "@features/profilePage/hooks/useProfileData";
-import { useState } from "react";
 
+export default function ProfilePage({ userId }: { userId: string }) { 
+  const { data, search, setSearch, loading, error } = useProfileData("Sell_Mango")
 
+  console.log(data, "sjekker data")
 
-export default function ProfilePage() {
-  const [user, setUser] = useState<any>(null);
-  const { data, search, setSearch, loading, error } = useProfileData(user?.userName)
-
-
-  // useEffect(() => {
-  //   async function loadUser() {
-  //     try {
-  //       const [result] = await db
-  //       .select()
-  //       .from(users)
-  //     setUser(result)
-  //   } catch (err) {
-  //     console.log("Failed fetching")
-  //    }
-  //   }
-  //   loadUser()
-  // }, [])
-
-  console.log(user)
-  
-  if(!user) return <p>Fetching user...</p>
+  if (loading) return <p>Hentar brukar</p>;
+  if (error) return <p>{error}</p>
+  if(!data) return <p>Ikkje ein einaste brukar...</p>
 
   return (
     <ProfileLayout 

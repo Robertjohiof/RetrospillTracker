@@ -1,8 +1,10 @@
+"use client"
 import Hero from "@/app/shared/components/Hero";
 import NavigationTemp from "@/app/shared/components/NavigationTemp";
+import { ProfileData } from "../types/user";
 
 interface ProfileLayoutProps {
-  data: any;
+  data: ProfileData | null;
   loading: boolean;
   error: string | null;
   search: string;
@@ -12,8 +14,6 @@ interface ProfileLayoutProps {
 export function ProfileLayout({ data, loading, error, search, setSearch}: ProfileLayoutProps) {
   if (loading) return <p>Fetching data...</p>
   if (error) return <p>{error}</p>
-
-  console.log(data.userGames)
   
   return (
     <div className="styling-profilepage">

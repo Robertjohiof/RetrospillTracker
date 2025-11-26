@@ -24,7 +24,7 @@ import {
   getSearchGames,
 } from "@features/api/game/gameService";
 import { fetchAllUsers, fetchUserById } from "./app/shared/repository/userRepository";
-import {fetchBacklogByUser, fetchCollectionsByUser} from "@/app/shared/repository/userCollectionsRepository";
+import { fetchBacklogByUser, fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
 
 // ----------- Types -----------
 export interface Env {
