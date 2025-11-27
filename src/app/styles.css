@@ -16,7 +16,6 @@
     --font-openSans: "Open Sans", sans-serif;
 }
 
-
 .text-glow-cyan {
   color: #33D4FF;
   text-shadow:
@@ -133,4 +132,3 @@
     0 0 28px rgba(0, 234, 255, .45);
   animation: neonPulse 1.6s ease-in-out infinite;
 }
-

@@ -6,8 +6,6 @@ import { useProfileData } from "@features/profilePage/hooks/useProfileData";
 export default function ProfilePage({ userId }: { userId: string }) { 
   const { data, search, setSearch, loading, error } = useProfileData("Sell_Mango")
 
-  console.log(data, "sjekker data")
-
   if (loading) return <p>Hentar brukar</p>;
   if (error) return <p>{error}</p>
   if(!data) return <p>Ikkje ein einaste brukar...</p>

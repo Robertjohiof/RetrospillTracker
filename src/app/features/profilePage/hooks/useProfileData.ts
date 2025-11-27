@@ -1,5 +1,5 @@
 import { dbCollections, dbCollectionsEntries, dbGames, dbUsers } from "@/app/data/dbTestData";
-import { API_ENDPOINT, API_URL, BASE_URL } from "@/app/shared/config/apiPaths";
+import { BASE_URL } from "@/app/shared/config/apiPaths";
 import { User, ProfileData } from "@/app/features/profilePage/types/user";
 import { useEffect, useState } from "react";
 
@@ -36,10 +36,6 @@ export function useProfileData(userName: string) {
   }, [])
 
   useEffect(() => {
-    console.log(users)
-  }, [users])
-
-  useEffect(() => {
     const user = users.find((u) => u.userName === userName);
 
     if(!user) return;
@@ -54,12 +50,6 @@ export function useProfileData(userName: string) {
 
     if (userGames.length > 0) setSearch(userGames[0].title)
   }, [userName, users])
-
-  useEffect(() => {
-    console.log("Selected userName:", userName);
-    console.log("Available users:", users);
-    console.log("Matched user:", users.find((u) => u.userName === userName));
-  }, [users, userName]);
 
   return { data, loading, error, search, setSearch };
 }
