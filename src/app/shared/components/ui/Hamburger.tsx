@@ -16,16 +16,16 @@ export default function Hamburger() {
     <>
       <div className="grid place-content-center">
         {!open &&
-        <div className={`HAM-ICON space-y-2 md:hidden`} onClick={() => setOpen((prev) => !prev)}>
+        <div className={`HAM-ICON space-y-2 py-4 md:hidden`} onClick={() => setOpen((prev) => !prev)}>
           <span className="block h-1 w-8 rounded-full bg-secondary"></span>
           <span className="block h-1 w-8 rounded-full bg-secondary"></span>
           <span className="block h-1 w-8 rounded-full bg-secondary"></span>
         </div>
         }
-        <div  className={`${open ? "flex" : "hidden"} flex-col items-center`}>
+        <div  className={`${open ? "flex" : "hidden"} flex-col items-center py-2`}>
           <div onClick={() => setOpen(false)}>
             <svg
-                className="h-10 w-10 text-secondary"
+                className="h-12 w-12 text-secondary"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
