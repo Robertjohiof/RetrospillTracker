@@ -16,6 +16,7 @@ import Forum from "./app/pages/Forum";
 import Login from "./app/pages/Login";
 import Layout from "@/app/shared/components/layout/Layout";
 import ProfilePage from "./app/pages/ProfilePage";
+import GameDetail from "./app/features/gameDetail/GameDetail";
 import SignUp from "./app/pages/SignUp";
 
 import {
@@ -86,11 +87,12 @@ export default defineApp([
       route("/forum", Forum),
       route("/login", Login),
       route("/signup", SignUp),
-      route("/profilepage", ProfilePage),
-
+      route("/profilepage/:id", 
+        ({ params }) => <ProfilePage userId={params.id} />),
       prefix("/games", [
         route("/", () => <h2>Games</h2>),
-        route("/:id", () => <h2>Dynamic game</h2>),
+        // route("/:id", () => <h2>Dynamic game</h2>),
+        route("/:id", ({ params }) => <GameDetail gameId={params.id} />),
       ]),
     ]),
   ]),

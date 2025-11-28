@@ -80,8 +80,8 @@ export function ProfileLayout({ data, loading, error, search, setSearch}: Profil
             <tbody>
               {data && data.userGames && data.userGames.length > 0 ? (
                 data.userGames.map((game: any) =>
-                  <tr key={game.gameId}>
-                    <td className="text-left text-white text-sm">{game.title}</td>
+                  <tr key={game.gameId}>                   
+                    <td className="text-left text-white text-sm"><a href={`/games/${game.gameId}`}>{game.title}</a></td>
                   </tr>
                 ))
               : (
