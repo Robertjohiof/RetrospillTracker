@@ -26,8 +26,13 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-[#0a0015] border border-white/10 shadow-lg z-30">
+        <div className="absolute left-0 mt-2 w-64 rounded-2xl bg-[#0a0015] border border-white/10 shadow-lg z-30">
           <nav className="flex flex-col gap-3 p-4 text-base font-semibold">
+            {/* Search inside the menu */}
+            <div className="my-1">
+              <HeaderSearch />
+            </div>
+
             <a
               href="/"
               className="nav-link text-orange-500 hover:text-pink-400 transition"
@@ -35,11 +40,6 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
             >
               Home
             </a>
-
-            {/* Search inside the menu */}
-            <div className="my-1">
-              <HeaderSearch />
-            </div>
 
             {/* Search/browse page */}
             <a
