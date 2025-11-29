@@ -3,19 +3,20 @@
 import Login from "@/app/pages/Login";
 import { useState } from "react";
 import HeaderSearch from "./HeaderSearch";
+import MobileMenu from "../ui/MobileMenu";
 
 export default function Header() {
   // Temp placeholder
   const isAuthenticated = false;
-  const [seen, setSeen] = useState<any>(false)
+  const [seen, setSeen] = useState(false);
 
   function togglePop() {
-    setSeen(!seen)
+    setSeen((prev) => !prev);
   }
 
   return (
-    <header className="sticky top-0 w-full bg-[#0a0015] px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
-      {/* Logo + tittel */}
+    <header className="sticky top-0 w-full bg-[#0a0015] px-4 sm:px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
+      {/* Logo + Title */}
       <a
         href="/"
         className="flex items-center gap-2 hover:opacity-90 transition"
@@ -30,7 +31,7 @@ export default function Header() {
         </h1>
       </a>
 
-      {/* Navigasjon + søk */}
+      {/* Desktop Navigation */}
       <nav className="hidden md:flex items-center gap-10 text-base font-semibold flex-1 justify-center">
         <a
           href="/"
@@ -49,6 +50,7 @@ export default function Header() {
         >
           Browse
         </a>
+
         <a
           href="/forum"
           className="nav-link text-orange-500 hover:text-pink-400 transition"
@@ -66,17 +68,25 @@ export default function Header() {
         )}
       </nav>
 
-      <div className="flex gap-4">
-        {/* <a href="/login" onClick={togglePop} className="nav-link font-medium">
-          Log in
-          {seen ? <Login toggle={togglePop} /> : null}
-        </a> */}
-        <button onClick={togglePop} className="nav-link font-medium">
+      {/* Right side */}
+      <div className="flex items-center gap-3">
+        {/* Mobile Burger Menu */}
+        <MobileMenu isAuthenticated={isAuthenticated} />
+
+        {/* Login / Sign Up */}
+        <button
+          onClick={togglePop}
+          className="nav-link font-medium text-sm sm:text-base"
+        >
           Login
         </button>
         {seen && <Login toggle={togglePop} />}
-        <span className="text-glow-orange text-2xl -mx-1">/</span>
-        <a href="/signup" className="btn-glow text-lg">
+
+        <span className="text-glow-orange text-xl sm:text-2xl -mx-1 hidden xs:inline">
+          /
+        </span>
+
+        <a href="/signup" className="btn-glow text-sm sm:text-lg">
           Sign up
         </a>
       </div>
