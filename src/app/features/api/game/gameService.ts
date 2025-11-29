@@ -69,3 +69,9 @@ export async function getSearchGames() {
 
   return await igdbFetch(query)
 }
+
+export async function getGames(id:string) {
+    const query = QUERY.SEARCH_GAME(id);
+
+    return await igdbFetch(query)
+}
