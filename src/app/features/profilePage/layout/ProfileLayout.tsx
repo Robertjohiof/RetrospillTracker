@@ -67,7 +67,7 @@ export function ProfileLayout({ data, loading, error, search, setSearch}: Profil
           </section>
         </article>
         
-        <article className="md:col-span-2">
+        <article className="md:col-span-2 playing">
           <h2 className="text-glow-cyan font-press text-sm">Playing</h2>
           <table className="w-full bg-primary font-orbitron text-sm table-auto p-3">
             <thead>
@@ -78,24 +78,33 @@ export function ProfileLayout({ data, loading, error, search, setSearch}: Profil
               </tr>
             </thead>
             <tbody>
-              {data && data.userGames && data.userGames.length > 0 ? (
-                data.userGames.map((game: any) =>
-                  <tr key={game.gameId}>                   
-                    <td className="text-left text-white text-sm"><a href={`/games/${game.gameId}`}>{game.title}</a></td>
+              {data?.userGames?.length ? (
+                data.userGames.map((game) => (
+                  <tr key={game.gameId} className="text-white border-b border-gray-700 hover:bg-gray-800/30">
+                    <td className="py-2">
+                      <a href={`/games/${game.gameId}`} className="hover:text-glow-orange transition">
+                        {game.title}
+                      </a>
+                    </td>
+                    <td className="text-center">
+                      {game.finishedAt
+                        ? new Date(game.finishedAt).toLocaleDateString()
+                        : game.status === "PLAYING"
+                        ? "In progress"
+                        : "-"}
+                    </td>
+                    <td className="text-right">
+                      {game.platform || "-"}
+                    </td>
                   </tr>
                 ))
-              : (
+              ) : (
                 <tr>
                   <td colSpan={3} className="text-center p-3 text-gray-400">
                     Ingen spill funnet
                   </td>
                 </tr>
-                )}
-              <tr className="text-white">
-                <td className="text-left">Temp</td>
-                <td className="text-center">Temp</td>
-                <td className="text-right">Temp</td>
-              </tr>
+              )}
             </tbody>
           </table>
         </article>

@@ -1,39 +1,67 @@
 import Hero from "@/app/shared/components/Hero";
+import { GameLayoutProps } from "../types/gameDetail";
 
-export default function GameLayout({ data }: { data: any }) {
-  console.log(data)
-  
+export default function GameLayout({ data }: GameLayoutProps) {
   return (
     <>
-      <Hero imageUrl="/images/gamePageBanner.png" imageAlt="Hero banner" />
+      <Hero
+        imageUrl={data.coverImageUrl || "/images/gamePageBanner.png"}
+        imageAlt={data.title}
+      />
 
-      <section className="main-game-detail bg-primary-light">
-        <article className="headline bg-primary p-2">
+      <section className="main-game-detail bg-primary-light min-h-screen p-6">
+        <article className="headline bg-primary p-4 md:flex gap-6 rounded-lg shadow-lg">
           <img
             src={data.coverImageUrl || "/images/placeholderGame.png"}
-            alt={"altText"}
-            className="w-full object-cover rounded-md bg-black/30 transition-transform duration-300 group-hover:scale-[1.05]"
+            alt={data.title}
+            className="w-64 h-80 object-cover rounded-md shadow-md hover:scale-105"
             loading="lazy"
           />
-          <div className="text-area">
-          <h1 className="text-glow-orange font-press text-sm">{data.title}</h1>
-            <span className="text-gray-300 font-press text-[10px] mt-1">
-            <p className="">Genre:
-              {data.genres.join(", ")}
+
+          <div className="text-area flex-1">
+            <h1 className="text-glow-orange font-press text-2xl mb-2">
+              {data.title}
+            </h1>
+
+          
+            <div className="flex flex-wrap gap-2 mb-2">
+              {data.genres.map((genre) => (
+                <span key={genre} className="text-xs bg-black/20 px-2 py-1 rounded-md">
+                  {genre}
+                </span>
+              ))}
+              {data.platforms.map((platform) => (
+                <span key={platform} className="text-xs bg-black/20 px-2 py-1 rounded-md">
+                  {platform}
+                </span>
+              ))}
+            </div>
+
+            <p className="text-gray-300 text-sm mb-2">
+              Developed by: <strong>{data.developers.join(", ")}</strong>
             </p>
-            <p>Platform:
-              {data.platforms.join(", ")}
-            </p>
-            <p>
-              Developed by: {data.developers.join(", ")}
-            </p>
-            </span>
+
+            {data.rating !== undefined && (
+              <p className="text-yellow-400 text-sm font-bold">
+                {data.rating}/10
+              </p>
+            )}
           </div>
         </article>
-        <article className="overview bg-primary mt-4 p-2 font-press">
-          <h2 className="text-glow-orange text-sm mb-2">Overview</h2>
-          <p className="text-gray-200 text-[10px]">{data.description}</p>
+
+        <article className="overview bg-primary mt-4 p-4 rounded-lg shadow-lg">
+          <h2 className="text-glow-orange font-press text-lg mb-2">Overview</h2>
+          <p className="text-gray-200 text-sm leading-relaxed">{data.description}</p>
         </article>
+
+        {data.developers.length > 0 && (
+          <article className="developer bg-primary mt-4 p-4 rounded-lg">
+            <h2 className="text-glow-orange font-press text-lg mb-2">Developer</h2>
+            <p className="text-gray-300 text-sm">
+              {data.developers.join(", ")} is known for creating engaging and immersive games.
+            </p>
+          </article>
+        )}
       </section>
     </>
   );

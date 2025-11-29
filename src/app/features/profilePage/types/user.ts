@@ -3,21 +3,26 @@ export interface User {
   userName: string;
   slug: string;
   email: string;
-  firstName: string;
-  lastName: string;
-  profilePicture?: string;
-  profileBanner?: string;
-  biography: string;
+  firstName: string | null;
+  lastName: string | null;
+  profilePicture?: string | null;
+  profileBanner?: string | null;
+  biography: string | null;
   isActive: boolean;
   roleId: number;
+  createdAt: string | null;
+  updatedAt: string | null;
 }
 
-interface UserGame {
+export interface UserGame {
   gameId: number;
   title: string;
-  platform?: string;
-  score?: number;
-  statusId?: number;
+  status: string | undefined;
+  score: number | null;
+  playTime: number | null;
+  finishedAt: string | null;
+  priority: number | null;
+  platform: string | null;
 }
 
 interface Collections {

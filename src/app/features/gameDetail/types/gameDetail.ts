@@ -1,15 +1,3 @@
-export interface GameLayoutProps {
-  data: {
-    title: string
-    coverImage: string
-    genre: string
-    platform: string
-    releaseDate: string
-    description: string
-    rating?: number
-  }
-}
-
 export interface GameDetail {
   gameId: number;
   title: string;
@@ -18,4 +6,16 @@ export interface GameDetail {
   developers: string[];
   genres: string[];
   platforms: string[];
+  rating?: number;
+}
+
+export interface GameData {
+  game: GameDetail;
+  developers: string[];
+  genres: string[];
+  platforms: string[];
+}
+
+export interface GameLayoutProps {
+  data: GameDetail;
 }

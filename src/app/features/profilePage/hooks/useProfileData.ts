@@ -1,6 +1,6 @@
-import { dbCollections, dbCollectionsEntries, dbGames, dbUsers } from "@/app/data/dbTestData";
+import { dbCollections, dbCollectionsEntries, dbGames, dbGamesToPlatforms, dbPlatforms, dbStatuses, dbUsers } from "@/app/data/dbTestData";
 import { BASE_URL } from "@/app/shared/config/apiPaths";
-import { User, ProfileData } from "@/app/features/profilePage/types/user";
+import { User, ProfileData, UserGame } from "@/app/features/profilePage/types/user";
 import { useEffect, useState } from "react";
 
 export function useProfileData(userName: string) {
@@ -44,7 +44,27 @@ export function useProfileData(userName: string) {
 
     const entries = dbCollectionsEntries.filter((ent) => collections.some((c) => c.collectionId === ent.collectionId));
 
-    const userGames = dbGames.filter((ga) => entries.some((ent) => ent.gameId === ga.gameId));
+    const userGames = entries.map((entry) => {
+      const game = dbGames.find((g) => g.gameId === entry.gameId);
+      if (!game) return null;
+
+      const platformId = dbGamesToPlatforms.find((p) => p.gameId === game.gameId)?.platformId;
+      const platform = dbPlatforms.find((pl) => pl.platformId === platformId)?.name || null;
+
+
+      const status = dbStatuses.find((s) => s.statusId === entry.statusId)?.status;
+
+      return {
+        gameId: game.gameId,
+        title: game.title,
+        status,
+        score: entry.score,
+        playTime: entry.playTime,
+        finishedAt: entry.finishedAt,
+        priority: entry.priority,
+        platform
+      };
+    }).filter((game): game is UserGame => game !== null);
 
     setData({ user, collections, userGames})
 

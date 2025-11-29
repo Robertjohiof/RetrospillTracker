@@ -10,5 +10,5 @@ export default function GameDetail({ gameId }: { gameId: string }) {
   if (error) return <p>{error}</p>;
   if (!data) return <p>Fant ikkje spelet</p>;
 
-  return <GameLayout data={data} />;
+  return <GameLayout data={data.game} />;
 }

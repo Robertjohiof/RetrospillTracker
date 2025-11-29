@@ -1,67 +1,92 @@
 import { useEffect, useState } from "react";
-import { API_ENDPOINT, BASE_URL } from "@/app/shared/config/apiPaths";
-import { GameDetail } from "../types/gameDetail";
+import { BASE_URL } from "@/app/shared/config/apiPaths";
+import { GameData, GameDetail } from "../types/gameDetail";
 import {
-  dbCollections,
-  dbCollectionsEntries,
-  dbDevelopers, 
-  dbGames, 
-  dbGamesToDevelopers, 
-  dbGamesToGenres, 
-  dbGamesToPlatforms, 
-  dbGenres, 
-  dbPlatforms 
+  dbGames,
+  dbDevelopers,
+  dbGamesToDevelopers,
+  dbGamesToGenres,
+  dbGenres,
+  dbGamesToPlatforms,
+  dbPlatforms,
 } from "@/app/data/dbTestData";
 
 export function useGameData(gameId: number | string) {
-  const [data, setData] = useState<GameDetail | null>(null);
+  const [data, setData] = useState<GameData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [search, setSearch] = useState<string>("");
 
-  useEffect(() => {
+  const numericGameId = Number(gameId);
+
+  const fetchGame = async () => {
+    setLoading(true);
+    setError(null);
+
     try {
-      setLoading(true);
+      // Klar til API-bruk senere:
+      // const response = await fetch(`${BASE_URL}games/${gameId}`);
+      // const json = await response.json();
+      // const game = json.data
 
-      const game = dbGames.find(
-        (g) => g.gameId === Number(gameId) || g.slug === gameId
-      );
-
+      // Midlertidig henting fra dbTestData:
+      const game = dbGames.find((g) => g.gameId === numericGameId);
       if (!game) {
-        setError("Game not found");
+        setError("Fant ikke spillet");
         return;
       }
 
-      const developers = dbGamesToDevelopers
-        .filter((d) => d.gameId === game.gameId)
-        .map((d) => dbDevelopers.find((dev) => dev.developerId === d.developerId)?.name)
-        .filter(Boolean) as string[];
+      const developerIds = dbGamesToDevelopers
+        .filter((rel) => rel.gameId === game.gameId)
+        .map((rel) => rel.developerId);
 
-      const genres = dbGamesToGenres
-        .filter((g) => g.gameId === game.gameId)
-        .map((g) => dbGenres.find((gen) => gen.genreId === g.genreId)?.name)
-        .filter(Boolean) as string[];
+      const developers = dbDevelopers
+        .filter((d) => developerIds.includes(d.developerId))
+        .map((d) => d.name);
 
-      const platforms = dbGamesToPlatforms
-        .filter((p) => p.gameId === game.gameId)
-        .map((p) => dbPlatforms.find((plat) => plat.platformId === p.platformId)?.name)
-        .filter(Boolean) as string[];
+      const genreIds = dbGamesToGenres
+        .filter((rel) => rel.gameId === game.gameId)
+        .map((rel) => rel.genreId);
+
+      const genres = dbGenres
+        .filter((g) => genreIds.includes(g.genreId))
+        .map((g) => g.name);
+
+      const platformIds = dbGamesToPlatforms
+        .filter((rel) => rel.gameId === game.gameId)
+        .map((rel) => rel.platformId);
+
+      const platforms = dbPlatforms
+        .filter((p) => platformIds.includes(p.platformId))
+        .map((p) => p.name);
 
       setData({
-        gameId: game.gameId,
-        title: game.title,
-        description: game.description,
-        coverImageUrl: game.coverImageUrl || "/images/placeholderGame.png",
+        game: {
+          gameId: game.gameId,
+          title: game.title,
+          description: game.description,
+          coverImageUrl: game.coverImageUrl ?? null,
+          developers,
+          genres,
+          platforms,
+        },
         developers,
         genres,
         platforms,
       });
 
-    } catch (err) {
-      setError("Failed to load game data");
+      setSearch(game.title);
+    } catch (error) {
+      console.error(error);
+      setError("Feil ved henting av spilldata");
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 1000);
     }
+  };
+
+  useEffect(() => {
+    fetchGame();
   }, [gameId]);
 
-  return { data, loading, error };
+  return { data, loading, error, search, setSearch };
 }
