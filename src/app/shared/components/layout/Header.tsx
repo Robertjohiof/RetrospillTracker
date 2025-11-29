@@ -6,8 +6,13 @@ import HeaderSearch from "./HeaderSearch";
 import MobileMenu from "../ui/MobileMenu";
 
 export default function Header() {
-  // Temp placeholder
-  const isAuthenticated = false;
+  // TODO: Backend kobler dette til ekte auth (f.eks. useAuth())
+  const mockUser: { username: string } | null = {
+    username: "RetroPlayer", // sett til null for å teste ikke-innlogget
+  };
+
+  const isAuthenticated = !!mockUser;
+
   const [seen, setSeen] = useState(false);
 
   function togglePop() {
@@ -15,8 +20,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 w-full bg-[#0a0015] px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
-      {/* LEFT: Burger + Logo */}
+    <header className="sticky top-0 w-full bg-[#0a0015] px-4 sm:px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
+      {/* VENSTRE: Burger + logo */}
       <div className="flex items-center gap-4">
         <MobileMenu isAuthenticated={isAuthenticated} />
 
@@ -35,7 +40,7 @@ export default function Header() {
         </a>
       </div>
 
-      {/* CENTER: Navigation (Desktop only) */}
+      {/* MIDTEN: Navigasjon (desktop) */}
       <nav className="hidden md:flex items-center gap-10 text-base font-semibold flex-1 justify-center">
         <a href="/" className="nav-link">
           Home
@@ -45,12 +50,10 @@ export default function Header() {
           <HeaderSearch />
         </div>
 
-        <a
-          href="/search"
-          className="nav-link text-orange-500 hover:text-pink-400 transition"
-        >
+        <a href="/search" className="nav-link">
           Browse
         </a>
+
         <a href="/forum" className="nav-link">
           Forum
         </a>
@@ -62,18 +65,34 @@ export default function Header() {
         )}
       </nav>
 
-      {/* RIGHT: Auth buttons */}
-      <div className="flex gap-4">
-        <button onClick={togglePop} className="nav-link font-medium">
-          Login
-        </button>
-        {seen && <Login toggle={togglePop} />}
+      {/* HØYRE: Auth-område */}
+      <div className="flex items-center gap-3">
+        {isAuthenticated && mockUser ? (
+          // ===== INNLOGGET VISNING =====
+          <div className="flex items-center gap-3">
+            <span className="nav-link text-base">{mockUser.username}</span>
+            <button className="btn-secondary text-sm px-3 py-1">Log out</button>
+          </div>
+        ) : (
+          // ===== IKKE INNLOGGET VISNING =====
+          <>
+            <button
+              onClick={togglePop}
+              className="nav-link font-medium text-sm sm:text-base"
+            >
+              Login
+            </button>
+            {seen && <Login toggle={togglePop} />}
 
-        <span className="text-glow-orange text-2xl -mx-1">/</span>
+            <span className="text-glow-orange text-xl sm:text-2xl -mx-1 hidden xs:inline">
+              /
+            </span>
 
-        <a href="/signup" className="btn-glow text-lg">
-          Sign up
-        </a>
+            <a href="/signup" className="btn-glow text-sm sm:text-lg">
+              Sign up
+            </a>
+          </>
+        )}
       </div>
     </header>
   );
