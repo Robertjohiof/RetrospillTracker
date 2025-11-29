@@ -45,7 +45,10 @@ export default function Header() {
           <HeaderSearch />
         </div>
 
-        <a href="/browse" className="nav-link">
+        <a
+          href="/search"
+          className="nav-link text-orange-500 hover:text-pink-400 transition"
+        >
           Browse
         </a>
         <a href="/forum" className="nav-link">
