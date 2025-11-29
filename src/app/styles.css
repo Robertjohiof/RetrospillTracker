@@ -16,6 +16,8 @@
     --font-openSans: "Open Sans", sans-serif;
 }
 
+/* ======== TEKST-GLOWER ======== */
+
 .text-glow-cyan {
   color: #33D4FF;
   text-shadow:
@@ -33,13 +35,16 @@
   filter: brightness(1.05) contrast(1.1);
 }
 
+/* Litt strammere, renere oransje-glow */
 .text-glow-orange {
-  color: var(--color-secondary); 
+  color: var(--color-secondary);
   text-shadow:
-    0 0 6px var(--color-secondary),
-    0 0 12px rgba(255, 106, 0, 0.6),
-    0 0 24px rgba(255, 106, 0, 0.3);
+    0 0 4px rgba(255, 106, 0, 1),
+    0 0 10px rgba(255, 106, 0, 0.8),
+    0 0 18px rgba(255, 106, 0, 0.45);
 }
+
+/* ======== PRIMÆRKNAPP MED NEON ======== */
 
 .btn-glow {
   background-color: var(--color-secondary);
@@ -48,7 +53,7 @@
   border-radius: 0.4rem;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
-  line-height: 1;          
+  line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -63,29 +68,43 @@
     0 0 24px rgba(255, 0, 217, 0.4);
 }
 
+/* ======== NAV-LENKER (Home, Browse, Forum, Login) ======== */
+
 .nav-link {
   transition: color 0.3s ease, text-shadow 0.3s ease;
   color: var(--color-secondary);
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.2rem; /* litt mindre enn før for renere rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
+  /* svak oransje-glow hele tiden for å unngå “flekkete” kanter */
+  text-shadow:
+    0 0 3px rgba(255, 106, 0, 0.9),
+    0 0 8px rgba(255, 106, 0, 0.5);
 }
+
 .nav-link:hover {
   color: var(--color-tertiary-light);
   text-shadow:
-    0 0 6px var(--color-tertiary-light),
-    0 0 12px rgba(255, 51, 255, 0.4);
+    0 0 4px var(--color-tertiary-light),
+    0 0 8px rgba(255, 51, 255, 0.4);
 }
 
+/* ======== SEKUNDÆR- OG GHOST-KNAPPER ======== */
+
 .btn-secondary {
-  background: rgba(15, 23, 42, 1); /* slate-900ish */
+  background: rgba(15, 23, 42, 1); /* slate-900-ish */
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 0.4rem;
   padding: 0.5rem 1rem;
   transition: background .2s ease;
 }
-.btn-secondary:hover { background: rgba(30, 41, 59, 1); }
+
+.btn-secondary:hover {
+  background: rgba(30, 41, 59, 1);
+}
 
 .btn-ghost {
   background: transparent;
@@ -95,10 +114,13 @@
   padding: 0.5rem 1rem;
   transition: border-color .2s ease;
 }
-.btn-ghost:hover { border-color: rgba(255,255,255,0.40); }
 
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.40);
+}
 
-/* Neon pulse for inputs (header search) */
+/* ======== NEON-PULS FOR INPUTS ======== */
+
 @keyframes neonPulse {
   0%, 100% {
     box-shadow:
@@ -114,7 +136,7 @@
   }
 }
 
-/* Neon input style */
+/* Neon input style (brukes av hoved-søk) */
 .input-neon {
   border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.04);
@@ -132,6 +154,8 @@
     0 0 28px rgba(0, 234, 255, .45);
   animation: neonPulse 1.6s ease-in-out infinite;
 }
+
+/* ======== BURGER-MENY IKON ======== */
 
 .burger-icon {
   color: var(--color-secondary);

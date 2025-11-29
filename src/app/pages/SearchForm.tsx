@@ -2,6 +2,7 @@
 
 import { React } from "rwsdk/client";
 import Button from "../shared/components/ui/Button";
+import SearchIcon from "../shared/components/ui/SearchIcon";
 
 type SearchFormProps = {
   query: string;
@@ -31,7 +32,7 @@ export default function SearchForm({
           className="absolute left-3 top-1/2 -translate-y-1/2 opacity-80 hover:opacity-100"
           disabled={isLoading}
         >
-          🔍
+          <SearchIcon className="w-4 h-4" />
         </button>
       </section>
       <Button

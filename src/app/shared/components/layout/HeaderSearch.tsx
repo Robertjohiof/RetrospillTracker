@@ -1,6 +1,7 @@
 "use client";
 
 import { React } from "rwsdk/client";
+import SearchIcon from "../ui/SearchIcon";
 
 export default function HeaderSearch() {
   return (
@@ -24,9 +25,9 @@ export default function HeaderSearch() {
       <button
         type="submit"
         aria-label="Search"
-        className="absolute left-3 top-1/2 -translate-y-1/2 opacity-80 hover:opacity-100"
+        className="absolute left-3 top-1/2 -translate-y-1/2 opacity-80 hover:opacity-100 text-glow-cyan"
       >
-        🔍
+        <SearchIcon className="w-4 h-4" />
       </button>
     </form>
   );
