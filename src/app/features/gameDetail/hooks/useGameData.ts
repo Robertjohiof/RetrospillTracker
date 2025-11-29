@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
 import { API_ENDPOINT, BASE_URL } from "@/app/shared/config/apiPaths";
 import { GameDetail } from "../types/gameDetail";
-import { dbDevelopers, dbGames, dbGamesToDevelopers, dbGamesToGenres, dbGamesToPlatforms, dbGenres, dbPlatforms } from "@/app/data/dbTestData";
+import {
+  dbCollections,
+  dbCollectionsEntries,
+  dbDevelopers, 
+  dbGames, 
+  dbGamesToDevelopers, 
+  dbGamesToGenres, 
+  dbGamesToPlatforms, 
+  dbGenres, 
+  dbPlatforms 
+} from "@/app/data/dbTestData";
 
 export function useGameData(gameId: number | string) {
   const [data, setData] = useState<GameDetail | null>(null);
