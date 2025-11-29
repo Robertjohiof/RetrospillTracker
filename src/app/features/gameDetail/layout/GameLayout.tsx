@@ -2,6 +2,8 @@ import Hero from "@/app/shared/components/Hero";
 import { GameLayoutProps } from "../types/gameDetail";
 
 export default function GameLayout({ data }: GameLayoutProps) {
+  console.log(data)
+  
   return (
     <>
       <Hero
@@ -58,7 +60,7 @@ export default function GameLayout({ data }: GameLayoutProps) {
           <article className="developer bg-primary mt-4 p-4 rounded-lg">
             <h2 className="text-glow-orange font-press text-lg mb-2">Developer</h2>
             <p className="text-gray-300 text-sm">
-              {data.developers.join(", ")} is known for creating engaging and immersive games.
+              {data.developers.join(", ")}
             </p>
           </article>
         )}
