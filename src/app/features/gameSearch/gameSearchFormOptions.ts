@@ -25,12 +25,14 @@ const genreOptions = [
 ];
 
 const yearOptions = [
-    {id: 1, name: "60s and erlier"},
+    {id: 0, name: "All years"},
+    {id: 1, name: "Pre-70s"},
     {id: 2, name: "70s"},
     {id: 3, name: "80s"},
     {id: 4, name: "90s"},
-    {id: 5, name: "2000"},
-    {id: 6, name: "2010 and newer"},
+    {id: 5, name: "2000s"},
+    {id: 6, name: "2010s"},
+    {id: 7, name: "2020 and newer"},
 ]
 
 const consoleOptions = [
