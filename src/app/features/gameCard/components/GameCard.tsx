@@ -1,7 +1,7 @@
-import { gameCardProps } from "@features/gameCard/types/gameCardProps";
+import { GameCardProps } from "@features/gameCard/types/gameCardProps";
 import Heading from "@/app/shared/components/Heading";
 
-export default function GameCard(props: gameCardProps) {
+export default function GameCard(props: GameCardProps) {
   const { title, imgUrl, altText } = props;
   return (
     <article className="max-w-52 min-w-24">
@@ -16,7 +16,7 @@ export default function GameCard(props: gameCardProps) {
         {/*TODO: handle multiple image sizes from api*/}
         <picture className="overflow-hidden">
           <img
-            src={imgUrl ?? "/images/placeholder.png"}
+            src={imgUrl ?? "/images/placeholderGame.png"}
             alt={altText}
             className="w-full aspect-[3/4] object-cover rounded-md bg-black/30 transition-transform duration-300 group-hover:scale-[1.05]"
             loading="lazy"

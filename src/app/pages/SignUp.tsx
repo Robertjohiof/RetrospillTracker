@@ -31,9 +31,9 @@ export default function SignUp(){
     <>
     <h1 className="text-3xl font-bold text-white text-center drop-shadow-sm">Sign up</h1>
     <section className="flex justify-center">
-      <div className="w-1/2 bg-iceblue rounded-sm border-secondary p-20">
-        <div className="flex flex-col gap-2">
-            <h2 className="text-primary font-bold text-lg">Signup</h2>
+      <div className="md:w-150 bg-iceblue rounded-sm border-secondary p-10 md:p-15">
+        <div className="flex flex-col gap-2 md:text-2xl">
+            <h2 className="text-primary font-bold">Signup</h2>
             <form className="flex flex-col gap-1" onSubmit={handleSignup}>
                 <label>
                     First name:
@@ -51,7 +51,7 @@ export default function SignUp(){
                     Password:
                     <input className="bg-white border w-full p-1" type="password" placeholder="**********" value={password} onChange={e => setPassword(e.target.value)} />
                 </label>
-                <button className="border text-glow-orange mx-30 mt-15 py-2 px-1 bg-primary" type="submit">Sign up</button>
+                <button className="border text-glow-orange w-50 mt-8 self-center text-2xl py-2 px-1 bg-primary" type="submit">Sign up</button>
             </form>
         </div>
       </div>
