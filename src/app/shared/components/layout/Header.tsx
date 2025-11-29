@@ -45,7 +45,7 @@ export default function Header() {
         </div>
 
         <a
-          href="/browse"
+          href="/search"
           className="nav-link text-orange-500 hover:text-pink-400 transition"
         >
           Browse
