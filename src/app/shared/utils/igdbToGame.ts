@@ -23,7 +23,6 @@ export type IGDBData = {
 type jsonData<T> = T[]
 
 export function igdbToGame(igdbData:IGDBData):Game[] {
-    console.log("igdbToGame", igdbData);
     return igdbData.data.map((game: IGDBGame) => {
         return {
             id: game.id.toString(),
