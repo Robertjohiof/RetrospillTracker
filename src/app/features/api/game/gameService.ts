@@ -95,9 +95,10 @@ export async function getReleaseDates(){
 
 export async function getConsoles(){
     return await igdbFetch("fields name;where platform_type = 1;sort name asc;limit 300;", "https://api.igdb.com/v4/platforms");
+}
 export async function getGames(id:string) {
     const query = QUERY.SEARCH_GAME(id);
 
     return await igdbFetch(query)
 }
-}
+
