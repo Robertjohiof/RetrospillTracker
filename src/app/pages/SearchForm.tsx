@@ -53,6 +53,7 @@ export default function SearchForm({
                 onChange={(e)=>onFilterChange(e,"genres")}
             >
                 <option className="hidden" selected>choose</option>
+                <option value={""}>Any</option>
                 {genreOptions.map((genre) => (<option key={genre.id} value={genre.id}>{genre.name}</option>))}
             </select>
         </section>
@@ -73,6 +74,7 @@ export default function SearchForm({
                 onChange={(e)=>onFilterChange(e,"platform")}
             >
                 <option className="hidden" selected>choose</option>
+                <option value={""}>Any</option>
                 {consoleOptions.map((console) => (<option key={console.id} value={console.id}>{console.name}</option>))}
             </select>
         </section>
