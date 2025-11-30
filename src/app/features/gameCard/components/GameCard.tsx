@@ -1,11 +1,52 @@
-import { gameCardProps } from "@features/gameCard/types/gameCardProps";
+import { GameCardProps } from "@features/gameCard/types/gameCardProps";
+import Heading from "@/app/shared/components/Heading";
 
-export default function GameCard(props: gameCardProps) {
-    const { title, imgUrl, altText } = props;
-    return (
-        <article className="flex flex-col-reverse items-center rounded-lg max-w-48 min-w-24 bg-primary shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <h3 className="text-lg font-semibold text-secondary mt-3 mb-4 px-3 text-center rounded-lg">{title}</h3>
-            <img src={imgUrl} alt={altText} className="w-full h-48 object-contain rounded-lg"/>
-        </article>
-    )
+export default function GameCard(props: GameCardProps) {
+  const { title, imgUrl, altText } = props;
+  return (
+    <article
+      className="
+    w-full
+    max-w-sm          /* Bred på mobil */
+    sm:max-w-md       /* Bredere på små tablets */
+    lg:max-w-52  /* normal på desktop */
+  "
+    >
+      {/*TODO: link med dynamic slugs */}
+      <a
+        href={"/"}
+        className="
+          group
+          border border-white/10
+          flex flex-col-reverse
+          items-stretch          
+          rounded-lg
+          w-full
+          bg-white/5
+          shadow-md
+        "
+      >
+        <Heading level={3} styling={"mt-4 mb-4 text-center"}>
+          {title}
+        </Heading>
+        {/*TODO: Multiple image sizes from api*/}
+        <picture className="overflow-hidden w-full">
+          <img
+            src={imgUrl ?? "/images/placeholderGame.png"}
+            alt={altText}
+            className="
+              w-full
+              aspect-[3/4]        
+              object-cover
+              rounded-md
+              bg-black/30
+              transition-transform duration-300
+              group-hover:scale-[1.05]
+            "
+            loading="lazy"
+          />
+        </picture>
+      </a>
+    </article>
+  );
 }

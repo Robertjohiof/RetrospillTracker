@@ -1,10 +1,171 @@
-/* src/app/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Orbitron:wght@400..900&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=VT323&display=swap');
 @import "tailwindcss";
 
-@theme{
+@theme {
     --color-primary: #0D0036;
     --color-primary-light: #1A006B;
+    --color-iceblue: #00BFFF;
     --color-secondary: #FF6A00;
     --color-tertiary: #FF00D9;
     --color-tertiary-light: #FF33FF;
+
+    --font-press: "Press Start 2P", system-ui;
+    --font-vt323: "VT323", monospace;
+    --font-orbitron: "Orbitron", sans-serif;
+    --font-roboto: "Roboto", sans-serif;
+    --font-openSans: "Open Sans", sans-serif;
+}
+
+/* ======== TEKST-GLOWER ======== */
+
+.text-glow-cyan {
+  color: #33D4FF;
+  text-shadow:
+    0 0 6px #33D4FF,
+    0 0 12px #0088FF,
+    0 0 24px rgba(0,136,255,0.4);
+}
+
+.text-glow-pink {
+  color: var(--color-tertiary); 
+  text-shadow:
+    0 0 1.5px var(--color-tertiary),
+    0 0 3px var(--color-tertiary-light),
+    0 0 6px rgba(255, 0, 217, 0.1);
+  filter: brightness(1.05) contrast(1.1);
+}
+
+/* Litt strammere, renere oransje-glow */
+.text-glow-orange {
+  color: var(--color-secondary);
+  text-shadow:
+    0 0 4px rgba(255, 106, 0, 1),
+    0 0 10px rgba(255, 106, 0, 0.8),
+    0 0 18px rgba(255, 106, 0, 0.45);
+}
+
+/* ======== PRIMÆRKNAPP MED NEON ======== */
+
+.btn-glow {
+  background-color: var(--color-secondary);
+  color: black;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-glow:hover {
+  background-color: var(--color-tertiary);
+  color: white;
+  box-shadow:
+    0 0 6px var(--color-tertiary),
+    0 0 12px var(--color-tertiary-light),
+    0 0 24px rgba(255, 0, 217, 0.4);
+}
+
+/* ======== NAV-LENKER (Home, Browse, Forum, Login) ======== */
+
+.nav-link {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  color: var(--color-secondary);
+  font-weight: 600;
+  font-size: 1.2rem; /* litt mindre enn før for renere rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* svak oransje-glow hele tiden for å unngå “flekkete” kanter */
+  text-shadow:
+    0 0 3px rgba(255, 106, 0, 0.9),
+    0 0 8px rgba(255, 106, 0, 0.5);
+}
+
+.nav-link:hover {
+  color: var(--color-tertiary-light);
+  text-shadow:
+    0 0 4px var(--color-tertiary-light),
+    0 0 8px rgba(255, 51, 255, 0.4);
+}
+
+/* ======== SEKUNDÆR- OG GHOST-KNAPPER ======== */
+
+.btn-secondary {
+  background: rgba(15, 23, 42, 1); /* slate-900-ish */
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  transition: background .2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(30, 41, 59, 1);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  transition: border-color .2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.40);
+}
+
+/* ======== NEON-PULS FOR INPUTS ======== */
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0px rgba(255, 77, 216, .0),
+      0 0 12px rgba(255, 77, 216, .35),
+      0 0 28px rgba(0, 234, 255, .25);
+  }
+  50% {
+    box-shadow:
+      0 0 0px rgba(255, 77, 216, .05),
+      0 0 18px rgba(255, 77, 216, .55),
+      0 0 40px rgba(0, 234, 255, .35);
+  }
+}
+
+/* Neon input style (brukes av hoved-søk) */
+.input-neon {
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+
+.input-neon:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #ff4dd8; /* pink neon edge */
+  box-shadow:
+    0 0 0 2px rgba(255, 77, 216, .35) inset,
+    0 0 12px rgba(255, 77, 216, .6),
+    0 0 28px rgba(0, 234, 255, .45);
+  animation: neonPulse 1.6s ease-in-out infinite;
+}
+
+/* ======== BURGER-MENY IKON ======== */
+
+.burger-icon {
+  color: var(--color-secondary);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.burger-icon:hover {
+  color: var(--color-tertiary-light);
+  text-shadow:
+    0 0 6px var(--color-tertiary-light),
+    0 0 12px rgba(255, 51, 255, 0.6),
+    0 0 24px rgba(255, 0, 217, 0.4);
 }
