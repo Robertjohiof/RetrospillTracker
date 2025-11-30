@@ -12,6 +12,7 @@ export default function Search() {
   // Mapper data fra hooken til props som SearchResults forventer.
   // Dette sikrer at alle properties har riktig type.
   const searchResults = games.map((game) => ({
+      id: game.id,
     title: game.title,
     imgUrl: game.imgUrl ?? "/images/placeholder.png", // Sørger for at imgUrl alltid er en string
     altText: game.title,

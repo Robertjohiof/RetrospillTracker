@@ -5,6 +5,7 @@
  * @property {string} altText Alt text describing the image
  */
 export interface GameCardProps {
+    id: string;
   title: string;
   imgUrl: string;
   altText: string;
