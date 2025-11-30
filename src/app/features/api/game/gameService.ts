@@ -70,7 +70,7 @@ export async function getSearchGames() {
           start: null,
           end: null,
       },
-      console: "",
+      platform: "",
       isSet: false,
   };
   if (filterParams) {

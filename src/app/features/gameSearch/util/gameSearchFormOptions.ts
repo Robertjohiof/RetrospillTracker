@@ -37,8 +37,8 @@ const yearOptions = [
         id: 1,
         name: "Pre-70s",
         date: {
-            start: -2208988800,
-            end: -1,
+            start: null,
+            end: 0,
         },
     },
     {

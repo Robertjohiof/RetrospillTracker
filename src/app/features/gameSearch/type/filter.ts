@@ -6,6 +6,6 @@ export type Filter = {
         start: number|null;
         end: number|null;
     };
-    console: string;
+    platform: string;
     isSet: boolean;
 }

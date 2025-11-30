@@ -2,7 +2,7 @@
 
 import { React } from "rwsdk/client";
 import Button from "../shared/components/ui/Button";
-import {consoleOptions, genreOptions, yearOptions} from "@features/gameSearch/gameSearchFormOptions";
+import {consoleOptions, genreOptions, yearOptions} from "@features/gameSearch/util/gameSearchFormOptions";
 
 type SearchFormProps = {
   query: string;

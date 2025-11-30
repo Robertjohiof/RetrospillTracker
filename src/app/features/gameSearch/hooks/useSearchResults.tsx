@@ -13,7 +13,7 @@ const emptyFilter: Filter = {
         start: null,
         end: null,
     },
-    console: "",
+    platform: "",
     isSet: false,
 }
 
