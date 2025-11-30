@@ -15,7 +15,7 @@ export const buildFilterQuery = (filter:Filter)=>{
     }
 
     if(end !== null){
-        conditions.push(`last_release_date<=${end}`)
+        conditions.push(`first_release_date<=${end}`)
     }
 
     if(platform.trim() !== ""){
@@ -24,6 +24,12 @@ export const buildFilterQuery = (filter:Filter)=>{
 
     if(conditions.length === 0)return "";
 
-    console.log(conditions.join(" & "))
     return `where ${conditions.join(" & ")};`;
+}
+
+export const buildSearchQuery = (search:string)=>{
+    if(search.trim() !== ""){
+        return `search "${search}";`
+    }
+    return ""
 }

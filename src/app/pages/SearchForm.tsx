@@ -70,7 +70,7 @@ export default function SearchForm({
             <label className="mb-1 block text-sm text-cyan-400">Console</label>
             <select
                 className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
-                onChange={(e)=>onFilterChange(e,"console")}
+                onChange={(e)=>onFilterChange(e,"platform")}
             >
                 <option className="hidden" selected>choose</option>
                 {consoleOptions.map((console) => (<option key={console.id} value={console.id}>{console.name}</option>))}
