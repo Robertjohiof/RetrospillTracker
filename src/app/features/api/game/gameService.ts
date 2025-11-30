@@ -100,3 +100,4 @@ export async function getGames(id:string) {
 
     return await igdbFetch(query)
 }
+}
