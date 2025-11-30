@@ -21,7 +21,7 @@ import SignUp from "./app/pages/SignUp";
 
 import {
     getAllGames, getConsoles, getGenres,
-    getPopularGames, getReleaseDates, getGames,
+    getPopularGames, getReleaseDates, 
     getSearchGames,
 } from "@features/api/game/gameService";
 import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
