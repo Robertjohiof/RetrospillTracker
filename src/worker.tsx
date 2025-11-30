@@ -16,15 +16,17 @@ import Forum from "./app/pages/Forum";
 import Login from "./app/pages/Login";
 import Layout from "@/app/shared/components/layout/Layout";
 import ProfilePage from "./app/pages/ProfilePage";
+import GameDetail from "./app/features/gameDetail/GameDetail";
 import SignUp from "./app/pages/SignUp";
 
 import {
     getAllGames, getConsoles, getGenres,
-    getPopularGames, getReleaseDates,
+    getPopularGames, getReleaseDates, getGames,
     getSearchGames,
 } from "@features/api/game/gameService";
-import { fetchAllUsers, fetchUserById } from "./app/shared/repository/userRepository";
-import {fetchBacklogByUser, fetchCollectionsByUser} from "@/app/shared/repository/userCollectionsRepository";
+import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
+import {userRoutes} from "@/app/shared/controllers/userRoutes";
+import {createUserController} from "@/app/shared/controllers/userController";
 
 // ----------- Types -----------
 export interface Env {
@@ -42,17 +44,17 @@ export default defineApp([
 
   // --- API Routes ---
     prefix("/api/v1/", [
+        userRoutes(createUserController()),
         route("getPopularGames", getPopularGames),
         route("getAllGames", getAllGames),
         route("getSearchGames", getSearchGames),
         route("getGenres", getGenres),
         route("getReleaseDates", getReleaseDates),
         route("getConsoles", getConsoles),
+        route("GET/games/:id", ({ params })=>{
+            return getGames(params.id)
+        }),
     ]),
-  route("/users", fetchAllUsers),
-  route("/users/:id", ({ params }) => {
-    return fetchUserById(params.id)
-  }),
     route("/users/:id/collections", ({ params }) => {
       return fetchCollectionsByUser(params.id)
     }),
@@ -89,11 +91,11 @@ export default defineApp([
       route("/forum", Forum),
       route("/login", Login),
       route("/signup", SignUp),
-      route("/profilepage", ProfilePage),
-
+      route("/profilepage/:id", 
+        ({ params }) => <ProfilePage userId={params.id} />),
       prefix("/games", [
         route("/", () => <h2>Games</h2>),
-        route("/:id", () => <h2>Dynamic game</h2>),
+        route("/:id", ({ params }) => <GameDetail gameId={params.id} />),
       ]),
     ]),
   ]),

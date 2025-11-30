@@ -29,11 +29,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       <h2 className="mb-4 text-xl font-bold text-cyan-400">
         Results ({results.length})
       </h2>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+
+      {/* Samme layout som GameList på forsiden */}
+      <section className="flex flex-wrap justify-evenly gap-9 p-4">
         {results.map((game) => (
           <GameCard key={game.title} {...game} />
         ))}
-      </div>
+      </section>
     </>
   );
 };
