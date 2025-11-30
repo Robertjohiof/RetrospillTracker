@@ -22,7 +22,7 @@ import SignUp from "./app/pages/SignUp";
 import {
     getAllGames, getConsoles, getGenres,
     getPopularGames, getReleaseDates, 
-    getSearchGames,
+    getSearchGames, getGames
 } from "@features/api/game/gameService";
 import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
 import {userRoutes} from "@/app/shared/controllers/userRoutes";
