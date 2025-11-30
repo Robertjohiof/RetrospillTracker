@@ -1,5 +1,5 @@
 import { dbCollections, dbCollectionsEntries, dbGames, dbGamesToPlatforms, dbPlatforms, dbStatuses, dbUsers } from "@/app/data/dbTestData";
-import { BASE_URL } from "@/app/shared/config/apiPaths";
+import { API_ENDPOINT, API_URL, BASE_URL } from "@/app/shared/config/apiPaths";
 import { User } from "@/app/shared/schemas/usersSchema";
 import { ProfileData, UserGame } from "@/app/features/profilePage/types/user";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ export function useProfileData(userName: string) {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${BASE_URL}users`);
+      const response = await fetch(`${BASE_URL}${API_URL}users`);
       if(!response.ok) {
         return
       }
@@ -24,6 +24,7 @@ export function useProfileData(userName: string) {
       
       if(json?.data?.length) {
         setUsers(json.data)
+        
       } else {
         console.warn("ingen data fra API, bruker fallback-data")
         setUsers(dbUsers)
