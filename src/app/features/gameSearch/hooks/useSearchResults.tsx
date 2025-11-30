@@ -2,7 +2,7 @@
 import {FormEvent, useEffect, useRef, useState} from "react";
 import {Game} from "@/app/shared/types/game"
 import {ChangeEvent} from "react";
-import {Result} from "@/app/shared/lib/response";
+import {Errors, Result} from "@/app/shared/lib/response";
 import {API_ENDPOINT} from "@/app/shared/config/apiPaths";
 import {IGDBData, igdbToGame} from "@/app/shared/utils/igdbToGame";
 
@@ -49,7 +49,11 @@ export default function useSearchResults(){
         try {
             const response = await fetch(`${API_ENDPOINT.GET_SEARCH_GAMES}${query}`);
             if(!response.ok){
-                return {success: false, error: response.statusText};
+                return {
+                    success: false,
+                    errorCode: Errors.NOT_FOUND,
+                    error: response.statusText
+                };
             }
             const data = await response.json();
             const gamesData = igdbToGame(data as IGDBData)
@@ -57,7 +61,10 @@ export default function useSearchResults(){
         }
         catch(error){
             console.warn(error)
-            return {success: false, error: "Something went wrong"};
+            return {
+                success: false,
+                errorCode: Errors.BAD_REQUEST,
+                error: "Something went wrong"};
         }
     }
 
@@ -65,7 +72,11 @@ export default function useSearchResults(){
         try {
             const response = await fetch(`${API_ENDPOINT.GET_ALL_GAMES}`)
             if(!response.ok){
-                return {success: false, error: response.statusText};
+                return {
+                    success: false,
+                    errorCode: Errors.NOT_FOUND,
+                    error: response.statusText
+                };
             }
             const data = await response.json();
             const gamesData = igdbToGame(data as IGDBData)
@@ -73,7 +84,11 @@ export default function useSearchResults(){
         }
         catch(error){
             console.warn(error)
-            return {success: false, error: "Something went wrong"};
+            return {
+                success: false,
+                errorCode: Errors.BAD_REQUEST,
+                error: "Something went wrong"
+            };
         }
     }
 
