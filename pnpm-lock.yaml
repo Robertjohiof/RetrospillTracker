@@ -46,10 +46,10 @@ importers:
         version: 19.2.0(react@19.2.0)
       react-server-dom-webpack:
         specifier: 19.2.0
-        version: 19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.102.1(esbuild@0.25.12))
+        version: 19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.103.0(esbuild@0.25.12))
       rwsdk:
-        specifier: 1.0.0-beta.23
-        version: 1.0.0-beta.23(@cloudflare/vite-plugin@1.13.16(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(workerd@1.20251011.0)(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0)))(react-dom@19.2.0(react@19.2.0))(react-server-dom-webpack@19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.102.1(esbuild@0.25.12)))(react@19.2.0)(typescript@5.9.3)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0))
+        specifier: 1.0.0-beta.33
+        version: 1.0.0-beta.33(@cloudflare/vite-plugin@1.13.16(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(workerd@1.20251011.0)(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0)))(capnweb@0.2.0)(react-dom@19.2.0(react@19.2.0))(react-server-dom-webpack@19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.103.0(esbuild@0.25.12)))(react@19.2.0)(typescript@5.9.3)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0))
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
@@ -1588,6 +1588,9 @@ packages:
   caniuse-lite@1.0.30001757:
     resolution: {integrity: sha512-r0nnL/I28Zi/yjk1el6ilj27tKcdjLsNqAOZr0yVjWPrSQyHgKI2INaEWw21bAQSv2LXRt1XuCS/GomNpWOxsQ==}
 
+  capnweb@0.2.0:
+    resolution: {integrity: sha512-fQSW5h6HIefRM4rHZMyAsWcu/qE/6Qr2OC8B99whifjDJatI5KLFcODSykKmpyCCKF50N3HvZ5lB26YBdh0fRg==}
+
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
 
@@ -1983,8 +1986,8 @@ packages:
     resolution: {integrity: sha512-Vo1ab+QXPzZ4tCa8SwIHJFaSzy4R6SHf7BY79rFBDf0idraZWAkYrDjDj8uWaSm3S2TK+hJ7/t1CEmZ7jXw+pg==}
     engines: {node: '>=18.0.0'}
 
-  execa@9.6.0:
-    resolution: {integrity: sha512-jpWzZ1ZhwUmeWRhS7Qv3mhpOhLfwI+uAX4e5fOcXqwMR7EcJ0pj2kV1CVzHVMX/LphnKWD3LObjZCoJ71lKpHw==}
+  execa@9.6.1:
+    resolution: {integrity: sha512-9Be3ZoN4LmYR90tUoVu2te2BsbzHfhJyfEiAVfz7N5/zv+jduIfLrV2xdQXOHbaD6KgpGdO9PRPM1Y4Q9QkPkA==}
     engines: {node: ^18.19.0 || >=20.5.0}
 
   exit-hook@2.2.1:
@@ -2115,8 +2118,8 @@ packages:
   glob-to-regexp@0.4.1:
     resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
 
-  glob@11.0.3:
-    resolution: {integrity: sha512-2Nim7dha1KVkaiF4q6Dj+ngPPMdfvLJEOpZk/jKiUAkqKebpGAWQXAq9z1xu9HKu5lWfqw/FASuccEjyznjPaA==}
+  glob@11.1.0:
+    resolution: {integrity: sha512-vuNwKSaKiqm7g0THUBu2x7ckSs3XJLXE+2ssL7/MfTGPLLcrJQ/4Uq1CjPTtO5cCIiRxqvN6Twy1qOwhL0Xjcw==}
     engines: {node: 20 || >=22}
     hasBin: true
 
@@ -2823,11 +2826,12 @@ packages:
   rsc-html-stream@0.0.7:
     resolution: {integrity: sha512-v9+fuY7usTgvXdNl8JmfXCvSsQbq2YMd60kOeeMIqCJFZ69fViuIxztHei7v5mlMMa2h3SqS+v44Gu9i9xANZA==}
 
-  rwsdk@1.0.0-beta.23:
-    resolution: {integrity: sha512-KlSLZ9SYJ6HHSnFTN9kkYFKZ36PRwTKMAJiUnEnbDo+fxzUxNyUKvlXSAHMxKbZrXr9VMgZSMqKPSfDciTxYOQ==}
+  rwsdk@1.0.0-beta.33:
+    resolution: {integrity: sha512-k/8CxfgQeXjAh6opNuVFqtkfeMcUhXRqqLpYr1bQ1h5e4K5pbU3+/3CoIKhb2XSJRhJm3xxksLxCa51MraHV6w==}
     hasBin: true
     peerDependencies:
       '@cloudflare/vite-plugin': ^1.13.10
+      capnweb: ~0.2.0
       react: '>=19.2.0-0 <19.3.0 || >=19.3.0-0 <20.0.0'
       react-dom: '>=19.2.0-0 <19.3.0 || >=19.3.0-0 <20.0.0'
       react-server-dom-webpack: '>=19.2.0-0 <19.3.0 || >=19.3.0-0 <20.0.0'
@@ -3208,8 +3212,8 @@ packages:
     resolution: {integrity: sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg==}
     engines: {node: '>=10.13.0'}
 
-  webpack@5.102.1:
-    resolution: {integrity: sha512-7h/weGm9d/ywQ6qzJ+Xy+r9n/3qgp/thalBbpOi5i223dPXKi04IBtqPN9nTd+jBc7QKfvDbaBnFipYp4sJAUQ==}
+  webpack@5.103.0:
+    resolution: {integrity: sha512-HU1JOuV1OavsZ+mfigY0j8d1TgQgbZ6M+J75zDkpEAwYeXjWSqrGJtgnPblJjd/mAyTNQ7ygw0MiKOn6etz8yw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -4568,6 +4572,8 @@ snapshots:
 
   caniuse-lite@1.0.30001757: {}
 
+  capnweb@0.2.0: {}
+
   ccount@2.0.1: {}
 
   chalk@4.1.2:
@@ -4950,7 +4956,7 @@ snapshots:
 
   eventsource-parser@3.0.6: {}
 
-  execa@9.6.0:
+  execa@9.6.1:
     dependencies:
       '@sindresorhus/merge-streams': 4.0.0
       cross-spawn: 7.0.6
@@ -5090,7 +5096,7 @@ snapshots:
 
   glob-to-regexp@0.4.1: {}
 
-  glob@11.0.3:
+  glob@11.1.0:
     dependencies:
       foreground-child: 3.3.1
       jackspeak: 4.1.1
@@ -5888,13 +5894,13 @@ snapshots:
 
   react-refresh@0.18.0: {}
 
-  react-server-dom-webpack@19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.102.1(esbuild@0.25.12)):
+  react-server-dom-webpack@19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.103.0(esbuild@0.25.12)):
     dependencies:
       acorn-loose: 8.5.2
       neo-async: 2.6.2
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
-      webpack: 5.102.1(esbuild@0.25.12)
+      webpack: 5.103.0(esbuild@0.25.12)
       webpack-sources: 3.3.3
 
   react@19.2.0: {}
@@ -6010,7 +6016,7 @@ snapshots:
 
   rsc-html-stream@0.0.7: {}
 
-  rwsdk@1.0.0-beta.23(@cloudflare/vite-plugin@1.13.16(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(workerd@1.20251011.0)(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0)))(react-dom@19.2.0(react@19.2.0))(react-server-dom-webpack@19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.102.1(esbuild@0.25.12)))(react@19.2.0)(typescript@5.9.3)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0)):
+  rwsdk@1.0.0-beta.33(@cloudflare/vite-plugin@1.13.16(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(workerd@1.20251011.0)(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0)))(capnweb@0.2.0)(react-dom@19.2.0(react@19.2.0))(react-server-dom-webpack@19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.103.0(esbuild@0.25.12)))(react@19.2.0)(typescript@5.9.3)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0)):
     dependencies:
       '@ast-grep/napi': 0.39.9
       '@cloudflare/vite-plugin': 1.13.16(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))(workerd@1.20251011.0)(wrangler@4.45.1(@cloudflare/workers-types@4.20251128.0))
@@ -6024,16 +6030,17 @@ snapshots:
       '@types/react-dom': 19.1.11(@types/react@19.1.17)
       '@types/react-is': 19.0.0
       '@vitejs/plugin-react': 5.0.4(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.20.6))
+      capnweb: 0.2.0
       chokidar: 4.0.3
       debug: 4.4.3
       decompress: 4.2.1
       enhanced-resolve: 5.18.3
       eventsource-parser: 3.0.6
-      execa: 9.6.0
+      execa: 9.6.1
       find-up: 8.0.0
       fs-extra: 11.3.2
       get-port: 7.1.0
-      glob: 11.0.3
+      glob: 11.1.0
       ignore: 7.0.5
       jsonc-parser: 3.3.1
       kysely: 0.28.8
@@ -6046,7 +6053,7 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
       react-is: 19.1.1
-      react-server-dom-webpack: 19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.102.1(esbuild@0.25.12))
+      react-server-dom-webpack: 19.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(webpack@5.103.0(esbuild@0.25.12))
       rsc-html-stream: 0.0.7
       tmp-promise: 3.0.3
       ts-morph: 27.0.2
@@ -6267,14 +6274,14 @@ snapshots:
       - bare-abort-controller
       - react-native-b4a
 
-  terser-webpack-plugin@5.3.14(esbuild@0.25.12)(webpack@5.102.1(esbuild@0.25.12)):
+  terser-webpack-plugin@5.3.14(esbuild@0.25.12)(webpack@5.103.0(esbuild@0.25.12)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
       serialize-javascript: 6.0.2
       terser: 5.44.1
-      webpack: 5.102.1(esbuild@0.25.12)
+      webpack: 5.103.0(esbuild@0.25.12)
     optionalDependencies:
       esbuild: 0.25.12
 
@@ -6472,7 +6479,7 @@ snapshots:
 
   webpack-sources@3.3.3: {}
 
-  webpack@5.102.1(esbuild@0.25.12):
+  webpack@5.103.0(esbuild@0.25.12):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.8
@@ -6496,7 +6503,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.0
-      terser-webpack-plugin: 5.3.14(esbuild@0.25.12)(webpack@5.102.1(esbuild@0.25.12))
+      terser-webpack-plugin: 5.3.14(esbuild@0.25.12)(webpack@5.103.0(esbuild@0.25.12))
       watchpack: 2.4.4
       webpack-sources: 3.3.3
     transitivePeerDependencies:
