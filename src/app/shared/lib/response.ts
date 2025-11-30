@@ -19,7 +19,7 @@ interface pagination{
 
 
 
-const Errors = {
+export const Errors = {
     INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
     NOT_FOUND: "NOT_FOUND",
     BAD_REQUEST: "BAD_REQUEST",
@@ -45,6 +45,7 @@ export type Success<T> = {
 
 export type Failure = {
     success: false,
+    errorCode: ErrorCode,
     error: string
 }
 
