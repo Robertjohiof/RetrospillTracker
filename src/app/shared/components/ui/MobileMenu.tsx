@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import HeaderSearch from "../layout/HeaderSearch";
 
 interface MobileMenuProps {
   isAuthenticated: boolean;
@@ -9,6 +8,12 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
+
+  // TODO: backend kobler dette til ekte logout
+  function handleLogout() {
+    console.log("Log out clicked (mobile menu)");
+    setOpen(false);
+  }
 
   return (
     <div className="md:hidden relative">
@@ -26,13 +31,8 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute left-0 mt-2 w-64 rounded-2xl bg-[#0a0015] border border-white/10 shadow-lg z-30">
+        <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-[#0a0015] border border-white/10 shadow-lg z-30">
           <nav className="flex flex-col gap-3 p-4 text-base font-semibold">
-            {/* Search inside the menu */}
-            <div className="my-1">
-              <HeaderSearch />
-            </div>
-
             <a
               href="/"
               className="nav-link text-orange-500 hover:text-pink-400 transition"
@@ -41,7 +41,6 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
               Home
             </a>
 
-            {/* Search/browse page */}
             <a
               href="/search"
               className="nav-link text-orange-500 hover:text-pink-400 transition"
@@ -50,7 +49,6 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
               Browse
             </a>
 
-            {/* forum page */}
             <a
               href="/forum"
               className="nav-link text-orange-500 hover:text-pink-400 transition"
@@ -59,7 +57,6 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
               Forum
             </a>
 
-            {/* profile page */}
             {isAuthenticated && (
               <a
                 href="/profile"
@@ -68,6 +65,19 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
               >
                 Profile
               </a>
+            )}
+
+            {/* Log out inside burger menu on small screens */}
+            {isAuthenticated && (
+              <div className="mt-3 border-t border-white/10 pt-3">
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="w-full rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 border border-white/10 hover:bg-slate-800"
+                >
+                  Log out
+                </button>
+              </div>
             )}
           </nav>
         </div>
