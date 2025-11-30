@@ -7,6 +7,7 @@ import {consoleOptions, genreOptions, yearOptions} from "@features/gameSearch/ga
 type SearchFormProps = {
   query: string;
   onQueryChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFilterChange: (event: React.ChangeEvent<HTMLSelectElement>, filterType:string) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   isLoading: boolean;
 };
@@ -14,6 +15,7 @@ type SearchFormProps = {
 export default function SearchForm({
   query,
   onQueryChange,
+    onFilterChange,
   onSubmit,
   isLoading,
 }: SearchFormProps) {
@@ -48,27 +50,30 @@ export default function SearchForm({
             <label className="mb-1 block text-sm text-cyan-400">Genres</label>
             <select
                 className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
+                onChange={(e)=>onFilterChange(e,"genres")}
             >
                 <option className="hidden" selected>choose</option>
-                {genreOptions.map((genre) => (<option key={genre.id}>{genre.name}</option>))}
+                {genreOptions.map((genre) => (<option key={genre.id} value={genre.id}>{genre.name}</option>))}
             </select>
         </section>
         <section className="flex flex-col w-[120px]">
             <label className="mb-1 block text-sm text-cyan-400">Year</label>
             <select
                 className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
+                onChange={(e)=>onFilterChange(e,"year")}
             >
                 <option className="hidden" selected>choose</option>
-                {yearOptions.map((year)=>(<option key={year.id}>{year.name}</option>))}
+                {yearOptions.map((year)=>(<option key={year.id} value={JSON.stringify(year.date)}>{year.name}</option>))}
             </select>
         </section>
         <section className="flex flex-col w-[150px]">
             <label className="mb-1 block text-sm text-cyan-400">Console</label>
             <select
                 className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
+                onChange={(e)=>onFilterChange(e,"console")}
             >
                 <option className="hidden" selected>choose</option>
-                {consoleOptions.map((console) => (<option key={console.id}>{console.name}</option>))}
+                {consoleOptions.map((console) => (<option key={console.id} value={console.id}>{console.name}</option>))}
             </select>
         </section>
     </form>

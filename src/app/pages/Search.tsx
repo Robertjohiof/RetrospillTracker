@@ -6,7 +6,7 @@ import SearchForm from "./SearchForm";
 import SearchResults from "./SearchResults";
 
 export default function Search() {
-  const { games, handleSearchChange, onSubmit, loading, error, query } =
+  const { games, handleSearchChange, handleFilterChange, onSubmit, loading, error, query } =
     useSearchResults();
 
   // Mapper data fra hooken til props som SearchResults forventer.
@@ -24,6 +24,7 @@ export default function Search() {
         <SearchForm
           query={query}
           onQueryChange={handleSearchChange}
+          onFilterChange={handleFilterChange}
           onSubmit={onSubmit}
           isLoading={loading}
         />

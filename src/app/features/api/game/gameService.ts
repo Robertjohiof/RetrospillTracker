@@ -3,6 +3,7 @@
 import { requestInfo } from "rwsdk/worker";
 import {QUERY} from "@/app/shared/config/IGDBQueries";
 import {igdbFetch} from "@/app/shared/utils/igdbFetch";
+import {Filter} from "@features/gameSearch/type/filter";
 
 // TODO: add logic for doing operations for getting games from the repository
 export function listGames() {
@@ -61,11 +62,25 @@ export async function getSearchGames() {
   const { request } = requestInfo;
   const url = new URL(request.url);
   let search = url.searchParams.get("search");
+  const filterParams = url.searchParams.get("filter");
+
+  let filters:Filter = {
+      genres: "",
+      year: {
+          start: null,
+          end: null,
+      },
+      console: "",
+      isSet: false,
+  };
+  if (filterParams) {
+      filters = JSON.parse(decodeURIComponent(filterParams));
+  }
 
   //TODO: make proper validation
   const safeSearch = (search ?? "").replace(/"/g, '\\"');
 
-  const query = QUERY.SEARCH_GAMES(safeSearch);
+  const query = QUERY.SEARCH_GAMES(safeSearch,filters);
 
   return await igdbFetch(query)
 }

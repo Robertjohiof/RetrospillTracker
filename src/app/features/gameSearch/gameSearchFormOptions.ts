@@ -25,14 +25,70 @@ const genreOptions = [
 ];
 
 const yearOptions = [
-    {id: 0, name: "All years"},
-    {id: 1, name: "Pre-70s"},
-    {id: 2, name: "70s"},
-    {id: 3, name: "80s"},
-    {id: 4, name: "90s"},
-    {id: 5, name: "2000s"},
-    {id: 6, name: "2010s"},
-    {id: 7, name: "2020 and newer"},
+    {
+        id: 0,
+        name: "All years",
+        date: {
+            start: null,
+            end: null,
+        },
+    },
+    {
+        id: 1,
+        name: "Pre-70s",
+        date: {
+            start: -2208988800,
+            end: -1,
+        },
+    },
+    {
+        id: 2,
+        name: "70s",
+        date: {
+            start: 0,
+            end: 315532799,
+        },
+    },
+    {
+        id: 3,
+        name: "80s",
+        date: {
+            start: 315532800,
+            end: 631151999,
+        },
+    },
+    {
+        id: 4,
+        name: "90s",
+        date: {
+            start: 631152000,
+            end: 946684799,
+        },
+    },
+    {
+        id: 5,
+        name: "2000s",
+        date: {
+            start: 946684800,
+            end: 1262303999,
+        },
+    },
+    {
+        id: 6,
+        name: "2010s",
+        date: {
+            start: 1262304000,
+            end: 1577836799,
+        },
+    },
+    {
+        id: 7,
+        name: "2020 and newer",
+        date: {
+            start: 1577836800,
+            end: null,
+        },
+    },
 ]
 
 const consoleOptions = [
