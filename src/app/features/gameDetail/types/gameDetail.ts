@@ -17,5 +17,11 @@ export interface GameData {
 }
 
 export interface GameLayoutProps {
-  data: GameDetail;
+  data: GameData | null;
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
 }

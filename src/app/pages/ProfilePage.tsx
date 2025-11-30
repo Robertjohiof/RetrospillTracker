@@ -4,7 +4,7 @@ import { ProfileLayout } from "@features/profilePage/layout/ProfileLayout";
 import { useProfileData } from "@features/profilePage/hooks/useProfileData";
 
 export default function ProfilePage({ userId }: { userId: string }) { 
-  const { data, search, setSearch, loading, error } = useProfileData("Sell_Mango")
+  const { data, search, setSearch, loading, error } = useProfileData(userId)
 
   if (loading) return <p>Hentar brukar</p>;
   if (error) return <p>{error}</p>

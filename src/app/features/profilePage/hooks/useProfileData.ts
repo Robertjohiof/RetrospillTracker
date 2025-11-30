@@ -20,12 +20,21 @@ export function useProfileData(userName: string) {
       }
       
       const json:any = await response.json();
-      setUsers(json.data)
+      
+      if(json?.data?.length) {
+        setUsers(json.data)
+      } else {
+        console.warn("ingen data fra API, bruker fallback-data")
+        setUsers(dbUsers)
+      }
+      
+
 
     } catch (error) {
       setError(null);
       console.error(error);
       setError("Feil ved henting av brukere")
+      setUsers(dbUsers)
     } finally {
       setTimeout(() => {setLoading(false)}, 1000)
     }
@@ -36,7 +45,13 @@ export function useProfileData(userName: string) {
   }, [])
 
   useEffect(() => {
-    const user = users.find((u) => u.userName === userName);
+    const user = users.find(
+      (u) =>
+        u.userName.toLowerCase() === userName.toLowerCase() ||
+        u.slug?.toLowerCase() === userName.toLowerCase()
+    );
+
+    console.log(user)
 
     if(!user) return;
     

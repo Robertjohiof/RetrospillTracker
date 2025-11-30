@@ -6,6 +6,7 @@ const API_ENDPOINT = {
     GET_SEARCH_GAMES: `${BASE_URL + API_URL}getSearchGames?search=`,
     GET_ALL_USERS: `${BASE_URL}/users`,
     GET_USER: `${BASE_URL}/users/:id`,
+    GET_GAME: `${BASE_URL + API_URL}GET/games/`,
 }
 
 export { BASE_URL, API_URL, API_ENDPOINT }
