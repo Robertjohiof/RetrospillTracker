@@ -1,4 +1,4 @@
-export interface User {
+/*export interface User {
   userId: number;
   userName: string;
   slug: string;
@@ -12,7 +12,9 @@ export interface User {
   roleId: number;
   createdAt: string | null;
   updatedAt: string | null;
-}
+}*/
+
+import {User} from "@/db/schema";
 
 export interface UserGame {
   gameId: number;

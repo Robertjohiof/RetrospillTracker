@@ -24,8 +24,9 @@ import {
     getPopularGames,
     getSearchGames,
 } from "@features/api/game/gameService";
-import { fetchAllUsers, fetchUserById } from "./app/shared/repository/userRepository";
-import { fetchBacklogByUser, fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
+import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
+import {userRoutes} from "@/app/shared/controllers/userRoutes";
+import {createUserController} from "@/app/shared/controllers/userController";
 
 // ----------- Types -----------
 export interface Env {
@@ -43,6 +44,7 @@ export default defineApp([
 
   // --- API Routes ---
     prefix("/api/v1/", [
+        userRoutes(createUserController()),
         route("getPopularGames", getPopularGames),
         route("getAllGames", getAllGames),
         route("getSearchGames", getSearchGames),
@@ -50,10 +52,6 @@ export default defineApp([
             return getGames(params.id)
         }),
     ]),
-  route("/users", fetchAllUsers),
-  route("/users/:id", ({ params }) => {
-    return fetchUserById(params.id)
-  }),
     route("/users/:id/collections", ({ params }) => {
       return fetchCollectionsByUser(params.id)
     }),
