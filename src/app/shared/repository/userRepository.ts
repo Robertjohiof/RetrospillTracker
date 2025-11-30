@@ -1,16 +1,32 @@
-import { User, users } from '@/db/schema';
-import { db } from '@/db';
-import { createSuccessResponse } from '../lib/response';
+import { db} from "@/db";
+import { users } from '@/db/schema';
+import { UserSchema, User } from "@/app/shared/schemas/usersSchema";
 import { eq } from 'drizzle-orm';
 
-export async function fetchAllUsers():Promise<Response> {
-        const results = await db.select().from(users);
-        
-        return createSuccessResponse(results);
+export interface UserRepository {
+    findAll(): Promise<User[] | null>;
+    findById(id: number): Promise<User | null>;
 }
 
-export async function fetchUserById(id: number):Promise<Response> {
-        const results = await db.select().from(users).where(eq(users.userId, id));
+export function createUserRepository(): UserRepository {
+    return {
+        async findAll():Promise<User[]> {
+            const results = await db.query.users.findMany();
 
-        return createSuccessResponse(results);
+            return UserSchema.array().parse(results);
+        },
+
+
+        async findById(id: number):Promise<User | null> {
+            const results = await db.query.users.findFirst({
+                where: eq(users.userId, id),
+            });
+
+            if (!results) {
+                return null;
+            }
+
+            return UserSchema.parse(results)
+        }
+    }
 }

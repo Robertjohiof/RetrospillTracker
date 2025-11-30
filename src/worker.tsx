@@ -16,14 +16,17 @@ import Forum from "./app/pages/Forum";
 import Login from "./app/pages/Login";
 import Layout from "@/app/shared/components/layout/Layout";
 import ProfilePage from "./app/pages/ProfilePage";
+import GameDetail from "./app/features/gameDetail/GameDetail";
 import SignUp from "./app/pages/SignUp";
 
 import {
-  getAllGames,
-  getPopularGames,
-  getSearchGames,
-} from "@/app/shared/services/gameService";
-import { fetchAllUsers, fetchUserById } from "./app/shared/repository/userRepository";
+    getAllGames, getGames,
+    getPopularGames,
+    getSearchGames,
+} from "@features/api/game/gameService";
+import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
+import {userRoutes} from "@/app/shared/controllers/userRoutes";
+import {createUserController} from "@/app/shared/controllers/userController";
 
 // ----------- Types -----------
 export interface Env {
@@ -40,13 +43,21 @@ export default defineApp([
   setCommonHeaders(),
 
   // --- API Routes ---
-  route("/api/v1/getPopularGames", getPopularGames),
-  route("/api/v1/getAllGames", getAllGames),
-  route("/api/v1/getSearchGames", getSearchGames),
-  route("/users", fetchAllUsers),
-  route("/users/:id", ({ params }) => {
-    return fetchUserById(params.id)
-  }),
+    prefix("/api/v1/", [
+        userRoutes(createUserController()),
+        route("getPopularGames", getPopularGames),
+        route("getAllGames", getAllGames),
+        route("getSearchGames", getSearchGames),
+        route("GET/games/:id", ({ params })=>{
+            return getGames(params.id)
+        }),
+    ]),
+    route("/users/:id/collections", ({ params }) => {
+      return fetchCollectionsByUser(params.id)
+    }),
+    route("/users/:id/collections/backlog/", ({ params }) => {
+        return fetchCollectionsByUser(params.id, true)
+    }),
 
   // --- Rendered Pages ---
   render(Document, [
@@ -77,11 +88,11 @@ export default defineApp([
       route("/forum", Forum),
       route("/login", Login),
       route("/signup", SignUp),
-      route("/profilepage", ProfilePage),
-
+      route("/profilepage/:id", 
+        ({ params }) => <ProfilePage userId={params.id} />),
       prefix("/games", [
         route("/", () => <h2>Games</h2>),
-        route("/:id", () => <h2>Dynamic game</h2>),
+        route("/:id", ({ params }) => <GameDetail gameId={params.id} />),
       ]),
     ]),
   ]),

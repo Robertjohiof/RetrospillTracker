@@ -3,7 +3,8 @@ const QUERY = {
     ALL_GAMES: 'fields name, cover.url, rating, rating_count, first_release_date; limit 25;',
     SEARCH_GAMES: (search:string):string => {return `fields name, cover.url, rating, rating_count, first_release_date;
     search "${search}";
-    limit 25;`}
+    limit 25;`},
+    SEARCH_GAME: (gameId:string):string => {return `fields name, cover.url, created_at, rating, summary, slug, involved_companies.company.name, genres.name, platforms.name; where id = ${gameId}; limit 1;`;},
 }
 
 export {QUERY}

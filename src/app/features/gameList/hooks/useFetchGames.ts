@@ -18,8 +18,7 @@ export function useFetchGames(apiEndpoint:string) {
                 return
             }
             const data:IGDBGame = await response.json();
-
-            console.log(data);
+            
             setGames(data.data.map((game:IGDBData) => {return {
                 id: game.id.toString(),
                 title: game.name,
