@@ -12,7 +12,6 @@ export default function Header() {
   };
 
   const isAuthenticated = !!mockUser;
-
   const [seen, setSeen] = useState(false);
 
   function togglePop() {
@@ -21,10 +20,8 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 w-full bg-[#0a0015] px-4 sm:px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
-      {/* VENSTRE: Burger + logo */}
+      {/* VENSTRE: logo */}
       <div className="flex items-center gap-4">
-        <MobileMenu isAuthenticated={isAuthenticated} />
-
         <a
           href="/"
           className="flex items-center gap-2 hover:opacity-90 transition"
@@ -40,38 +37,45 @@ export default function Header() {
         </a>
       </div>
 
-      {/* MIDTEN: Navigasjon (desktop) */}
-      <nav className="hidden md:flex items-center gap-10 text-base font-semibold flex-1 justify-center">
-        <a href="/" className="nav-link">
-          Home
-        </a>
-
-        <div className="flex justify-center flex-1 max-w-sm">
+      {/* MIDTEN: Søk – alltid i midten */}
+      <div className="flex-1 flex justify-center">
+        <div className="w-full max-w-md md:max-w-xl">
           <HeaderSearch />
         </div>
+      </div>
 
-        <a href="/search" className="nav-link">
-          Browse
-        </a>
-
-        <a href="/forum" className="nav-link">
-          Forum
-        </a>
-
-        {isAuthenticated && (
-          <a href="/profile" className="nav-link">
-            Profile
-          </a>
-        )}
-      </nav>
-
-      {/* HØYRE: Auth-område */}
+      {/* HØYRE: Navigasjon (desktop) + auth + burger (mobil) */}
       <div className="flex items-center gap-3">
+        {/* Navigasjon – kun desktop */}
+        <nav className="hidden md:flex items-center gap-10 text-base font-semibold">
+          <a href="/" className="nav-link">
+            Home
+          </a>
+          <a href="/search" className="nav-link">
+            Browse
+          </a>
+          <a href="/forum" className="nav-link">
+            Forum
+          </a>
+          {isAuthenticated && (
+            <a href="/profile" className="nav-link">
+              Profile
+            </a>
+          )}
+        </nav>
+
+        {/* Auth-område */}
         {isAuthenticated && mockUser ? (
           // ===== INNLOGGET VISNING =====
           <div className="flex items-center gap-3">
-            <span className="nav-link text-base">{mockUser.username}</span>
-            <button className="btn-secondary text-sm px-3 py-1">Log out</button>
+            <img
+              src="/images/user_logo1.png" // ← bruker logo
+              alt="User avatar"
+              className="h-8 w-8 rounded-full border border-white/20 shadow-md object-cover"
+            />
+            <button className="btn-secondary text-sm px-3 py-1 hidden md:inline-flex">
+              Log out
+            </button>
           </div>
         ) : (
           // ===== IKKE INNLOGGET VISNING =====
@@ -93,6 +97,9 @@ export default function Header() {
             </a>
           </>
         )}
+
+        {/* Burger-meny – nå helt til høyre (mobil) */}
+        <MobileMenu isAuthenticated={isAuthenticated} />
       </div>
     </header>
   );
