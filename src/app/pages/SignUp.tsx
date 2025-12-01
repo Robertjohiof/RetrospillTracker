@@ -85,7 +85,17 @@ export default function SignUp() {
       </h1>
 
       <section className="flex justify-center px-4 py-10">
-        <div className="w-full max-w-xl rounded-2xl bg-[#12001f]/95 border border-white/20 p-8 shadow-xl">
+        <div
+          className="
+      w-full max-w-xl
+      overflow-hidden
+      rounded-3xl
+      border border-pink-500/30
+      bg-gradient-to-b from-[#0a0015]/90 via-[#0a0015]/70 to-[#210018]/80
+      shadow-lg shadow-pink-500/25
+      p-6 md:p-8
+    "
+        >
           <div className="flex flex-col gap-4 text-base md:text-lg">
             <h2 className="text-2xl font-bold text-glow-orange">
               Create account
