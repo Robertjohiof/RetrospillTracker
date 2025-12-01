@@ -47,7 +47,9 @@ export default defineApp([
         userRoutes(createUserController()),
         route("getPopularGames", getPopularGames),
         route("getAllGames", getAllGames),
-        route("getSearchGames", getSearchGames),
+        route("getSearchGames", ({ request }) => {
+            return getSearchGames(request.url)
+        }),
         route("getGenres", getGenres),
         route("getReleaseDates", getReleaseDates),
         route("getConsoles", getConsoles),
