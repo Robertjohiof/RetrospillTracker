@@ -1,4 +1,5 @@
 import {hashPassword as hash, verifyPassword as verify} from "better-auth/crypto";
+import {commonPasswords} from "@features/auth/commonPasswords";
 
 export async function hashPassword(password: string):Promise<string> {
     try {
@@ -37,6 +38,10 @@ export function validatePasswordStrength(password:string): { isValid: boolean, e
 
     if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
         errors.push("Password must contain at least one special character");
+    }
+
+    if (commonPasswords.includes(password.toLowerCase())) {
+        errors.push("Password is too common and easy to guess");
     }
 
     return {
