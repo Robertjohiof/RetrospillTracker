@@ -18,8 +18,10 @@ export const users = sqliteTable("users", {
   profileBanner: text("profile_banner"),
   biography: text("biography"),
   isActive: integer("is_active", { mode: 'boolean' }).notNull(),
-  createdAt: text("created_at"),
-  updatedAt: text("updated_at").default(sql`(CURRENT_TIMESTAMP)`),
+        createdAt: integer("created_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
+        updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdateFn(
+            () => new Date()
+        ),
   roleId: integer("role_id")
     .notNull()
     .references(() => roles.id)
