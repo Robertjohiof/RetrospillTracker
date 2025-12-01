@@ -58,7 +58,7 @@ export default function Header() {
             Forum
           </a>
           {isAuthenticated && (
-            <a href="/profile" className="nav-link">
+            <a href="/profilepage/sell-mango" className="nav-link">
               Profile
             </a>
           )}

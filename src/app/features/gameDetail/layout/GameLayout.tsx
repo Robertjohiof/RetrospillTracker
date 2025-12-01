@@ -1,10 +1,15 @@
 import Hero from "@/app/shared/components/Hero";
 import { GameLayoutProps } from "../types/gameDetail";
 
+function formatRating(rating?: number | null) {
+  return rating ? `${rating.toFixed(0)}/100` : "No rating available";
+}
+
 export default function GameLayout({ data }: GameLayoutProps) {
   if(!data) {
     return <p>Laster spilldata...</p>
   }
+
   
   return (
     <>
@@ -49,7 +54,7 @@ export default function GameLayout({ data }: GameLayoutProps) {
 
               <p className="text-gray-300 text-sm font-bold">
                 Rating: <span className="text-yellow-400 text-sm font-bold">
-                  {data.game.rating.toFixed()}/100
+                  {formatRating(data.game.rating)}
                 </span>
               </p>
             )}
