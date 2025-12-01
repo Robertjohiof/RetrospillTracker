@@ -1,10 +1,10 @@
-import {db} from "@/db";
+import {getDatabase} from "@/db";
 import {and, eq} from "drizzle-orm";
 import {collectionEntries, collections, users} from "@/db/schema";
 import {createSuccessResponse} from "@/app/shared/lib/response";
 
 export async function fetchCollectionsByUser(userId: number, isBacklog: boolean = false): Promise<Response> {
-
+    const db = await getDatabase();
     const results = await db.query.collections.findMany({
         where: and(
             eq(users.userId, userId),
