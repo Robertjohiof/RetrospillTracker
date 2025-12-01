@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "904e5b36-d6eb-479a-b06a-ed863f7b09b6",
+  "id": "1c6e2386-77f3-4026-a5f3-adec9718847a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "collection_entries": {
@@ -655,18 +655,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "(CURRENT_TIMESTAMP)"
+          "autoincrement": false
         },
         "role_id": {
           "name": "role_id",
