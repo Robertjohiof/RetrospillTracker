@@ -1,6 +1,6 @@
 // src/db/index.ts
 import { drizzle, type DrizzleD1Database } from "drizzle-orm/d1";
-import {createRemoteAdapter, queryRemoteD1} from "@/db/lib/d1-proxy-server";
+import {createProxyD1Database} from "@/db/lib/d1-proxy-server";
 import * as schema from "./schema";
 
 const USE_REMOTE_PROXY = process.env.USE_REMOTE_DB === 'true';
@@ -30,7 +30,7 @@ export async function getDatabase(): Promise<DrizzleD1Database<typeof schema>> {
         return dbInstance;
     }
     if (USE_REMOTE_PROXY) {
-        dbInstance = drizzle(createRemoteAdapter(), { schema });
+        dbInstance = drizzle(createProxyD1Database(), { schema });
     }
     else {
         dbInstance = drizzle(await getWorkerEnv(), { schema });

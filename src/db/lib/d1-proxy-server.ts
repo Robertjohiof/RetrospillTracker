@@ -4,9 +4,10 @@ interface D1RemoteResponse {
     meta: any;
 }
 
+const PROXY_URL = process.env.D1_PROXY_URL;
+const API_KEY = process.env.D1_PROXY_API_KEY;
+
 export async function queryRemoteD1(sql: string, params: any[] = []): Promise<D1RemoteResponse> {
-    const PROXY_URL = process.env.D1_PROXY_URL;
-    const API_KEY = process.env.D1_PROXY_API_KEY;
 
     if (!PROXY_URL || !API_KEY) {
         throw new Error('D1 proxy server url or API key is not configured correctly.');
@@ -34,8 +35,29 @@ export async function queryRemoteD1(sql: string, params: any[] = []): Promise<D1
     };
 }
 
+export async function executeRemoteD1(sql: string, params: any[] = []): Promise<any> {
 
-export function createRemoteAdapter(): D1Database {
+    if (!PROXY_URL || !API_KEY) {
+        throw new Error('D1_PROXY_URL and D1_PROXY_API_KEY not configured');
+    }
+
+    const response = await fetch(`${PROXY_URL}/api/exec`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({ sql, params })
+    });
+
+    if (!response.ok) {
+        throw new Error(`D1 Proxy Error: ${response.statusText}`);
+    }
+
+    return response.json();
+}
+
+export function createProxyD1Database(): D1Database {
     return {
         prepare(sql: string) {
             const boundParams: any[] = [];
@@ -54,7 +76,7 @@ export function createRemoteAdapter(): D1Database {
                     };
                 },
                 async run() {
-                    return await queryRemoteD1(sql, boundParams);
+                    return await executeRemoteD1(sql, boundParams);
                 },
                 async raw() {
                     const result = await queryRemoteD1(sql, boundParams);
