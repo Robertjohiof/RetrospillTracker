@@ -4,6 +4,7 @@ import Login from "@/app/pages/Login";
 import { useState } from "react";
 import HeaderSearch from "./HeaderSearch";
 import MobileMenu from "../ui/MobileMenu";
+import Button from "@/app/shared/components/ui/Button";
 
 export default function Header() {
   // TODO: Backend kobler dette til ekte auth (f.eks. useAuth())
@@ -16,6 +17,11 @@ export default function Header() {
 
   function togglePop() {
     setSeen((prev) => !prev);
+  }
+
+  function handleLogout() {
+    // TODO: byttes ut med ekte logout-logikk
+    console.log("Log out clicked from Header");
   }
 
   return (
@@ -37,7 +43,7 @@ export default function Header() {
         </a>
       </div>
 
-      {/* MIDTEN: Søk – alltid i midten */}
+      {/* MIDTEN: Søk  */}
       <div className="flex justify-center basis-1/3 min-w-0">
         <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-lg">
           <HeaderSearch />
@@ -74,9 +80,17 @@ export default function Header() {
               className="h-8 w-8 sm:h-7 sm:w-7 md:h-8 md:w-8 rounded-full border border-white/20 shadow-md object-cover"
             />
 
-            <button className="btn-secondary text-xs sm:text-sm md:text-sm px-2 py-1 sm:px-3 hidden md:inline-flex">
-              Log out
-            </button>
+            <div className="hidden md:inline-flex">
+              <Button
+                type="button"
+                onClick={handleLogout}
+                variant="none"
+                size="none"
+                className="logout-btn"
+              >
+                Log out
+              </Button>
+            </div>
           </div>
         ) : (
           // ===== IKKE INNLOGGET VISNING =====
