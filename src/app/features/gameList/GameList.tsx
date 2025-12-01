@@ -10,7 +10,7 @@ export default function GameList({games, categoryTitle, loading}:{games:Game[], 
             {
                 loading ? <LoadingGame/> : games.map(
                 ({ id, title, imgUrl, description }) =>
-                    <GameCard key={id} title={title} imgUrl={imgUrl} altText={description}/>
+                    <GameCard key={id} title={title} id={id} imgUrl={imgUrl} altText={description}/>
                 )
             }
         </section>

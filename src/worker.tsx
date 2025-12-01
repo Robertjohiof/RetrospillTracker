@@ -20,9 +20,9 @@ import GameDetail from "./app/features/gameDetail/GameDetail";
 import SignUp from "./app/pages/SignUp";
 
 import {
-    getAllGames, getGames,
-    getPopularGames,
-    getSearchGames,
+    getAllGames, getConsoles, getGenres,
+    getPopularGames, getReleaseDates, 
+    getSearchGames, getGames
 } from "@features/api/game/gameService";
 import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
 import {userRoutes} from "@/app/shared/controllers/userRoutes";
@@ -48,6 +48,9 @@ export default defineApp([
         route("getPopularGames", getPopularGames),
         route("getAllGames", getAllGames),
         route("getSearchGames", getSearchGames),
+        route("getGenres", getGenres),
+        route("getReleaseDates", getReleaseDates),
+        route("getConsoles", getConsoles),
         route("GET/games/:id", ({ params })=>{
             return getGames(params.id)
         }),
