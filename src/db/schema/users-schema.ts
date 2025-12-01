@@ -12,6 +12,7 @@ export const users = sqliteTable("users", {
   userName: text("user_name").notNull().unique(),
   slug: text("slug").notNull().unique(),
   email: text("email").notNull().unique(),
+    passwordHash: text("password_hash").notNull(),
   firstName: text("first_name"),
   lastName: text("last_name"),
   profilePicture: text("profile_picture"),
@@ -44,5 +45,7 @@ export const userRelations = relations(users, ({ one, many }) => ({
 }))
 
 
-
+export type CreateUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
+
+export type SafeUser = Omit<User, "passwordHash">

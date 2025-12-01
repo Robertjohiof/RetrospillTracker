@@ -9,7 +9,7 @@ export const sessions = sqliteTable("sessions", {
     ipAddress: text("ip_address"),
     createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(CURRENT_TIMESTAMP)`),
     updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`(CURRENT_TIMESTAMP)`),
-    expiresAt: integer("expires_at", { mode: "timestamp" }),
+    expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
     revoked: integer("revoked", { mode: "boolean" })
 }
 , (table) => [
@@ -24,4 +24,5 @@ export const sessionsRelations = relations(sessions, ({ one }) => ({
     })
 }));
 
+export type CreateSession = typeof sessions.$inferInsert;
 export type Session = typeof sessions.$inferSelect;
