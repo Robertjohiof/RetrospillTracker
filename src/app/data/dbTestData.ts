@@ -21,7 +21,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-01-15T10:30:00.000Z"),
         updatedAt: new Date("2024-10-20T14:22:00.000Z"),
-        roleId: 1
+        roleId: 1,
+        lastLoginAt: null
     },
     {
         userId: 2,
@@ -37,7 +38,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-02-10T08:15:00.000Z"),
         updatedAt: new Date("2024-10-19T11:45:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 3,
@@ -53,7 +55,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-03-05T13:20:00.000Z"),
         updatedAt: new Date("2024-10-21T09:30:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 4,
@@ -69,7 +72,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-03-22T16:45:00.000Z"),
         updatedAt: new Date("2024-10-20T18:10:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 5,
@@ -85,7 +89,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-04-12T12:00:00.000Z"),
         updatedAt: new Date("2024-10-18T20:15:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 6,
@@ -101,7 +106,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-05-08T09:30:00.000Z"),
         updatedAt: new Date("2024-10-21T07:20:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 7,
@@ -117,7 +123,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-06-14T14:25:00.000Z"),
         updatedAt: new Date("2024-09-30T16:40:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 8,
@@ -133,7 +140,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-07-01T11:10:00.000Z"),
         updatedAt: new Date("2024-10-20T13:55:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 9,
@@ -149,7 +157,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-07-19T15:40:00.000Z"),
         updatedAt: new Date("2024-10-21T10:05:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 10,
@@ -165,7 +174,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-08-03T10:20:00.000Z"),
         updatedAt: new Date("2024-10-19T15:30:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     },
     {
         userId: 11,
@@ -181,7 +191,8 @@ export const dbUsers: User[] = [
         profilePicture: null,
         createdAt: new Date("2024-08-25T17:50:00.000Z"),
         updatedAt: new Date("2024-10-20T12:25:00.000Z"),
-        roleId: 2
+        roleId: 2,
+        lastLoginAt: null
     }
 ];
 

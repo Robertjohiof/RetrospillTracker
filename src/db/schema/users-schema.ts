@@ -19,7 +19,7 @@ export const users = sqliteTable("users", {
   profileBanner: text("profile_banner"),
   biography: text("biography"),
   isActive: integer("is_active", { mode: 'boolean' }).notNull(),
-        lastLoginAt: integer("last_login_at", { mode: "timestamp" }),
+    lastLoginAt: integer("last_login_at", { mode: "timestamp" }),
     createdAt: integer("created_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
     updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdateFn(
         () => new Date()
