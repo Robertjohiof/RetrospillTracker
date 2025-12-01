@@ -92,7 +92,7 @@ CREATE TABLE `users` (
 	`profile_picture` text,
 	`profile_banner` text,
 	`biography` text,
-	`isActive` integer NOT NULL,
+	`is_active` integer NOT NULL,
 	`created_at` text,
 	`updated_at` text DEFAULT (CURRENT_TIMESTAMP),
 	`role_id` integer NOT NULL,

@@ -22,7 +22,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className="relative z-10">
         <Header />
         <main className="max-w-7xl mx-auto bg-gradient-to-b from-blue-950/35 to-pink-500/35 px-4 py-8">
-          0{children}
+          {children}
         </main>
         <Footer />
       </div>

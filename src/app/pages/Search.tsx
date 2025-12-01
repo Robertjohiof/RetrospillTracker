@@ -1,74 +1,34 @@
 "use client";
 
-import GameCard from "@/app/features/gameCard/components/GameCard";
 import { React } from "rwsdk/client";
 import useSearchResults from "@features/gameSearch/hooks/useSearchResults";
-import Button from "../shared/components/ui/Button";
+import SearchForm from "./SearchForm";
+import SearchResults from "./SearchResults";
 
 export default function Search() {
+  const { games, handleSearchChange, handleFilterChange, onSubmit, loading, error, query } =
+    useSearchResults();
 
-  const {games, handleSearchChange, onSubmit, loading, error, query} = useSearchResults()
+  // Mapper data fra hooken til props som SearchResults forventer.
+  // Dette sikrer at alle properties har riktig type.
+  const searchResults = games.map((game) => ({
+      id: game.id,
+    title: game.title,
+    imgUrl: game.imgUrl ?? "/images/placeholder.png", // Sørger for at imgUrl alltid er en string
+    altText: game.title,
+  }));
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-10 text-cyan-300">
       {/* Filter-rad (deaktiverte drop-downs foreløpig) */}
       <div className="mb-10 flex flex-wrap items-end justify-center gap-4">
-        {/* Søk */}
-        <form onSubmit={onSubmit} className="flex items-end gap-2">
-          <div className="relative flex-1 min-w-[220px]">
-            <input
-              value={query}
-              onChange={handleSearchChange}
-              placeholder="Search games"
-              className="w-full rounded-lg border border-white/10 bg-white/5 pl-10 pr-3 py-3 text-white placeholder-white/40 outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500/60 focus:shadow-[0_0_10px_rgba(255,77,216,0.5)] transition-all"
-            />
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 opacity-70">
-              🔍
-            </span>
-          </div>
-
-          <Button
-            type="submit"
-            variant="glow"
-            size="none"
-            className="h-[48px] rounded-md px-5"
-          >
-            Search
-          </Button>
-        </form>
-
-        {/* Genres */}
-        <div className="flex flex-col w-[150px]">
-          <label className="mb-1 block text-sm text-cyan-400">Genres</label>
-          <select
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
-            disabled
-          >
-            <option>Any</option>
-          </select>
-        </div>
-
-        {/* Year */}
-        <div className="flex flex-col w-[120px]">
-          <label className="mb-1 block text-sm text-cyan-400">Year</label>
-          <select
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
-            disabled
-          >
-            <option>Any</option>
-          </select>
-        </div>
-
-        {/* Console */}
-        <div className="flex flex-col w-[150px]">
-          <label className="mb-1 block text-sm text-cyan-400">Console</label>
-          <select
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-3"
-            disabled
-          >
-            <option>Any</option>
-          </select>
-        </div>
+        <SearchForm
+          query={query}
+          onQueryChange={handleSearchChange}
+          onFilterChange={handleFilterChange}
+          onSubmit={onSubmit}
+          isLoading={loading}
+        />
 
         {/* More filters */}
         <div className="flex flex-col w-[160px]">
@@ -90,28 +50,11 @@ export default function Search() {
       {error && <p className="text-red-400">{error}</p>}
 
       {/* Resultater */}
-      {!loading && !error && (
-        <>
-          <h2 className="mb-4 text-xl font-bold text-cyan-400">
-            Results {games.length ? `(${games.length})` : ""}
-          </h2>
-
-          {games.length === 0 ? (
-            <p>No games found.</p>
-          ) : (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-              {games.map((game) => (
-                <GameCard
-                  key={game.id ?? game.slug}
-                  title={game.title}
-                  imgUrl={game.imgUrl ?? "/images/placeholder.png"}
-                  altText={game.title}
-                />
-              ))}
-            </div>
-          )}
-        </>
-      )}
+      <div className="mt-8">
+        {!error && (
+          <SearchResults results={searchResults} isLoading={loading} />
+        )}
+      </div>
     </section>
   );
 }

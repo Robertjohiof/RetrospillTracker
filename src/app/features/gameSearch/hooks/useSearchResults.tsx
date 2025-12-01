@@ -2,25 +2,50 @@
 import {FormEvent, useEffect, useRef, useState} from "react";
 import {Game} from "@/app/shared/types/game"
 import {ChangeEvent} from "react";
-import {Result} from "@/app/shared/lib/response";
+import {Errors, Result} from "@/app/shared/lib/response";
 import {API_ENDPOINT} from "@/app/shared/config/apiPaths";
 import {IGDBData, igdbToGame} from "@/app/shared/utils/igdbToGame";
+import {Filter} from "@features/gameSearch/type/filter";
+
+const emptyFilter: Filter = {
+    genres: "",
+    year: {
+        start: null,
+        end: null,
+    },
+    platform: "",
+    isSet: false,
+}
 
 export default function useSearchResults(){
     const [games, setGames] = useState<Game[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [query, setQuery] = useState<string>("");
     const [error, setError] = useState<string|null>(null);
+    const [filter, setFilter] = useState<Filter>(emptyFilter);
 
     function handleSearchChange(e:ChangeEvent<HTMLInputElement>){
         setQuery(e.target.value)
+    }
+
+    function handleFilterChange(e:ChangeEvent<HTMLSelectElement>, filterType:string){
+        if (filterType === "year"){
+            setFilter((prev)=>({...prev, [filterType]: JSON.parse(e.target.value), isSet: true}))
+            return
+        }
+        setFilter((prev)=>({...prev, [filterType]: e.target.value, isSet: true}))
     }
 
     async function onSubmit(event:FormEvent<HTMLFormElement>): Promise<void>{
         setError(null)
         event.preventDefault()
         setLoading(true)
-        const result:Result<Game[]> = await (query.trim() ? searchFetch(query) : fetchAll())
+        let queryFilter = query
+        if (filter.isSet){
+            const filterString = encodeURIComponent(JSON.stringify(filter))
+            queryFilter = `${query}&filter=${filterString}`
+        }
+        const result:Result<Game[]> = await (filter.isSet ? searchFetch(queryFilter) : searchFetch(queryFilter))
         if (!result.success){
             setError(result.error)
         }
@@ -49,7 +74,11 @@ export default function useSearchResults(){
         try {
             const response = await fetch(`${API_ENDPOINT.GET_SEARCH_GAMES}${query}`);
             if(!response.ok){
-                return {success: false, error: response.statusText};
+                return {
+                    success: false,
+                    errorCode: Errors.NOT_FOUND,
+                    error: response.statusText
+                };
             }
             const data = await response.json();
             const gamesData = igdbToGame(data as IGDBData)
@@ -57,7 +86,10 @@ export default function useSearchResults(){
         }
         catch(error){
             console.warn(error)
-            return {success: false, error: "Something went wrong"};
+            return {
+                success: false,
+                errorCode: Errors.BAD_REQUEST,
+                error: "Something went wrong"};
         }
     }
 
@@ -65,7 +97,11 @@ export default function useSearchResults(){
         try {
             const response = await fetch(`${API_ENDPOINT.GET_ALL_GAMES}`)
             if(!response.ok){
-                return {success: false, error: response.statusText};
+                return {
+                    success: false,
+                    errorCode: Errors.NOT_FOUND,
+                    error: response.statusText
+                };
             }
             const data = await response.json();
             const gamesData = igdbToGame(data as IGDBData)
@@ -73,7 +109,11 @@ export default function useSearchResults(){
         }
         catch(error){
             console.warn(error)
-            return {success: false, error: "Something went wrong"};
+            return {
+                success: false,
+                errorCode: Errors.BAD_REQUEST,
+                error: "Something went wrong"
+            };
         }
     }
 
@@ -82,5 +122,5 @@ export default function useSearchResults(){
     }, []);
 
 
-    return {error, games, loading, handleSearchChange, onSubmit, query};
+    return {error, games, loading, handleSearchChange, handleFilterChange, onSubmit, query};
 }

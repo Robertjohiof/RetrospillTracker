@@ -3,6 +3,7 @@
 import { requestInfo } from "rwsdk/worker";
 import {QUERY} from "@/app/shared/config/IGDBQueries";
 import {igdbFetch} from "@/app/shared/utils/igdbFetch";
+import {Filter} from "@features/gameSearch/type/filter";
 
 // TODO: add logic for doing operations for getting games from the repository
 export function listGames() {
@@ -61,11 +62,43 @@ export async function getSearchGames() {
   const { request } = requestInfo;
   const url = new URL(request.url);
   let search = url.searchParams.get("search");
+  const filterParams = url.searchParams.get("filter");
+
+  let filters:Filter = {
+      genres: "",
+      year: {
+          start: null,
+          end: null,
+      },
+      platform: "",
+      isSet: false,
+  };
+  if (filterParams) {
+      filters = JSON.parse(decodeURIComponent(filterParams));
+  }
 
   //TODO: make proper validation
   const safeSearch = (search ?? "").replace(/"/g, '\\"');
 
-  const query = QUERY.SEARCH_GAMES(safeSearch);
+  const query = QUERY.SEARCH_GAMES(safeSearch,filters);
 
   return await igdbFetch(query)
 }
+
+export async function getGenres() {
+    return await igdbFetch("fields name;limit 300;","https://api.igdb.com/v4/genres");
+}
+
+export async function getReleaseDates(){
+    return await igdbFetch("fields y;where y != null;sort y asc;limit 300;","https://api.igdb.com/v4/release_dates");
+}
+
+export async function getConsoles(){
+    return await igdbFetch("fields name;where platform_type = 1;sort name asc;limit 300;", "https://api.igdb.com/v4/platforms");
+}
+export async function getGames(id:string) {
+    const query = QUERY.SEARCH_GAME(id);
+
+    return await igdbFetch(query)
+}
+
