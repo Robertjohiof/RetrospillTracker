@@ -36,7 +36,7 @@ export default function GameCard(props: GameCardProps) {
             alt={altText}
             className="
               w-full
-              aspect-[3/4]        
+              aspect-3/4        
               object-cover
               rounded-md
               bg-black/30

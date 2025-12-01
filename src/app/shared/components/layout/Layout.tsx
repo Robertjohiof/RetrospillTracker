@@ -15,13 +15,13 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Gradient over bakgrunn for kontrast */}
       <div
-        className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"
+        className="pointer-events-none fixed inset-0 z-0 bg-linear-to-b from-black/40 via-black/30 to-black/60"
         aria-hidden="true"
       />
 
       <div className="relative z-10">
         <Header />
-        <main className="max-w-7xl mx-auto bg-gradient-to-b from-blue-950/35 to-pink-500/35 px-4 py-8">
+        <main className="max-w-7xl mx-auto bg-linear-to-b from-blue-950/35 to-pink-500/35 px-4 py-8">
           {children}
         </main>
         <Footer />
