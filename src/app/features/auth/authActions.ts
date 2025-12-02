@@ -1,3 +1,5 @@
+"use server"
+
 import { authService } from "./authService";
 import { setSessionCookie, clearSessionCookie } from "@features/auth/util/session";
 import { Errors } from "@/app/shared/types/errors";
@@ -18,11 +20,11 @@ export async function register(
 > {
     try {
         const credentials = {
-            userName: formData.get("username") as string,
+            userName: formData.get("userName") as string,
             email: formData.get("email") as string,
             password: formData.get("password") as string,
-            firstName: formData.get("firstname") as string,
-            lastName: formData.get("lastname") as string,
+            firstName: formData.get("firstName") as string,
+            lastName: formData.get("lastName") as string,
             biography: formData.get("biography") as string,
             profilePicture: formData.get("profilePicture") as string,
             profileBanner: formData.get("profileBanner") as string,
@@ -75,7 +77,7 @@ export async function login(
 > {
     try {
         const credentials = {
-            userName: formData.get("username") as string,
+            userName: formData.get("userName") as string,
             password: formData.get("password") as string,
         };
 

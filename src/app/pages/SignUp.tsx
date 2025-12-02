@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import type { FormEvent } from "react";
 import type { SignUpPayload } from "@/app/features/signUp/types/signuptypes";
+import { register } from "@features/auth/authActions"
 import Button from "@/app/shared/components/ui/Button";
 
 export default function SignUp() {
+    const { pending } = useFormStatus();
   const SIGNUP_ENDPOINT = "/api/v1/auth/signup"; // OBS:: Denne er ikke satt opp enda.
 
   const [generalError, setGeneralError] = useState<string | null>(null);
