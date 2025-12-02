@@ -1,3 +1,6 @@
+import {clearSessionCookie, setSessionCookie} from "@features/auth/util/session";
+import {Errors} from "@/app/shared/types/errors";
+
 const baseHeaders = {
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
@@ -8,7 +11,7 @@ const baseHeaders = {
         "Content-Type, Authorization, X-Requested-With",
 }
 
-interface pagination{
+export interface pagination{
     limit: number;
     page: number;
     pages: number;
@@ -18,38 +21,6 @@ interface pagination{
 }
 
 
-
-export const Errors = {
-    INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
-    NOT_FOUND: "NOT_FOUND",
-    BAD_REQUEST: "BAD_REQUEST",
-    FORBIDDEN: "FORBIDDEN",
-    NOT_UNIQUE: "NOT_UNIQUE",
-    RATE_LIMITED: "RATE_LIMITED",
-    METHOD_NOT_ALLOWED: "METHOD_NOT_ALLOWED",
-    UNAUTHORIZED: "UNAUTHORIZED",
-    NOT_IMPLEMENTED: "NOT_IMPLEMENTED",
-} as const;
-
-export type ErrorCode = keyof typeof Errors;
-
-interface error{
-    error: ErrorCode;
-    message: string;
-}
-
-export type Success<T> = {
-    success: true,
-    data: T
-}
-
-export type Failure = {
-    success: false,
-    errorCode: ErrorCode,
-    error: string
-}
-
-export type Result<T> = Success<T> | Failure
 
 export function createSuccessResponse<T>(data:T, pagination?:pagination):Response {
     const response = {
@@ -73,3 +44,59 @@ export function createErrorResponse(errorMessage:string, status:number):Response
         headers: baseHeaders,
     })
 }
+
+export function createCookieResponse(sessionId: string): Response {
+    const cookie = setSessionCookie(sessionId);
+
+    return new Response(null, {
+        status: 200,
+        headers: {
+            "Set-Cookie": cookie,
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+        },
+    })
+}
+
+export function removeCookieResponse(): Response{
+    const cookie = clearSessionCookie()
+    return new Response(null, {
+        status: 200,
+        headers: {
+            "Set-Cookie": cookie,
+        }
+    })
+}
+
+export function createAuthenticationResponse() {
+    return new Response(
+        JSON.stringify({
+            success: false,
+            error: {
+                code: Errors.UNAUTHORIZED,
+                message: "Authentication required",
+            },
+        }),
+        {
+            status: 401,
+            headers: { "Content-Type": "application/json" },
+        }
+    );
+}
+
+export function createAuthorizationResponse() {
+    return new Response(
+        JSON.stringify({
+            success: false,
+            error: {
+                code: Errors.FORBIDDEN,
+                message: "Insufficient permissions",
+            },
+        }),
+        {
+            status: 403,
+            headers: { "Content-Type": "application/json" },
+        }
+    );
+}
+

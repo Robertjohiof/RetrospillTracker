@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Button from "@/app/shared/components/ui/Button";
 
 interface MobileMenuProps {
   isAuthenticated: boolean;
@@ -9,7 +10,6 @@ interface MobileMenuProps {
 export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
 
-  // TODO: backend kobler dette til ekte logout
   function handleLogout() {
     console.log("Log out clicked (mobile menu)");
     setOpen(false);
@@ -31,11 +31,25 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-[#0a0015] border border-white/10 shadow-lg z-30">
-          <nav className="flex flex-col gap-3 p-4 text-base font-semibold">
+        <div className="absolute right-0 mt-2 w-auto min-w-[12rem] px-4 py-2 rounded-2xl bg-[#0a0015] border border-pink-500/20 shadow-lg z-30">
+          <nav className="flex flex-col gap-3 pt-2 text-base font-semibold tracking-wide">
+            <style>{`
+              .menu-item {
+                padding: 6px 12px;
+                border-radius: 12px;
+                transition: 0.25s ease;
+              }
+              .menu-item:hover {
+                background: rgba(255, 0, 120, 0.12);
+                border: 1px solid rgba(255, 0, 160, 0.6);
+                box-shadow: 0 0 14px rgba(255, 0, 140, 0.85);
+                color: #ff80d0 !important;
+              }
+            `}</style>
+
             <a
               href="/"
-              className="nav-link text-orange-500 hover:text-pink-400 transition"
+              className="menu-item text-orange-500"
               onClick={() => setOpen(false)}
             >
               Home
@@ -43,7 +57,7 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
 
             <a
               href="/search"
-              className="nav-link text-orange-500 hover:text-pink-400 transition"
+              className="menu-item text-orange-500"
               onClick={() => setOpen(false)}
             >
               Browse
@@ -51,7 +65,7 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
 
             <a
               href="/forum"
-              className="nav-link text-orange-500 hover:text-pink-400 transition"
+              className="menu-item text-orange-500"
               onClick={() => setOpen(false)}
             >
               Forum
@@ -60,23 +74,25 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
             {isAuthenticated && (
               <a
                 href="/profile"
-                className="nav-link text-orange-500 hover:text-pink-400 transition"
+                className="menu-item text-orange-500"
                 onClick={() => setOpen(false)}
               >
                 Profile
               </a>
             )}
 
-            {/* Log out inside burger menu on small screens */}
+            {/* Log out  */}
             {isAuthenticated && (
               <div className="mt-3 border-t border-white/10 pt-3">
-                <button
+                <Button
                   type="button"
                   onClick={handleLogout}
-                  className="w-full rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-100 border border-white/10 hover:bg-slate-800"
+                  variant="glow"
+                  size="md"
+                  className="logout-btn w-full justify-center"
                 >
                   Log out
-                </button>
+                </Button>
               </div>
             )}
           </nav>

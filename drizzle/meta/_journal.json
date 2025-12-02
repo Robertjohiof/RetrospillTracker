@@ -8,6 +8,34 @@
       "when": 1762900197435,
       "tag": "0000_gifted_magma",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1764593954061,
+      "tag": "0001_empty_power_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1764599706519,
+      "tag": "0002_empty_lord_hawal",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1764612732701,
+      "tag": "0003_neat_talon",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1764629864030,
+      "tag": "0004_wise_meggan",
+      "breakpoints": true
     }
   ]
 }

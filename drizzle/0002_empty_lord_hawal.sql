@@ -93,8 +93,8 @@ CREATE TABLE `users` (
 	`profile_banner` text,
 	`biography` text,
 	`is_active` integer NOT NULL,
-	`created_at` text,
-	`updated_at` text DEFAULT (CURRENT_TIMESTAMP),
+	`created_at` integer NOT NULL,
+	`updated_at` integer,
 	`role_id` integer NOT NULL,
 	FOREIGN KEY (`role_id`) REFERENCES `roles`(`id`) ON UPDATE no action ON DELETE no action
 );
