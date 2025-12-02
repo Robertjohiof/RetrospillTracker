@@ -1,7 +1,6 @@
 import { defineApp } from "rwsdk/worker";
 import { layout, prefix, render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
-import { Home } from "@/app/pages/Home";
 
 import { runCustomSeed } from "./db/runCustomSeed";
 import HomePage from "./app/pages/HomePage";
@@ -11,7 +10,6 @@ import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";
 
 import Search from "./app/pages/Search";
-import Browse from "./app/pages/Browse";
 import Forum from "./app/pages/Forum";
 import Login from "./app/pages/Login";
 import Layout from "@/app/shared/components/layout/Layout";
