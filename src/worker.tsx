@@ -99,6 +99,19 @@ export default defineApp([
                 }
 
                 return createCookieResponse(result.data.session.sessionId)
+            }),
+            route("/coolkid", async (ctx)=> {
+                const result = await authService.register({
+                    biography: "coolkid dude",
+                    email: "newCoolKid@cool.no",
+                    firstName: "cooldude",
+                    lastName: "dudeiscool",
+                    password: "Torep8Spore?",
+                    profileBanner: null,
+                    profilePicture: null,
+                    userName: "Coolkid40"
+                })
+                console.log(result)
             })
         ])
     ]),

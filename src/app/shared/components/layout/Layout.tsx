@@ -16,7 +16,7 @@ export default async function Layout({ children, requestInfo }: LayoutProps) {
 
     return (
         <AuthProvider initialUser={user}>
-            // isolate for at z-index fungerer litt mer smooth
+            {/* isolate for at z-index fungerer litt mer smooth*/}
             <div className="min-h-dvh bg-[#0a0015] relative overflow-x-hidden isolate">
               {/* Låst bakgrunn, for parallax effekt*/}
               <div
