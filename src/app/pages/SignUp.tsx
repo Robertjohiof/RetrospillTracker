@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { FormEvent } from "react";
 import type { SignUpPayload } from "@/app/features/signUp/types/signuptypes";
 import Button from "@/app/shared/components/ui/Button";
@@ -7,10 +8,14 @@ import Button from "@/app/shared/components/ui/Button";
 export default function SignUp() {
   const SIGNUP_ENDPOINT = "/api/v1/auth/signup"; // OBS:: Denne er ikke satt opp enda.
 
-  async function onSignup(payload: SignUpPayload) {
+  const [generalError, setGeneralError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function onSignup(payload: SignUpPayload): Promise<boolean> {
     const formData = new FormData();
 
-    // Tekst felt
+    // Tekstfelt
     formData.append("firstName", payload.firstName);
     formData.append("lastName", payload.lastName);
     formData.append("userName", payload.userName);
@@ -34,20 +39,36 @@ export default function SignUp() {
       });
 
       if (!response.ok) {
-        const errorText = await response.text().catch(() => "Unknown error");
+        const errorText = await response.text().catch(() => "");
         console.error("Signup failed:", response.status, errorText);
-        return;
+        setGeneralError(
+          "Signup failed. Please try again later when the service is available."
+        );
+        setSuccessMessage(null);
+        return false;
       }
 
       const data = await response.json().catch(() => null);
       console.log("Signup success! Response from backend:", data);
+
+      setSuccessMessage("Account created successfully! 🎉");
+      setGeneralError(null);
+      return true;
     } catch (error) {
       console.error("Network error during signup:", error);
+      setGeneralError(
+        "Network error. Please check your connection and try again."
+      );
+      setSuccessMessage(null);
+      return false;
     }
   }
 
   async function handleSignup(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    setGeneralError(null);
+    setSuccessMessage(null);
 
     const formData = new FormData(e.currentTarget);
 
@@ -73,9 +94,16 @@ export default function SignUp() {
     };
 
     console.log("Signup payload:", payload);
-    await onSignup(payload);
-    // Hvis du vil resette feltene etter vellykket submit:
-    // e.currentTarget.reset();
+
+    setIsSubmitting(true);
+    try {
+      const ok = await onSignup(payload);
+      if (ok) {
+        e.currentTarget.reset();
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -87,19 +115,33 @@ export default function SignUp() {
       <section className="flex justify-center px-4 py-10">
         <div
           className="
-      w-full max-w-xl
-      overflow-hidden
-      rounded-3xl
-      border border-pink-500/30
-      bg-gradient-to-b from-[#0a0015]/90 via-[#0a0015]/70 to-[#210018]/80
-      shadow-lg shadow-pink-500/25
-      p-6 md:p-8
-    "
+            w-full max-w-xl
+            overflow-hidden
+            rounded-3xl
+            border border-pink-500/30
+            bg-gradient-to-b from-[#0a0015]/90 via-[#0a0015]/70 to-[#210018]/80
+            shadow-lg shadow-pink-500/25
+            p-6 md:p-8
+          "
         >
           <div className="flex flex-col gap-4 text-base md:text-lg">
             <h2 className="text-2xl font-bold text-glow-orange">
               Create account
             </h2>
+
+            {/* Success message */}
+            {successMessage && (
+              <div className="rounded-md bg-green-500/20 border border-green-500/50 p-3 text-green-200">
+                {successMessage}
+              </div>
+            )}
+
+            {/* General error message */}
+            {generalError && (
+              <div className="rounded-md bg-red-500/20 border border-red-500/50 p-3 text-red-200">
+                {generalError}
+              </div>
+            )}
 
             <form className="flex flex-col gap-4" onSubmit={handleSignup}>
               {/* First name */}
@@ -218,8 +260,9 @@ export default function SignUp() {
                   variant="glow"
                   size="lg"
                   className="w-full rounded-md text-xl"
+                  disabled={isSubmitting}
                 >
-                  Sign up
+                  {isSubmitting ? "Creating account..." : "Sign up"}
                 </Button>
               </div>
             </form>
