@@ -40,4 +40,3 @@ export async function getDatabase(): Promise<DrizzleD1Database<typeof schema>> {
 }
 
 export type Database = DrizzleD1Database<typeof schema>;
-export const db = await getDatabase();

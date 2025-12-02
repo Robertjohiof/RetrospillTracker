@@ -12,16 +12,18 @@ export const users = sqliteTable("users", {
   userName: text("user_name").notNull().unique(),
   slug: text("slug").notNull().unique(),
   email: text("email").notNull().unique(),
+    passwordHash: text("password_hash").notNull(),
   firstName: text("first_name"),
   lastName: text("last_name"),
   profilePicture: text("profile_picture"),
   profileBanner: text("profile_banner"),
   biography: text("biography"),
   isActive: integer("is_active", { mode: 'boolean' }).notNull(),
-        createdAt: integer("created_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
-        updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdateFn(
-            () => new Date()
-        ),
+    lastLoginAt: integer("last_login_at", { mode: "timestamp" }),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
+    updatedAt: integer("updated_at", { mode: "timestamp" }).$onUpdateFn(
+        () => new Date()
+    ),
   roleId: integer("role_id")
     .notNull()
     .references(() => roles.id)
@@ -44,5 +46,8 @@ export const userRelations = relations(users, ({ one, many }) => ({
 }))
 
 
-
+export type CreateUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
+export type UserRole = 1 | 2 | 3
+
+export type SafeUser = Omit<User, "passwordHash">

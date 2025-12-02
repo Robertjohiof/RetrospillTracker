@@ -1,6 +1,5 @@
 "use server";
 
-import { requestInfo } from "rwsdk/worker";
 import {QUERY} from "@/app/shared/config/IGDBQueries";
 import {igdbFetch} from "@/app/shared/utils/igdbFetch";
 import {Filter} from "@features/gameSearch/type/filter";
@@ -58,9 +57,8 @@ export async function getAllGames() {
   return await igdbFetch(query)
 }
 
-export async function getSearchGames() {
-  const { request } = requestInfo;
-  const url = new URL(request.url);
+export async function getSearchGames(requestUrl: string) {
+  const url = new URL(requestUrl);
   let search = url.searchParams.get("search");
   const filterParams = url.searchParams.get("filter");
 
