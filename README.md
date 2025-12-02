@@ -34,7 +34,7 @@ npm run dev
 2. Terminer applikasjonen, og kjør følgende kommandoer i terminalen
 
 ```bash
-pnpm migrate:nev
+pnpm migrate:new
 pnpm migrate:dev
 ```
 
