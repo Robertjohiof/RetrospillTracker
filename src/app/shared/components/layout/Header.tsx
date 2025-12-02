@@ -5,23 +5,33 @@ import { useState } from "react";
 import HeaderSearch from "./HeaderSearch";
 import MobileMenu from "../ui/MobileMenu";
 import Button from "@/app/shared/components/ui/Button";
+import {useAuth} from "@features/auth/context/AuthProvider";
+import {isUser} from "@features/auth/middleware/roleGuard";
+import {logout} from "@features/auth/authActions";
+import {navigate} from "rwsdk/client";
 
 export default function Header() {
-  // TODO: Backend kobler dette til ekte auth (f.eks. useAuth())
-  const mockUser: { username: string } | null = {
-    username: "RetroPlayer", // sett til null for å teste ikke-innlogget
-  };
+  const { isAuthenticated, user } = useAuth()
 
-  const isAuthenticated = !!mockUser;
+    const userIsAuthenticated = isUser(user)
+
+    console.log(user);
+
   const [seen, setSeen] = useState(false);
 
   function togglePop() {
     setSeen((prev) => !prev);
   }
 
-  function handleLogout() {
-    // TODO: byttes ut med ekte logout-logikk
-    console.log("Log out clicked from Header");
+  async function handleLogout() {
+      try {
+          const response = await logout()
+          if (response.success) {
+              navigate("/")
+          }
+      } catch (error) {
+          console.error("Logout failed:", error)
+      }
   }
 
   return (
@@ -69,7 +79,7 @@ export default function Header() {
         </nav>
 
         {/* Auth-område */}
-        {isAuthenticated && mockUser ? (
+        {isAuthenticated && user ? (
           <div className="flex items-center justify-end gap-2 sm:gap-3 min-w-0">
             <img
               src="/images/user_logo1.png"
@@ -92,13 +102,18 @@ export default function Header() {
         ) : (
           // ===== IKKE INNLOGGET VISNING =====
           <>
-            <button
+              {/*
+              <button
               onClick={togglePop}
               className="nav-link font-medium text-sm sm:text-base"
             >
               Login
             </button>
             {seen && <Login toggle={togglePop} />}
+              */}
+              <a href="/login" className="nav-link font-medium text-sm sm:text-base">
+                  Login
+              </a>
 
             <span className="text-glow-orange text-xl sm:text-2xl -mx-1 hidden xs:inline">
               /
