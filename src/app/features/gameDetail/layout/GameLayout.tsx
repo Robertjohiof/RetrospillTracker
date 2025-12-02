@@ -1,3 +1,4 @@
+"use client";
 import Hero from "@/app/shared/components/Hero";
 import { GameLayoutProps } from "../types/gameDetail";
 
@@ -19,11 +20,11 @@ export default function GameLayout({ data }: GameLayoutProps) {
       />
 
       <section className="main-game-detail bg-primary-light min-h-screen p-6">
-        <article className="headline bg-primary p-4 md:flex gap-6 rounded-lg shadow-lg">
+        <article className="headline bg-primary p-4 flex flex-col md:flex-row items-center md:items-start gap-6 rounded-lg shadow-lg">
           <img
             src={data.game.coverImageUrl || "/images/placeholderGame.png"}
             alt={data.game.title}
-            className="w-64 h-80 object-cover rounded-md shadow-md hover:scale-105"
+            className="w-100 h-auto object-cover rounded-md shadow-md hover:scale-105"
             loading="lazy"
           />
 
@@ -35,12 +36,12 @@ export default function GameLayout({ data }: GameLayoutProps) {
           
             <div className="flex flex-wrap gap-2 mb-2">
               {data.genres.map((genre) => (
-                <span key={genre} className="text-xs bg-black/20 px-2 py-1 rounded-md">
+                <span key={genre} className="text-xs text-gray-300 font-bold px-2 py-1 rounded-md">
                   {genre}
                 </span>
               ))}
               {data.platforms.map((platform) => (
-                <span key={platform} className="text-xs bg-black/20 px-2 py-1 rounded-md">
+                <span key={platform} className="text-xs text-gray-300 font-bold px-2 py-1 rounded-md">
                   {platform}
                 </span>
               ))}
@@ -58,6 +59,7 @@ export default function GameLayout({ data }: GameLayoutProps) {
                 </span>
               </p>
             )}
+            <p>{data.created_at}</p>
           </div>
         </article>
 

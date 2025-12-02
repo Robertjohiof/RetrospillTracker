@@ -19,6 +19,11 @@ export function ProfileLayout({ data, loading, error, search, setSearch}: Profil
   const user = data?.user;
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
 
+  const filteredSearch: UserGame[] =
+    data?.userGames.filter((game) =>
+      game.title.toLowerCase().includes(search.toLowerCase())
+    ) ?? [];
+
   const filteredGames: UserGame[] =
     statusFilter && data?.userGames
       ? data.userGames.filter((game) => game.status === statusFilter)
@@ -34,9 +39,9 @@ export function ProfileLayout({ data, loading, error, search, setSearch}: Profil
         <span className="h-7">
           <Hero imageUrl="/images/gameover.png" imageAlt="Hero banner that says Game Over" />
         </span>
-        <span>
+        {/* <span>
           <NavigationTemp />
-        </span>
+        </span> */}
       </section>
 
       <section className="bg-primary-light grid grid-cols-1 md:grid-cols-3 grid-rows-4 md:grid-rows-3 gap-3 p-3">
@@ -58,7 +63,7 @@ export function ProfileLayout({ data, loading, error, search, setSearch}: Profil
               <p className="font-press text-white text-[10px]">"{user?.biography}!"</p>
             </div>
             <span className="w-20 md:w-40 self-center rounded-full bg-white">
-              <img src="images/avatartest.png" alt="Avatar picture" />
+              <img src="/images/avatartest.png" alt="Avatar picture" />
             </span>
           </section>
           
@@ -71,6 +76,15 @@ export function ProfileLayout({ data, loading, error, search, setSearch}: Profil
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
+            <span className="text-white text-xs mt-2">
+              {filteredSearch.length > 0 ? (
+                filteredSearch.map((g) => (
+                  <div key={g.gameId}>{g.title}</div>
+                ))
+              ) : (
+                <p className="text-gray-400">Ingen treff</p>
+              )}
+            </span>
           </section>
         </article>
         
