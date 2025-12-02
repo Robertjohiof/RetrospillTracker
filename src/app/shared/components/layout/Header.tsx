@@ -60,9 +60,6 @@ export default function Header() {
           <a href="/search" className="nav-link">
             Browse
           </a>
-          <a href="/forum" className="nav-link">
-            Forum
-          </a>
 
           {isAuthenticated && (
             <a href="/profile" className="nav-link">
