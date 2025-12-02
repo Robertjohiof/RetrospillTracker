@@ -43,7 +43,7 @@ pnpm migrate:dev
 pnpm dev
 ```
 
-5. Gå til http://localhost:5173/seed i nettleseren for å populere databasen med testdata.
+4. Gå til http://localhost:5173/seed i nettleseren for å populere databasen med testdata.
 
 ---
 ## Prosjektmedlemmer
