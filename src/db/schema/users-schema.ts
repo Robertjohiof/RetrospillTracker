@@ -48,5 +48,6 @@ export const userRelations = relations(users, ({ one, many }) => ({
 
 export type CreateUser = typeof users.$inferInsert;
 export type User = typeof users.$inferSelect;
+export type UserRole = 1 | 2 | 3
 
 export type SafeUser = Omit<User, "passwordHash">

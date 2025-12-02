@@ -5,7 +5,7 @@ import { Home } from "@/app/pages/Home";
 
 import { runCustomSeed } from "./db/runCustomSeed";
 import HomePage from "./app/pages/HomePage";
-import { User, users } from "@/db/schema";
+import {SafeUser, Session} from "@/db/schema";
 import { setCommonHeaders } from "./app/headers";
 import { env } from "cloudflare:workers";
 import { drizzle } from "drizzle-orm/d1";
@@ -27,6 +27,7 @@ import {
 import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
 import {userRoutes} from "@/app/shared/controllers/userRoutes";
 import {createUserController} from "@/app/shared/controllers/userController";
+import {Database} from "@/db";
 
 // ----------- Types -----------
 export interface Env {
@@ -34,7 +35,9 @@ export interface Env {
 }
 
 export type AppContext = {
-  user: User | undefined;
+    database: Database
+  user: SafeUser | undefined | null;
+    session: Session | null;
   authUrl: string;
 };
 
