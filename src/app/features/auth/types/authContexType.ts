@@ -1,19 +1,21 @@
-import {LoginCredentials, RegisterCredentials} from "@features/auth/types/credentials";
 import {User, SafeUser} from "@/db/schema/users-schema"
 import {Session} from "@/db/schema/sessions-schema"
+import {ReactNode} from "react";
 
 export type AuthContexType = {
-    user: User|null,
-    login: (loginCredentials: LoginCredentials) => Promise<void>,
-    logout: () => Promise<void>,
-    register: (registerCredentials:RegisterCredentials) => Promise<void>,
-    authError: string|null,
-    isLoading: boolean,
-    isLoggedIn: boolean,
-    isLoaded: boolean,
+    user: SafeUser|null,
+    isAuthenticated: boolean,
+    isAdmin: boolean,
+    login: (user: SafeUser) => void,
+    logout: () => void,
 }
 
 export type AuthContext = {
     user: SafeUser | null,
     session: Session | null,
+}
+
+export type AuthProviderProps = {
+    children: ReactNode,
+    initialUser: SafeUser | null,
 }
