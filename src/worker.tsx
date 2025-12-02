@@ -27,7 +27,11 @@ import {
 import { fetchCollectionsByUser } from "@/app/shared/repository/userCollectionsRepository";
 import {userRoutes} from "@/app/shared/controllers/userRoutes";
 import {createUserController} from "@/app/shared/controllers/userController";
-import {Database} from "@/db";
+import {Database, getDatabase} from "@/db";
+import {authenticationMiddleware} from "@features/auth/middleware/authenticationMiddleware";
+import {RegisterDTOSchema} from "@features/auth/types/authDtos";
+import {createCookieResponse, createErrorResponse} from "@/app/shared/lib/response";
+import {authService} from "@features/auth/authService";
 
 // ----------- Types -----------
 export interface Env {
@@ -45,6 +49,10 @@ export type AppContext = {
 export default defineApp([
   setCommonHeaders(),
 
+  async function setup({ ctx }){
+    ctx.database = await getDatabase();
+  },
+    authenticationMiddleware,
   // --- API Routes ---
     prefix("/api/v1/", [
         userRoutes(createUserController()),
@@ -59,6 +67,40 @@ export default defineApp([
         route("GET/games/:id", ({ params })=>{
             return getGames(params.id)
         }),
+        prefix("auth",[
+            route("/register", async (ctx)=> {
+                const body = await ctx.request.json()
+                const parsedData = RegisterDTOSchema.safeParse(body)
+                if (!parsedData.success) {
+                    return createErrorResponse(
+                        `Validation failed ${parsedData.error.message}`,
+                        400
+                    )
+                }
+
+                const { userName, email, password, biography, firstName, lastName, profilePicture, profileBanner } = parsedData.data
+
+                const result = await authService.register({
+                    userName,
+                    email,
+                    password,
+                    biography,
+                    firstName,
+                    lastName,
+                    profilePicture,
+                    profileBanner,
+                })
+
+                if(!result.success){
+                    return createErrorResponse(
+                        "Failed to register user",
+                        500,
+                    )
+                }
+
+                return createCookieResponse(result.data.session.sessionId)
+            })
+        ])
     ]),
     route("/users/:id/collections", ({ params }) => {
       return fetchCollectionsByUser(params.id)

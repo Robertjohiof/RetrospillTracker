@@ -1,3 +1,6 @@
+import {clearSessionCookie, setSessionCookie} from "@features/auth/util/session";
+import {Errors} from "@/app/shared/types/errors";
+
 const baseHeaders = {
     "Content-Type": "application/json",
     "Cache-Control": "no-cache",
@@ -41,3 +44,59 @@ export function createErrorResponse(errorMessage:string, status:number):Response
         headers: baseHeaders,
     })
 }
+
+export function createCookieResponse(sessionId: string): Response {
+    const cookie = setSessionCookie(sessionId);
+
+    return new Response(null, {
+        status: 200,
+        headers: {
+            "Set-Cookie": cookie,
+            "Content-Type": "application/json",
+            "Cache-Control": "no-cache",
+        },
+    })
+}
+
+export function removeCookieResponse(): Response{
+    const cookie = clearSessionCookie()
+    return new Response(null, {
+        status: 200,
+        headers: {
+            "Set-Cookie": cookie,
+        }
+    })
+}
+
+export function createAuthenticationResponse() {
+    return new Response(
+        JSON.stringify({
+            success: false,
+            error: {
+                code: Errors.UNAUTHORIZED,
+                message: "Authentication required",
+            },
+        }),
+        {
+            status: 401,
+            headers: { "Content-Type": "application/json" },
+        }
+    );
+}
+
+export function createAuthorizationResponse() {
+    return new Response(
+        JSON.stringify({
+            success: false,
+            error: {
+                code: Errors.FORBIDDEN,
+                message: "Insufficient permissions",
+            },
+        }),
+        {
+            status: 403,
+            headers: { "Content-Type": "application/json" },
+        }
+    );
+}
+

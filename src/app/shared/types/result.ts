@@ -17,3 +17,12 @@ export type ResultFunction = {
     failure: (error: unknown, code: ErrorCode) => Failure,
 }
 
+export type ServerResult<T, U extends Record<string, unknown> = {}> =
+    | { success: true, data: T }
+    | {
+        success: false,
+            error: string,
+        code?: string,
+        fieldErrors?: Record<string, string[]>,
+        state?: U
+}
