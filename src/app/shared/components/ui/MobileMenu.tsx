@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Button from "@/app/shared/components/ui/Button";
 
 interface MobileMenuProps {
   isAuthenticated: boolean;
@@ -80,17 +81,18 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
               </a>
             )}
 
-            {/* Log out (med riktig størrelse) */}
+            {/* Log out  */}
             {isAuthenticated && (
               <div className="mt-3 border-t border-white/10 pt-3">
-                <button
+                <Button
                   type="button"
                   onClick={handleLogout}
-                  className="menu-item bg-slate-900 text-white text-sm border border-white/10 hover:bg-slate-800"
-                  style={{ width: "fit-content" }}
+                  variant="glow"
+                  size="md"
+                  className="logout-btn w-full justify-center"
                 >
                   Log out
-                </button>
+                </Button>
               </div>
             )}
           </nav>
