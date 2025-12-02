@@ -1,5 +1,3 @@
-"use client";
-
 import GameLayout from "@/app/features/gameDetail/layout/GameLayout";
 import { useGameData } from "@/app/features/gameDetail/hooks/useGameData";
 
