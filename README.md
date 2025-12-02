@@ -1,5 +1,7 @@
 # RetrospillTracker
 
+En portal for videospill entusiaster og samlere.
+
 ## Krav til å kjøre applikasjonen
 * Node (Satt opp med på 22.19)
 * PNPM (anbfefalt)
