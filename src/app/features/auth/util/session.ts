@@ -33,7 +33,6 @@ export async function getSession(sessionId:string): Promise<Result<{ session: Se
         const response = await database.select({
             session: sessions,
             user: {
-                userId: users.userId,
                 userName: users.userName,
                 slug: users.slug,
                 email: users.email,
@@ -42,6 +41,7 @@ export async function getSession(sessionId:string): Promise<Result<{ session: Se
                 profilePicture: users.profilePicture,
                 profileBanner: users.profileBanner,
                 biography: users.biography,
+                userId: users.userId,
                 isActive: users.isActive,
                 lastLoginAt: users.lastLoginAt,
                 createdAt: users.createdAt,
