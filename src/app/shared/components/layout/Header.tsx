@@ -4,24 +4,40 @@ import Login from "@/app/pages/Login";
 import { useState } from "react";
 import HeaderSearch from "./HeaderSearch";
 import MobileMenu from "../ui/MobileMenu";
+import Button from "@/app/shared/components/ui/Button";
+import {useAuth} from "@features/auth/context/AuthProvider";
+import {isUser} from "@features/auth/middleware/roleGuard";
+import {logout} from "@features/auth/authActions";
+import {navigate} from "rwsdk/client";
 
 export default function Header() {
-  // TODO: Backend kobler dette til ekte auth (f.eks. useAuth())
-  const mockUser: { username: string } | null = {
-    username: "RetroPlayer", // sett til null for å teste ikke-innlogget
-  };
+  const { isAuthenticated, user } = useAuth()
 
-  const isAuthenticated = !!mockUser;
+    const userIsAuthenticated = isUser(user)
+
+    console.log(user);
+
   const [seen, setSeen] = useState(false);
 
   function togglePop() {
     setSeen((prev) => !prev);
   }
 
+  async function handleLogout() {
+      try {
+          const response = await logout()
+          if (response.success) {
+              navigate("/")
+          }
+      } catch (error) {
+          console.error("Logout failed:", error)
+      }
+  }
+
   return (
-    <header className="sticky top-0 w-full bg-[#0a0015] px-4 sm:px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
+    <header className="relative sticky top-0 w-full bg-[#0a0015] px-4 sm:px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
       {/* VENSTRE: logo */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 basis-1/3 min-w-0">
         <a
           href="/"
           className="flex items-center gap-2 hover:opacity-90 transition"
@@ -31,15 +47,15 @@ export default function Header() {
             alt="RetroSpillTracker logo"
             className="h-10 w-auto"
           />
-          <h1 className="text-glow-pink text-xl font-bold hidden sm:block tracking-wide">
+          <h1 className="text-glow-pink text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wide hidden lg:block">
             RetroSpillTracker
           </h1>
         </a>
       </div>
 
-      {/* MIDTEN: Søk – alltid i midten */}
-      <div className="flex-1 flex justify-center">
-        <div className="w-full max-w-md md:max-w-xl">
+      {/* MIDTEN: Søk  */}
+      <div className="flex justify-center basis-1/3 min-w-0">
+        <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-lg">
           <HeaderSearch />
         </div>
       </div>
@@ -47,46 +63,57 @@ export default function Header() {
       {/* HØYRE: Navigasjon (desktop) + auth + burger (mobil) */}
       <div className="flex items-center gap-3">
         {/* Navigasjon – kun desktop */}
-        <nav className="hidden md:flex items-center gap-10 text-base font-semibold">
+        <nav className="hidden md:flex items-center gap-4 md:gap-6 lg:gap-8 xl:gap-10 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-semibold">
           <a href="/" className="nav-link">
             Home
           </a>
           <a href="/search" className="nav-link">
             Browse
           </a>
-          <a href="/forum" className="nav-link">
-            Forum
-          </a>
+
           {isAuthenticated && (
-            <a href="/profile" className="nav-link">
+            <a href="/profilepage/sell-mango" className="nav-link">
               Profile
             </a>
           )}
         </nav>
 
         {/* Auth-område */}
-        {isAuthenticated && mockUser ? (
-          // ===== INNLOGGET VISNING =====
-          <div className="flex items-center gap-3">
+        {isAuthenticated && user ? (
+          <div className="flex items-center justify-end gap-2 sm:gap-3 min-w-0">
             <img
-              src="/images/user_logo1.png" // ← bruker logo
+              src="/images/user_logo1.png"
               alt="User avatar"
-              className="h-8 w-8 rounded-full border border-white/20 shadow-md object-cover"
+              className="h-10 w-10 rounded-full border border-white/20 shadow-md object-cover"
             />
-            <button className="btn-secondary text-sm px-3 py-1 hidden md:inline-flex">
-              Log out
-            </button>
+
+            <div className="hidden md:inline-flex">
+              <Button
+                type="button"
+                onClick={handleLogout}
+                variant="none"
+                size="none"
+                className="logout-btn"
+              >
+                Log out
+              </Button>
+            </div>
           </div>
         ) : (
           // ===== IKKE INNLOGGET VISNING =====
           <>
-            <button
+              {/*
+              <button
               onClick={togglePop}
               className="nav-link font-medium text-sm sm:text-base"
             >
               Login
             </button>
             {seen && <Login toggle={togglePop} />}
+              */}
+              <a href="/login" className="nav-link font-medium text-sm sm:text-base">
+                  Login
+              </a>
 
             <span className="text-glow-orange text-xl sm:text-2xl -mx-1 hidden xs:inline">
               /

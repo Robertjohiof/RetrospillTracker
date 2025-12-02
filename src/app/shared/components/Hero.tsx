@@ -38,7 +38,7 @@ export default function Hero({
 
       {/* Fyll over bildet så tekst synes bedre */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60"
+        className="absolute inset-0 bg-linear-to-b from-black/30 via-black/40 to-black/60"
         aria-hidden="true"
       />
 
@@ -79,7 +79,7 @@ export default function Hero({
 
       {/* Litt kulere kanter */}
       <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/10 via-transparent to-black/40"
+        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-black/10 via-transparent to-black/40"
         aria-hidden="true"
       />
     </section>

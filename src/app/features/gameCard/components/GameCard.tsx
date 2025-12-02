@@ -2,7 +2,7 @@ import { GameCardProps } from "@features/gameCard/types/gameCardProps";
 import Heading from "@/app/shared/components/Heading";
 
 export default function GameCard(props: GameCardProps) {
-  const { title, imgUrl, altText } = props;
+  const { id, title, imgUrl, altText } = props;
   return (
     <article
       className="
@@ -14,7 +14,7 @@ export default function GameCard(props: GameCardProps) {
     >
       {/*TODO: link med dynamic slugs */}
       <a
-        href={"/"}
+        href={`/games/${id}`}
         className="
           group
           border border-white/10
@@ -36,7 +36,7 @@ export default function GameCard(props: GameCardProps) {
             alt={altText}
             className="
               w-full
-              aspect-[3/4]        
+              aspect-3/4        
               object-cover
               rounded-md
               bg-black/30

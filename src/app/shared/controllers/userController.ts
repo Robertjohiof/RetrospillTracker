@@ -1,7 +1,8 @@
 import {createUserRepository} from "@/app/shared/repository/userRepository";
 import {createUserService} from "@/app/shared/services/userService";
 import {z} from "zod";
-import {createErrorResponse, createSuccessResponse, Errors} from "@/app/shared/lib/response";
+import {createErrorResponse, createSuccessResponse} from "@/app/shared/lib/response";
+import {Errors} from "@/app/shared/types/errors";
 
 export function createUserController() {
     const repo = createUserRepository();
