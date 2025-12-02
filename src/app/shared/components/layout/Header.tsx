@@ -74,7 +74,7 @@ export default function Header() {
             <img
               src="/images/user_logo1.png"
               alt="User avatar"
-              className="h-8 w-8 sm:h-7 sm:w-7 md:h-8 md:w-8 rounded-full border border-white/20 shadow-md object-cover"
+              className="h-10 w-10 rounded-full border border-white/20 shadow-md object-cover"
             />
 
             <div className="hidden md:inline-flex">
