@@ -113,7 +113,7 @@ export default function Login(props: any) {
             <p className="mt-2 text-sm text-white/80">
               Don't have an account?{" "}
               <a
-                href="/register"
+                href="/signup"
                 className="text-glow-orange underline hover:text-pink-300"
               >
                 Register here
