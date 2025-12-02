@@ -18,6 +18,8 @@ export const Errors = {
     METHOD_NOT_ALLOWED: "METHOD_NOT_ALLOWED",
     UNAUTHORIZED: "UNAUTHORIZED",
     NOT_IMPLEMENTED: "NOT_IMPLEMENTED",
+    VALIDATION_ERROR: "VALIDATION_ERROR",
+    CONFLICT: "CONFLICT",
 } as const;
 export type ErrorCode = keyof typeof Errors;
 
