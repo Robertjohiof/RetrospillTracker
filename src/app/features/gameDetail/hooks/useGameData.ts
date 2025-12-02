@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { API_ENDPOINT, BASE_URL } from "@/app/shared/config/apiPaths";
 import { ApiResponse, GameData } from "../types/gameDetail";

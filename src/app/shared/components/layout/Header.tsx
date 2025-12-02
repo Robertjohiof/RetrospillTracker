@@ -62,7 +62,7 @@ export default function Header() {
           </a>
 
           {isAuthenticated && (
-            <a href="/profile" className="nav-link">
+            <a href="/profilepage/sell-mango" className="nav-link">
               Profile
             </a>
           )}

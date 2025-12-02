@@ -1,5 +1,3 @@
-"use client"
-
 import {Game} from "@/app/shared/types/game"
 import {useEffect, useState} from "react";
 import {API_BASE_URL} from "@/app/config/api";
