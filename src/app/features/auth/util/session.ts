@@ -1,12 +1,15 @@
-import {createErrorResponse, createSuccessResponse, Errors, Result} from "@/app/shared/lib/response"
+import {createErrorResponse, createSuccessResponse} from "@/app/shared/lib/response"
 import {Session, sessions, users, User} from "@/db/schema";
 import {getDatabase} from "@/db";
 import type {SafeUser} from "@/db/schema/users-schema"
 import {nanoid} from "nanoid";
 import {SESSION_COOKIE_NAME, SESSION_DURATION} from "@/app/shared/config/sessionConstants";
 import {and, eq, gt, lt} from "drizzle-orm";
+import {Result} from "@/app/shared/types/result";
+import {Errors} from "@/app/shared/types/errors";
+import {ResultHandler} from "@/app/shared/lib/result";
 
-export async function createSession(userId: number): Promise<Response> {
+export async function createSession(userId: number): Promise<Result<Session>> {
     try {
         const database = await getDatabase();
         const sessionId = nanoid();
@@ -18,13 +21,13 @@ export async function createSession(userId: number): Promise<Response> {
             expiresAt
         }).returning()
 
-        return createSuccessResponse<Session>(session)
+        return ResultHandler.success(session)
     } catch (error) {
-        return createErrorResponse(error.message, error.status)
+        return ResultHandler.failure("Failed to create session", Errors.INTERNAL_SERVER_ERROR)
     }
 }
 
-export async function getSession(sessionId:string): Promise<Response> {
+export async function getSession(sessionId:string): Promise<Result<{ session: Session, user: SafeUser}|null>> {
     try {
         const database = await getDatabase();
         const response = await database.select({
@@ -34,9 +37,16 @@ export async function getSession(sessionId:string): Promise<Response> {
                 userName: users.userName,
                 slug: users.slug,
                 email: users.email,
+                firstName: users.firstName,
+                lastName: users.lastName,
+                profilePicture: users.profilePicture,
+                profileBanner: users.profileBanner,
+                biography: users.biography,
                 isActive: users.isActive,
+                lastLoginAt: users.lastLoginAt,
                 createdAt: users.createdAt,
-                updatedAt: users.updatedAt
+                updatedAt: users.updatedAt,
+                roleId: users.roleId,
             },
         }).from(sessions)
             .innerJoin(users, eq(sessions.userId, users.userId))
@@ -50,7 +60,7 @@ export async function getSession(sessionId:string): Promise<Response> {
             .limit(1);
 
         if(response.length === 0) {
-            return createSuccessResponse<null>(null)
+            return ResultHandler.success(null)
         }
 
         const { session, user } = response[0];
@@ -60,25 +70,25 @@ export async function getSession(sessionId:string): Promise<Response> {
             .set({ lastLoginAt: new Date() })
             .where(eq(users.userId, user.userId))
 
-        return createSuccessResponse<{session: Session, user: Partial<SafeUser>}>({ session, user })
+        return ResultHandler.success({ session, user })
     } catch (error) {
-        return createErrorResponse("Failed to get session", error.status)
+        return ResultHandler.failure("Failed to get session", Errors.INTERNAL_SERVER_ERROR)
     }
 }
 
-export async function deleteSession(sessionId:string): Promise<Response> {
+export async function deleteSession(sessionId:string): Promise<Result<void>> {
     try{
         const database = await getDatabase();
 
         await database.delete(sessions).where(eq(sessions.sessionId, sessionId))
 
-        return createSuccessResponse<undefined>(undefined)
+        return ResultHandler.success(undefined)
     } catch (error) {
-        return createErrorResponse("Failed to delete session", error.status)
+        return ResultHandler.failure("Failed to delete session", Errors.INTERNAL_SERVER_ERROR)
     }
 }
 
-export async function cleanupExpiredSessions(): Promise<Response> {
+export async function cleanupExpiredSessions(): Promise<Result<number>> {
     try {
         const database = await getDatabase();
 
@@ -87,9 +97,9 @@ export async function cleanupExpiredSessions(): Promise<Response> {
             .where(lt(sessions.expiresAt, new Date()))
             .returning({ sessionId: sessions.sessionId });
 
-        return createSuccessResponse<number>(deleted.length)
+        return ResultHandler.success(deleted.length)
     } catch (error) {
-        return createErrorResponse("Failed to clean up sessions", error.status)
+        return ResultHandler.failure("Failed to clean up sessions", Errors.INTERNAL_SERVER_ERROR)
     }
 }
 

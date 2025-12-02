@@ -1,6 +1,7 @@
 import {User} from "@/app/shared/schemas/usersSchema";
 import {UserRepository} from "@/app/shared/repository/userRepository";
-import {Errors, Result} from "@/app/shared/lib/response";
+import {Result} from "@/app/shared/types/result";
+import {Errors} from "@/app/shared/types/errors";
 
 export interface UserService {
     getAllUsers(): Promise<Result<User[]>>;

@@ -1,5 +1,5 @@
 import {hashPassword as hash, verifyPassword as verify} from "better-auth/crypto";
-import {commonPasswords} from "@features/auth/commonPasswords";
+import {commonPasswords} from "@features/auth/util/commonPasswords";
 
 export async function hashPassword(password: string):Promise<string> {
     try {
