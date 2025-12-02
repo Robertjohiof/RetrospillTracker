@@ -31,4 +31,4 @@ export const setCommonHeaders =
   };
 
 
-  // fjern 'unsafe-eval' ved production!
+  // fjern den øverste 'unsafe-eval' ved production!
