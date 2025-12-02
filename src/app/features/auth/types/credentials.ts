@@ -1,13 +1,17 @@
 type LoginCredentials = {
-    email: string,
+    userName: string,
     password: string,
 }
 
-//TODO: få den enestemmig med register formet
 type RegisterCredentials = {
-    email: string,
+    firstName: string,
+    lastName: string,
+    userName: string,
     password: string,
-    passwordConfirmation: string,
+    email: string,
+    biography: string|null,
+    profilePicture: string|null,
+    profileBanner: string|null,
 }
 
 export type {LoginCredentials, RegisterCredentials};

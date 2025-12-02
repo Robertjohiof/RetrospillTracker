@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "904e5b36-d6eb-479a-b06a-ed863f7b09b6",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "0510e81b-eff2-41c5-8876-63e6d96eb1f4",
+  "prevId": "1fd9c603-33af-4ee4-8a53-f89274150dd8",
   "tables": {
     "collection_entries": {
       "name": "collection_entries",
@@ -611,6 +611,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "password_hash": {
+          "name": "password_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "first_name": {
           "name": "first_name",
           "type": "text",
@@ -653,20 +660,26 @@
           "notNull": true,
           "autoincrement": false
         },
-        "created_at": {
-          "name": "created_at",
-          "type": "text",
+        "last_login_at": {
+          "name": "last_login_at",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "(CURRENT_TIMESTAMP)"
+          "autoincrement": false
         },
         "role_id": {
           "name": "role_id",
@@ -808,7 +821,7 @@
           "name": "expires_at",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "revoked": {

@@ -1,0 +1,4 @@
+const SESSION_DURATION = 24 * 60 * 60 * 1000;
+const SESSION_COOKIE_NAME = "retrospill_session"
+
+export { SESSION_DURATION, SESSION_COOKIE_NAME }

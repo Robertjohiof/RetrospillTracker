@@ -19,9 +19,9 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 w-full bg-[#0a0015] px-4 sm:px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
+    <header className="relative sticky top-0 w-full bg-[#0a0015] px-4 sm:px-8 py-3 flex items-center justify-between border-b border-white/10 shadow-md z-20">
       {/* VENSTRE: logo */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 basis-1/3 min-w-0">
         <a
           href="/"
           className="flex items-center gap-2 hover:opacity-90 transition"
@@ -31,15 +31,15 @@ export default function Header() {
             alt="RetroSpillTracker logo"
             className="h-10 w-auto"
           />
-          <h1 className="text-glow-pink text-xl font-bold hidden sm:block tracking-wide">
+          <h1 className="text-glow-pink text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wide hidden lg:block">
             RetroSpillTracker
           </h1>
         </a>
       </div>
 
       {/* MIDTEN: Søk – alltid i midten */}
-      <div className="flex-1 flex justify-center">
-        <div className="w-full max-w-md md:max-w-xl">
+      <div className="flex justify-center basis-1/3 min-w-0">
+        <div className="max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-lg">
           <HeaderSearch />
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function Header() {
       {/* HØYRE: Navigasjon (desktop) + auth + burger (mobil) */}
       <div className="flex items-center gap-3">
         {/* Navigasjon – kun desktop */}
-        <nav className="hidden md:flex items-center gap-10 text-base font-semibold">
+        <nav className="hidden md:flex items-center gap-4 md:gap-6 lg:gap-8 xl:gap-10 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-semibold">
           <a href="/" className="nav-link">
             Home
           </a>
@@ -57,6 +57,7 @@ export default function Header() {
           <a href="/forum" className="nav-link">
             Forum
           </a>
+
           {isAuthenticated && (
             <a href="/profile" className="nav-link">
               Profile
@@ -66,14 +67,14 @@ export default function Header() {
 
         {/* Auth-område */}
         {isAuthenticated && mockUser ? (
-          // ===== INNLOGGET VISNING =====
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-end gap-2 sm:gap-3 min-w-0">
             <img
-              src="/images/user_logo1.png" // ← bruker logo
+              src="/images/user_logo1.png"
               alt="User avatar"
-              className="h-8 w-8 rounded-full border border-white/20 shadow-md object-cover"
+              className="h-8 w-8 sm:h-7 sm:w-7 md:h-8 md:w-8 rounded-full border border-white/20 shadow-md object-cover"
             />
-            <button className="btn-secondary text-sm px-3 py-1 hidden md:inline-flex">
+
+            <button className="btn-secondary text-xs sm:text-sm md:text-sm px-2 py-1 sm:px-3 hidden md:inline-flex">
               Log out
             </button>
           </div>

@@ -2,10 +2,11 @@
 import {FormEvent, useEffect, useRef, useState} from "react";
 import {Game} from "@/app/shared/types/game"
 import {ChangeEvent} from "react";
-import {Errors, Result} from "@/app/shared/lib/response";
 import {API_ENDPOINT} from "@/app/shared/config/apiPaths";
 import {IGDBData, igdbToGame} from "@/app/shared/utils/igdbToGame";
 import {Filter} from "@features/gameSearch/type/filter";
+import {Result} from "@/app/shared/types/result";
+import {Errors} from "@/app/shared/types/errors";
 
 const emptyFilter: Filter = {
     genres: "",
