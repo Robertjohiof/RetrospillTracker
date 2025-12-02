@@ -119,6 +119,32 @@
   border-color: rgba(255,255,255,0.40);
 }
 
+
+/* === Shared Logout Button Style === */
+.logout-btn {
+  background-color: #12001f;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;        /* like rounded-md */
+  padding: 0.375rem 1rem;       /* px-4 py-1.5 */
+  font-size: 0.875rem;          /* text-sm */
+  font-weight: 500;             /* font-medium */
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Hover glow */
+.logout-btn:hover {
+  background-color: #1a002d;
+  border-color: #ff4ab8;
+  box-shadow: 0 0 18px 3px rgba(255, 0, 128, 0.7);
+  color: #ffffff;
+}
+
 /* ======== NEON-PULS FOR INPUTS ======== */
 
 @keyframes neonPulse {
