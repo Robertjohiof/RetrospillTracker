@@ -1,86 +1,126 @@
 "use client";
 
-import { useState, useActionState } from "react"
+import { useActionState } from "react";
 import SubmitButton from "@features/auth/components/SubmitButton";
-import { login } from "@features/auth/authActions"
-import {navigate} from "rwsdk/client";
-import {useFormStatus} from "react-dom";
+import { login } from "@features/auth/authActions";
+import { navigate } from "rwsdk/client";
+import { useFormStatus } from "react-dom";
 import Button from "@/app/shared/components/ui/Button";
 
-export default function Login(props: any){
-    const { pending } = useFormStatus()
-    const [state, formAction] = useActionState(
-        async (prevState:any, formData: FormData) => {
-            const response = await login(prevState, formData);
-            console.log(response);
+export default function Login(props: any) {
+  const { pending } = useFormStatus();
+  const [state, formAction] = useActionState(
+    async (prevState: any, formData: FormData) => {
+      const response = await login(prevState, formData);
+      console.log(response);
 
-            if (response.success) {
-                navigate("/profile")
-            }
-            return response;
-        },
-        {
-            success: false,
-            error: "",
-            state: {
-                user: null,
-                session: null
-            }
-        }
-    )
+      if (response.success) {
+        navigate("/profile");
+      }
+      return response;
+    },
+    {
+      success: false,
+      error: "",
+      state: {
+        user: null,
+        session: null,
+      },
+    }
+  );
 
   return (
-    <div className="h-1/2 w-90 bg-primary-light fixed md:w-120 md:px-10 top-1/2 left-1/2 p-2 m-auto -translate-1/2 rounded-lg border-4 border-iceblue">
-        <div className="flex flex-col gap-4">
-            <h2 className="text-white font-bold text-4xl text-shadow-2xs mb-3">Login</h2>
-            {!state.success && state.error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mb-4">
-                    <p className="text-sm">{state.error}</p>
-                </div>
-            )}
-            <form className="flex flex-col gap-7" action={formAction}>
-                <label htmlFor="userName" className="text-2xl text-white">
-                    Username:
-                    <input
-                        id="userName"
-                        name="userName"
-                        className="border text-black bg-white w-full p-1 mb-1"
-                        type="text"
-                        required
-                        autoComplete="username"
-                        placeholder="Ola Nordmann..."
-                    />
-                </label>
-                <label htmlFor="password" className="text-2xl text-white">
-                    Password:
-                    <input
-                        id="password"
-                        name="password"
-                        className="bg-white border w-full p-1 text-black"
-                        type="password"
-                        required
-                        autoComplete="current-password"
-                        placeholder="**********"
-                    />
-                </label>
-                <Button
-                    type="submit"
-                    variant="glow"
-                    size="lg"
-                    className="w-full rounded-md text-xl"
-                    disabled={pending}
-                >
-                    {pending ? "Logging in...": "Logg inn"}
-                </Button>
-            </form>
-            <div>
-                <p>
-                    Don't have an account? <a href="/register">Register here</a>
-                </p>
-            </div>
+    <>
+      <h1 className="mt-10 text-center text-4xl font-bold text-white drop-shadow-lg">
+        Login
+      </h1>
 
-            <button className="text-glow-orange border px-4 py-2.5 mx-auto mt-5 bg-white" onClick={props.toggle}>X</button>
+      <section className="flex justify-center px-4 py-10">
+        <div
+          className="
+            w-full max-w-xl
+            overflow-hidden
+            rounded-3xl
+            border border-pink-500/30
+            bg-gradient-to-b from-[#0a0015]/90 via-[#0a0015]/70 to-[#210018]/80
+            shadow-lg shadow-pink-500/25
+            p-6 md:p-8
+          "
+        >
+          <div className="flex flex-col gap-4 text-base md:text-lg">
+            <h2 className="text-2xl font-bold text-glow-orange">
+              Welcome back
+            </h2>
+
+            {/* Error message */}
+            {!state.success && state.error && (
+              <div className="rounded-md bg-red-500/20 border border-red-500/50 p-3 text-red-200">
+                <p className="text-sm">{state.error}</p>
+              </div>
+            )}
+
+            <form className="flex flex-col gap-4" action={formAction}>
+              {/* Username */}
+              <label
+                htmlFor="userName"
+                className="flex flex-col gap-1 text-white"
+              >
+                <span>Username:</span>
+                <input
+                  id="userName"
+                  name="userName"
+                  className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
+                  type="text"
+                  required
+                  autoComplete="username"
+                  placeholder="Ola Nordmann..."
+                />
+              </label>
+
+              {/* Password */}
+              <label
+                htmlFor="password"
+                className="flex flex-col gap-1 text-white"
+              >
+                <span>Password:</span>
+                <input
+                  id="password"
+                  name="password"
+                  className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
+                  type="password"
+                  required
+                  autoComplete="current-password"
+                  placeholder="**********"
+                />
+              </label>
+
+              {/* Submit button */}
+              <div className="mt-4 flex justify-center">
+                <Button
+                  type="submit"
+                  variant="glow"
+                  size="lg"
+                  className="w-full rounded-md text-xl"
+                  disabled={pending}
+                >
+                  {pending ? "Logging in..." : "Logg inn"}
+                </Button>
+              </div>
+            </form>
+
+            {/* Link to register */}
+            <p className="mt-2 text-sm text-white/80">
+              Don't have an account?{" "}
+              <a
+                href="/register"
+                className="text-glow-orange underline hover:text-pink-300"
+              >
+                Register here
+              </a>
+            </p>
+          </div>
         </div>
-    </div>
-  )
+      </section>
+    </>
+  );
 }
