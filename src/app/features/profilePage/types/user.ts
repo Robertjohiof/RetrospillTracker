@@ -14,7 +14,7 @@
   updatedAt: string | null;
 }*/
 
-import {User} from "@/db/schema";
+import {SafeUser, User} from "@/db/schema";
 
 export interface UserGame {
   gameId: number;
@@ -35,7 +35,7 @@ interface Collections {
 }
 
 export interface ProfileData {
-  user: User;
+  user: SafeUser;
   collections: Collections[];
   userGames: UserGame[];
 }
