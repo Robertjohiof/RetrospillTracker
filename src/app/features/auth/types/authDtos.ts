@@ -11,9 +11,9 @@ export const RegisterDTOSchema = z.object({
     userName: z.string().min(3).max(30),
     password: z.string().min(8),
     email: z.email(),
-    biography: z.string().min(3).max(250).nullable(),
-    profilePicture: z.string().min(3).max(2000).nullable(),
-    profileBanner: z.string().min(3).max(2000).nullable(),
+    biography: z.string().min(0).max(250).nullable(),
+    profilePicture: z.string().min(0).max(2000).nullable(),
+    profileBanner: z.string().min(0).max(2000).nullable(),
 })
 
 export const UserDTOSchema = z.object({
