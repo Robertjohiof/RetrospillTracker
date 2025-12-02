@@ -4,18 +4,38 @@ import { useState, useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import type { FormEvent } from "react";
 import type { SignUpPayload } from "@/app/features/signUp/types/signuptypes";
-import { register } from "@features/auth/authActions"
+import {login, register} from "@features/auth/authActions"
 import Button from "@/app/shared/components/ui/Button";
+import PasswordStrengthIndicator from "@features/auth/components/passwordStrengthIndicator";
+import {navigate} from "rwsdk/client";
 
 export default function SignUp() {
     const { pending } = useFormStatus();
-  const SIGNUP_ENDPOINT = "/api/v1/auth/signup"; // OBS:: Denne er ikke satt opp enda.
+
+    const [password, setPassword] = useState("");
+    const [state, formAction] = useActionState(async (prevState:any, formData: FormData) => {
+        const response = await register(prevState, formData);
+        console.log(response);
+
+        if (response.success) {
+            navigate("/login")
+        }
+        return response;
+    },
+        {
+            success: false,
+            error: "",
+            state: {
+                user: null,
+                session: null,
+        }
+    })
 
   const [generalError, setGeneralError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function onSignup(payload: SignUpPayload): Promise<boolean> {
+  /*async function onSignup(payload: SignUpPayload): Promise<boolean> {
     const formData = new FormData();
 
     // Tekstfelt
@@ -65,9 +85,9 @@ export default function SignUp() {
       setSuccessMessage(null);
       return false;
     }
-  }
+  }*/
 
-  async function handleSignup(e: FormEvent<HTMLFormElement>) {
+  /*async function handleSignup(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setGeneralError(null);
@@ -107,7 +127,7 @@ export default function SignUp() {
     } finally {
       setIsSubmitting(false);
     }
-  }
+  }*/
 
   return (
     <>
@@ -146,66 +166,81 @@ export default function SignUp() {
               </div>
             )}
 
-            <form className="flex flex-col gap-4" onSubmit={handleSignup}>
+            <form className="flex flex-col gap-4" action={formAction}>
               {/* First name */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="firstName" className="flex flex-col gap-1 text-white">
                 <span>First name:</span>
                 <input
+                    id="firstName"
                   name="firstName"
                   className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
                   type="text"
                   placeholder="Ola..."
+                    required
                 />
               </label>
 
               {/* Last name */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="lastName" className="flex flex-col gap-1 text-white">
                 <span>Last name:</span>
                 <input
+                    id="lastName"
                   name="lastName"
                   className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
                   type="text"
+                    required
                   placeholder="Nordmann..."
                 />
               </label>
 
               {/* Username */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="userName" className="flex flex-col gap-1 text-white">
                 <span>Username:</span>
                 <input
+                    id="userName"
                   name="userName"
                   className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
                   type="text"
+                    required
                   placeholder="OlaNordmann..."
                 />
               </label>
 
               {/* Password */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="password" className="flex flex-col gap-1 text-white">
                 <span>Password:</span>
                 <input
-                  name="passWord"
+                    id="password"
+                  name="password"
                   className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
                   type="password"
+                    required
                   placeholder="*********"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
 
+                <PasswordStrengthIndicator password={password} />
+
               {/* Email */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="email" className="flex flex-col gap-1 text-white">
                 <span>Email:</span>
                 <input
+                    id="email"
                   name="email"
                   className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
                   type="email"
+                    required
                   placeholder="ola@nordmann.no"
                 />
               </label>
 
               {/* Biography */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="biography" className="flex flex-col gap-1 text-white">
                 <span>Biography:</span>
                 <textarea
+                    id="biography"
                   name="biography"
                   className="w-full rounded-md border border-white/20 bg-white/5 p-2 text-white shadow-sm outline-none focus:ring-2 focus:ring-glow-orange"
                   placeholder="Write a short description..."
@@ -225,10 +260,11 @@ export default function SignUp() {
               </label>
 
               {/* Profile picture */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="profilePicture" className="flex flex-col gap-1 text-white">
                 <span>Profile picture:</span>
                 <input
-                  name="profilePic"
+                    id="profilePicture"
+                  name="profilePicture"
                   className="
                     w-full rounded-md border border-white/30 bg-white/10 p-2 text-white shadow-sm
                     file:mr-3 file:rounded-md file:border file:border-white/20
@@ -241,10 +277,11 @@ export default function SignUp() {
               </label>
 
               {/* Banner image */}
-              <label className="flex flex-col gap-1 text-white">
+              <label htmlFor="bannerPicture" className="flex flex-col gap-1 text-white">
                 <span>Banner image:</span>
                 <input
-                  name="banner"
+                    id="bannerPicture"
+                  name="bannerPicture"
                   className="
                     w-full rounded-md border border-white/30 bg-white/10 p-2 text-white shadow-sm
                     file:mr-3 file:rounded-md file:border file:border-white/20
@@ -263,7 +300,7 @@ export default function SignUp() {
                   variant="glow"
                   size="lg"
                   className="w-full rounded-md text-xl"
-                  disabled={isSubmitting}
+                  disabled={pending}
                 >
                   {isSubmitting ? "Creating account..." : "Sign up"}
                 </Button>
