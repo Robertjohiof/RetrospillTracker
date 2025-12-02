@@ -63,14 +63,6 @@ export default function MobileMenu({ isAuthenticated }: MobileMenuProps) {
               Browse
             </a>
 
-            <a
-              href="/forum"
-              className="menu-item text-orange-500"
-              onClick={() => setOpen(false)}
-            >
-              Forum
-            </a>
-
             {isAuthenticated && (
               <a
                 href="/profile"
