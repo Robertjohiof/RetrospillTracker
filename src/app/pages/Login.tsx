@@ -4,8 +4,11 @@ import { useState, useActionState } from "react"
 import SubmitButton from "@features/auth/components/SubmitButton";
 import { login } from "@features/auth/authActions"
 import {navigate} from "rwsdk/client";
+import {useFormStatus} from "react-dom";
+import Button from "@/app/shared/components/ui/Button";
 
 export default function Login(props: any){
+    const { pending } = useFormStatus()
     const [state, formAction] = useActionState(
         async (prevState:any, formData: FormData) => {
             const response = await login(prevState, formData);
@@ -60,8 +63,22 @@ export default function Login(props: any){
                         placeholder="**********"
                     />
                 </label>
-                <SubmitButton/>
+                <Button
+                    type="submit"
+                    variant="glow"
+                    size="lg"
+                    className="w-full rounded-md text-xl"
+                    disabled={pending}
+                >
+                    {pending ? "Logging in...": "Logg inn"}
+                </Button>
             </form>
+            <div>
+                <p>
+                    Don't have an account? <a href="/register">Register here</a>
+                </p>
+            </div>
+
             <button className="text-glow-orange border px-4 py-2.5 mx-auto mt-5 bg-white" onClick={props.toggle}>X</button>
         </div>
     </div>
