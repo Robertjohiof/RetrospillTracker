@@ -28,8 +28,12 @@ export default function SearchForm({
   isLoading,
 }: SearchFormProps) {
   return (
-    <form onSubmit={onSubmit} className="flex items-end gap-2">
-      <section className="relative flex-1 min-w-[220px] ">
+    <form
+      onSubmit={onSubmit}
+      className="flex flex-col gap-3 md:flex-row md:flex-wrap md:items-end"
+    >
+      {/* Search input */}
+      <section className="relative w-full md:flex-1 min-w-[220px]">
         <input
           value={query}
           onChange={onQueryChange}
@@ -45,22 +49,27 @@ export default function SearchForm({
           <SearchIcon className="w-4 h-4" />
         </button>
       </section>
+
+      {/* Search button */}
       <Button
         type="submit"
         variant="glow"
         size="none"
-        className="h-[48px] rounded-md px-5"
+        className="h-[48px] rounded-md px-5 w-full md:w-auto"
         disabled={isLoading}
       >
         {isLoading ? "Searching..." : "Search"}
       </Button>
-      <section className="flex flex-col w-[150px]">
+
+      {/* Genres */}
+      <section className="flex flex-col w-full md:w-[150px]">
         <label className="mb-1 block text-sm text-cyan-400">Genres</label>
         <select
           className="w-full rounded-lg border border-pink-500/40 bg-[#0a0015] text-cyan-300 px-3 py-3 focus:border-pink-500 focus:ring-1 focus:ring-pink-500/60"
           onChange={(e) => onFilterChange(e, "genres")}
+          defaultValue=""
         >
-          <option className="hidden" selected>
+          <option value="" disabled>
             choose
           </option>
           <option value={""}>Any</option>
@@ -71,13 +80,16 @@ export default function SearchForm({
           ))}
         </select>
       </section>
-      <section className="flex flex-col w-[120px]">
+
+      {/* Year */}
+      <section className="flex flex-col w-full md:w-[120px]">
         <label className="mb-1 block text-sm text-cyan-400">Year</label>
         <select
           className="w-full rounded-lg border border-pink-500/40 bg-[#0a0015] text-cyan-300 px-3 py-3 focus:border-pink-500 focus:ring-1 focus:ring-pink-500/60"
           onChange={(e) => onFilterChange(e, "year")}
+          defaultValue=""
         >
-          <option className="hidden" selected>
+          <option value="" disabled>
             choose
           </option>
           {yearOptions.map((year) => (
@@ -87,13 +99,16 @@ export default function SearchForm({
           ))}
         </select>
       </section>
-      <section className="flex flex-col w-[150px]">
+
+      {/* Console */}
+      <section className="flex flex-col w-full md:w-[150px]">
         <label className="mb-1 block text-sm text-cyan-400">Console</label>
         <select
           className="w-full rounded-lg border border-pink-500/40 bg-[#0a0015] text-cyan-300 px-3 py-3 focus:border-pink-500 focus:ring-1 focus:ring-pink-500/60"
           onChange={(e) => onFilterChange(e, "platform")}
+          defaultValue=""
         >
-          <option className="hidden" selected>
+          <option value="" disabled>
             choose
           </option>
           <option value={""}>Any</option>
