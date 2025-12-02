@@ -163,6 +163,7 @@ export default defineApp([
       route("/profilepage/:id", ({ params }) => (
         <ProfilePage userId={params.id} />
       )),
+      route("/profile", ProfilePage),
       prefix("/games", [
         route("/", () => <h2>Games</h2>),
         route("/:id", ({ params }) => <GameDetail gameId={params.id} />),

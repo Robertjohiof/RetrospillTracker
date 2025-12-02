@@ -2,9 +2,12 @@
 
 import { ProfileLayout } from "@features/profilePage/layout/ProfileLayout";
 import { useProfileData } from "@features/profilePage/hooks/useProfileData";
+import {useAuth} from "@features/auth/context/AuthProvider";
+import {useEffect} from "react";
 
-export default function ProfilePage({ userId }: { userId: string }) { 
-  const { data, search, setSearch, loading, error } = useProfileData(userId)
+export default function ProfilePage() {
+
+    const { data, search, setSearch, loading, error } = useProfileData()
 
   if (loading) return <p>Hentar brukar</p>;
   if (error) return <p>{error}</p>

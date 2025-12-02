@@ -6,6 +6,7 @@ import { login } from "@features/auth/authActions";
 import { navigate } from "rwsdk/client";
 import { useFormStatus } from "react-dom";
 import Button from "@/app/shared/components/ui/Button";
+import {useAuth} from "@features/auth/context/AuthProvider";
 
 export default function Login(props: any) {
   const { pending } = useFormStatus();
@@ -15,7 +16,7 @@ export default function Login(props: any) {
       console.log(response);
 
       if (response.success) {
-        navigate("/profile");
+        navigate(`/profile`);
       }
       return response;
     },
@@ -112,7 +113,7 @@ export default function Login(props: any) {
             <p className="mt-2 text-sm text-white/80">
               Don't have an account?{" "}
               <a
-                href="/register"
+                href="/signup"
                 className="text-glow-orange underline hover:text-pink-300"
               >
                 Register here
