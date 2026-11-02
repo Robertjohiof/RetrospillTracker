@@ -27,6 +27,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      "@features": resolve(__dirname, "src/app/features"),
+      "@generated": resolve(__dirname, "generated"),
       "@": resolve(__dirname, "src"),
     },
   },

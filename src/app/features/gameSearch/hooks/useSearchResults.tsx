@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {FormEvent, useEffect, useRef, useState} from "react";
 import {Game} from "@/app/shared/types/game"
 import {ChangeEvent} from "react";

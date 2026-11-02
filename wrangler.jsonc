@@ -18,7 +18,7 @@
     {
       "binding": "DB",
       "database_name": "retrospill-tracker",
-      "database_id": "REMOVED_CLOUDFLARE_DATABASE_ID",
+      "database_id": "06e450dd-3b66-40d1-8631-f54a1443b589",
       "migrations_dir": "drizzle"
     }
   ],

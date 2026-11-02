@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {createContext, use, useCallback, useState} from "react";
 import {AuthContexType, AuthProviderProps} from "@features/auth/types/authContexType";

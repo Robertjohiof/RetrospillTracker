@@ -137,6 +137,10 @@ export default defineApp([
   render(Document, [
     // Seeder
     route("/seed", async () => {
+      // Seeding sletter alle data, så i produksjon må det slås på eksplisitt med ALLOW_SEED
+      if (!import.meta.env.VITE_IS_DEV_SERVER && (env as { ALLOW_SEED?: string }).ALLOW_SEED !== "true") {
+        return new Response("Not found", { status: 404 });
+      }
       try {
         const seedResponse = await runCustomSeed(env.DB);
         return new Response(JSON.stringify(seedResponse, null, 2), {

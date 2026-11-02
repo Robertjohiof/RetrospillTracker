@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Hero from "@/app/shared/components/Hero";
 import NavigationTemp from "@/app/shared/components/NavigationTemp";
 import { ProfileData, UserGame } from "../types/user";

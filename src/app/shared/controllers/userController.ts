@@ -4,6 +4,12 @@ import {z} from "zod";
 import {createErrorResponse, createSuccessResponse} from "@/app/shared/lib/response";
 import {Errors} from "@/app/shared/types/errors";
 
+// Offentlige svar skal aldri inneholde passord-hash eller e-post
+function toPublicUser<T extends { passwordHash?: unknown; email?: unknown }>(user: T) {
+    const { passwordHash, email, ...publicUser } = user;
+    return publicUser;
+}
+
 export function createUserController() {
     const repo = createUserRepository();
     const service = createUserService(repo);
@@ -18,7 +24,7 @@ export function createUserController() {
                 }
                 return createErrorResponse(Errors.INTERNAL_SERVER_ERROR, 500);
             }
-            return createSuccessResponse(results.data);
+            return createSuccessResponse(results.data.map(toPublicUser));
         },
 
         getUserById: async (idParam: number) => {
@@ -37,7 +43,7 @@ export function createUserController() {
                 }
                 return createErrorResponse(Errors.INTERNAL_SERVER_ERROR, 500);
             }
-            return createSuccessResponse(results.data);
+            return createSuccessResponse(toPublicUser(results.data));
         }
     }
 }

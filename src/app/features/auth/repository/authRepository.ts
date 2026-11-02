@@ -101,4 +101,21 @@ export function createAuthRepository(database: Database): AuthRepository {
     }
 }
 
-export const authRepository = createAuthRepository(await getDatabase());
+// Databasen hentes ved første kall, ikke ved oppstart: Cloudflare Workers gir ikke
+// tilgang til D1-bindingen mens modulen lastes, så top-level await feiler ved deploy.
+let repositoryInstance: AuthRepository | null = null;
+
+async function getAuthRepository(): Promise<AuthRepository> {
+    if (!repositoryInstance) {
+        repositoryInstance = createAuthRepository(await getDatabase());
+    }
+    return repositoryInstance;
+}
+
+export const authRepository: AuthRepository = {
+    findUserByUsername: async (username) => (await getAuthRepository()).findUserByUsername(username),
+    findUserByEmail: async (email) => (await getAuthRepository()).findUserByEmail(email),
+    findUserById: async (id) => (await getAuthRepository()).findUserById(id),
+    createUser: async (data) => (await getAuthRepository()).createUser(data),
+    updateLastLogin: async (userId) => (await getAuthRepository()).updateLastLogin(userId),
+};
