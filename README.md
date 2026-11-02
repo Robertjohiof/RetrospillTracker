@@ -13,7 +13,7 @@ En portal for videospill entusiaster og samlere.
 pnpm install
 ```
 
-2. Navngi **_env.txt_** filen i rotmappen til **_.env_**
+2. Kopier **_.env.example_** til **_.env_** i rotmappen og fyll inn egne nøkler (Cloudflare D1 og Twitch/IGDB). Sett også egen `database_id` i **_wrangler.jsonc_**.
 
 ### Kjøre remote eller lokal database.
 Som standard leser applikasjonen data direkte fra D1 databasen gjennom en worker proxy, men kan enkelt bytte til lokal dersom ekstern kontakt ikke oppnås.

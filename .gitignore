@@ -66,3 +66,6 @@ coverage
 .wrangler
 
 generated/
+# Local secrets (never commit)
+env.txt
+env1.txt
