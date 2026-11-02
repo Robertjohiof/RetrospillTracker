@@ -23,10 +23,11 @@ export const setCommonHeaders =
       "geolocation=(), microphone=(), camera=()"
     );
 
-    // Defines trusted sources for content loading and script execution:
+    // Defines trusted sources for content loading and script execution.
+    // frame-ancestors also allows my portfolio, which shows the app live in an iframe.
     response.headers.set(
       "Content-Security-Policy",
-      `default-src 'self'; script-src 'self' 'nonce-${nonce}' 'unsafe-eval' https://challenges.cloudflare.com;   frame-ancestors 'self'; frame-src 'self' https://challenges.cloudflare.com https://rwsdk.com; object-src 'none'; connect-src 'self' https://api.igdb.com; img-src 'self' images.igdb.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;`
+      `default-src 'self'; script-src 'self' 'nonce-${nonce}' 'unsafe-eval' https://challenges.cloudflare.com;   frame-ancestors 'self' https://robertjohiof.github.io; frame-src 'self' https://challenges.cloudflare.com https://rwsdk.com; object-src 'none'; connect-src 'self' https://api.igdb.com; img-src 'self' images.igdb.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;`
     );
   };
 
